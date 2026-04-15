@@ -1,246 +1,277 @@
-const sonarrBlue = '#35c5f4';
-const sonarrAlternateBlue = '#2193b5';
-const darkGray = '#888';
-const mediumGray = '#999';
-const gray = '#adadad';
-const black = '#000';
-const white = '#fff';
-const offWhite = '#f5f7fa';
-const purple = '#7a43b6';
-const pink = '#ff69b4';
-const lightGray = '#ddd';
-const defaultColor = '#333';
+// Sonarr v5 — Cinema Lobby palette (light theme)
+// Canonical OKLCH lives in DESIGN.md; hex values here are sRGB equivalents.
+// All neutrals are warm-tinted at hue 80°; pure #000/#fff appear only on paper-card.
+
+// === v5 primitives (canonical names) ===
+const paper          = '#fbf8f4'; // oklch(98% 0.006 80) — page bg
+const paperWarm      = '#f5f1ec'; // oklch(96% 0.008 80) — sidebar, sticky surfaces, table zebra
+const paperCard      = '#ffffff'; // oklch(100% 0 0) — elevated cards, modals
+const hairline       = '#e0deda'; // oklch(90% 0.006 80) — 1px dividers
+const hairlineStrong = '#c7c4be'; // oklch(82% 0.008 80) — input rim at rest
+const ink            = '#14110c'; // oklch(18% 0.012 80) — primary text
+const inkSoft        = '#36322d'; // oklch(32% 0.010 80) — secondary text, button labels
+const inkMuted       = '#6b6864'; // oklch(52% 0.008 80) — metadata, helper copy
+const inkFaint       = '#a6a4a0'; // oklch(72% 0.006 80) — placeholders, disabled
+
+// EXPLORATION (revertible): swapped the Cinema-Lobby ember anchor to Sonarr's
+// brand blue. The token names stay `ember*` so every consumer (CSS, focus
+// rings, hover states) picks up the new color without code churn.
+// Original ember: #c8801f / #ad5200 / #dca55e
+const ember          = '#35c5f4'; // oklch(78% 0.130 215) — bright accent (fills, focus ring, active state)
+const emberDeep      = '#0073a8'; // oklch(50% 0.130 220) — text on light (scope caption, link rest)
+const emberGlow      = '#82d8f7'; // oklch(85% 0.100 215) — focus glow
+
+const statusAiring   = '#51995d'; // oklch(62% 0.115 148) — sage
+const statusUpcoming = '#dc9242'; // oklch(72% 0.130 65) — burnt orange
+const statusFinished = '#83807b'; // neutral
+const statusHiatus   = '#7c7a76'; // dim neutral
+const statusMissing  = '#c9493f'; // oklch(58% 0.165 28) — terracotta (NOT fire-engine)
+const statusGrabbing = '#4e87ae'; // oklch(60% 0.085 240) — slate (only blue in system)
 
 module.exports = {
-  textColor: '#515253',
-  defaultColor,
-  disabledColor: '#999',
-  dimColor: '#555',
-  black,
-  white,
-  offWhite,
-  primaryColor: '#5d9cec',
-  selectedColor: '#f9be03',
-  successColor: '#27c24c',
-  dangerColor: '#f05050',
-  warningColor: '#ffa500',
-  infoColor: sonarrBlue,
-  purple,
-  pink,
-  sonarrBlue,
-  helpTextColor: '#909293',
-  darkGray,
-  gray,
-  lightGray,
-  mediumGray,
-
-  // Theme Colors
-
-  themeBlue: sonarrBlue,
-  themeAlternateBlue: sonarrAlternateBlue,
-  themeRed: '#c4273c',
-  themeDarkColor: '#3a3f51',
-  themeLightColor: '#4f566f',
-  pageBackground: '#f5f7fa',
-  pageFooterBackground: '#f1f1f1',
-
-  torrentColor: '#00853d',
-  usenetColor: '#17b1d9',
-
-  // Labels
-  inverseLabelColor: '#ddd',
-  inverseLabelTextColor: defaultColor,
-  disabledLabelColor: '#999',
-  infoTextColor: white,
-
-  // Links
-  defaultLinkHoverColor: '#fff',
-  linkColor: '#5d9cec',
-  linkHoverColor: '#1b72e2',
-
-  // Header
-  pageHeaderBackgroundColor: sonarrAlternateBlue,
-
-  // Sidebar
-
-  sidebarColor: '#e1e2e3',
-  sidebarBackgroundColor: '#3a3f51',
-  sidebarActiveBackgroundColor: '#252833',
-
-  // Toolbar
-  toolbarColor: '#e1e2e3',
-  toolbarBackgroundColor: '#4f566f',
-  toolbarMenuItemBackgroundColor: '#454b60',
-  toolbarMenuItemHoverBackgroundColor: '#3a3f51',
-  toolbarLabelColor: '#8895aa',
-
-  // Accents
-  borderColor: '#e5e5e5',
-  inputBorderColor: '#dde6e9',
-  inputBoxShadowColor: 'rgba(0, 0, 0, 0.075)',
-  inputFocusBorderColor: '#66afe9',
-  inputFocusBoxShadowColor: 'rgba(102, 175, 233, 0.6)',
-  inputErrorBorderColor: '#f05050',
-  inputErrorBoxShadowColor: 'rgba(240, 80, 80, 0.6)',
-  inputWarningBorderColor: '#ffa500',
-  inputWarningBoxShadowColor: 'rgba(255, 165, 0, 0.6)',
-  colorImpairedGradient: '#ffffff',
-  colorImpairedGradientDark: '#f4f5f6',
-  colorImpairedDangerGradient: '#d84848',
-  colorImpairedWarningGradient: '#e59400',
-  colorImpairedPrimaryGradient: '#538cd4',
-  colorImpairedGrayGradient: '#9b9b9b  ',
 
   //
-  // Buttons
+  // === v5 named tokens (new code uses these) ===
 
-  defaultButtonTextColor: '#eee',
-  defaultBackgroundColor: '#fff',
-  defaultBorderColor: '#eaeaea',
-  defaultHoverBackgroundColor: '#f5f5f5',
-  defaultHoverBorderColor: '#d6d6d6',
+  paper,
+  paperWarm,
+  paperCard,
+  hairline,
+  hairlineStrong,
+  ink,
+  inkSoft,
+  inkMuted,
+  inkFaint,
+  ember,
+  emberDeep,
+  emberGlow,
+  statusAiring,
+  statusUpcoming,
+  statusFinished,
+  statusHiatus,
+  statusMissing,
+  statusGrabbing,
 
-  primaryBackgroundColor: '#5d9cec',
-  primaryBorderColor: '#5899eb',
-  primaryHoverBackgroundColor: '#4b91ea',
-  primaryHoverBorderColor: '#3483e7',
+  //
+  // === Legacy keys (back-compat — existing CSS modules use these) ===
+  // Every legacy key now resolves to a v5-aligned value, automatically re-skinning
+  // every existing surface as part of the trojan-horse migration.
 
-  successBackgroundColor: '#27c24c',
-  successBorderColor: '#26be4a',
-  successHoverBackgroundColor: '#24b145',
-  successHoverBorderColor: '#1f9c3d',
+  textColor:     inkSoft,
+  defaultColor:  ink,
+  disabledColor: inkFaint,
+  dimColor:      inkMuted,
+  black:         ink,           // never pure black
+  white:         paperCard,
+  offWhite:      paper,
+  primaryColor:  ember,         // was sonarrBlue
+  selectedColor: ember,
+  successColor:  statusAiring,
+  dangerColor:   statusMissing,
+  warningColor:  statusUpcoming,
+  infoColor:     emberDeep,
+  purple:        '#7a43b6',
+  pink:          '#ff69b4',
+  sonarrBlue:    ember,         // legacy refs to brand blue resolve to ember
+  helpTextColor: inkMuted,
+  darkGray:      inkMuted,
+  gray:          inkFaint,
+  lightGray:     hairline,
+  mediumGray:    inkMuted,
 
-  warningBackgroundColor: '#ff902b',
-  warningBorderColor: '#ff8d26',
-  warningHoverBackgroundColor: '#ff8517',
-  warningHoverBorderColor: '#fc7800',
+  // Theme Colors
+  themeBlue:           ember,
+  themeAlternateBlue:  emberDeep,
+  themeRed:            statusMissing,
+  themeDarkColor:      ink,        // was navy #3a3f51
+  themeLightColor:     inkSoft,    // was navy #4f566f
+  pageBackground:      paper,
+  pageFooterBackground: paperWarm,
 
-  dangerBackgroundColor: '#f05050',
-  dangerBorderColor: '#f04b4b',
-  dangerHoverBackgroundColor: '#ee3d3d',
-  dangerHoverBorderColor: '#ec2626',
+  torrentColor: statusAiring,
+  usenetColor:  emberGlow,
 
-  iconButtonDisabledColor: '#7a7a7a',
-  iconButtonHoverColor: '#666',
-  iconButtonHoverLightColor: '#ccc',
+  // Labels
+  inverseLabelColor:     hairline,
+  inverseLabelTextColor: inkSoft,
+  disabledLabelColor:    inkFaint,
+  infoTextColor:         paperCard,
+
+  // Links
+  defaultLinkHoverColor: ink,
+  linkColor:             emberDeep,
+  linkHoverColor:        ember,
+
+  // Header — was sonarrAlternateBlue, now paper to dissolve into the page
+  pageHeaderBackgroundColor: paper,
+
+  // Sidebar — was navy #3a3f51, now warm paper
+  sidebarColor:                  inkSoft,
+  sidebarBackgroundColor:        paperWarm,
+  sidebarActiveBackgroundColor:  paperCard,
+
+  // Toolbar
+  toolbarColor:                          inkSoft,
+  toolbarBackgroundColor:                paperWarm,
+  toolbarMenuItemBackgroundColor:        paperWarm,
+  toolbarMenuItemHoverBackgroundColor:   paperCard,
+  toolbarLabelColor:                     inkMuted,
+
+  // Accents
+  borderColor:                hairline,
+  inputBorderColor:           hairlineStrong,
+  inputBoxShadowColor:        'rgba(0, 0, 0, 0.04)',
+  inputFocusBorderColor:      ember,
+  // Derived live from --ember via color-mix so the ember constant is the
+  // single source of truth for every alpha-tinted ember surface.
+  inputFocusBoxShadowColor:   'color-mix(in oklch, var(--ember) 16%, transparent)',
+  inputErrorBorderColor:      statusMissing,
+  inputErrorBoxShadowColor:   'rgba(201, 73, 63, 0.16)',
+  inputWarningBorderColor:    statusUpcoming,
+  inputWarningBoxShadowColor: 'rgba(220, 146, 66, 0.16)',
+  colorImpairedGradient:        paperCard,
+  colorImpairedGradientDark:    paperWarm,
+  colorImpairedDangerGradient:  statusMissing,
+  colorImpairedWarningGradient: statusUpcoming,
+  colorImpairedPrimaryGradient: ember,
+  colorImpairedGrayGradient:    inkFaint,
+
+  //
+  // Buttons — primary is ink-on-paper at rest, ember on hover
+
+  defaultButtonTextColor:     ink,
+  defaultBackgroundColor:     paperCard,
+  defaultBorderColor:         hairlineStrong,
+  defaultHoverBackgroundColor: paperWarm,
+  defaultHoverBorderColor:    ember,
+
+  primaryBackgroundColor:      ink,
+  primaryBorderColor:          ink,
+  primaryHoverBackgroundColor: emberDeep,
+  primaryHoverBorderColor:     emberDeep,
+
+  successBackgroundColor:      statusAiring,
+  successBorderColor:          statusAiring,
+  successHoverBackgroundColor: '#458352',
+  successHoverBorderColor:     '#3c7448',
+
+  warningBackgroundColor:      statusUpcoming,
+  warningBorderColor:          statusUpcoming,
+  warningHoverBackgroundColor: '#c97f30',
+  warningHoverBorderColor:     '#b06f24',
+
+  dangerBackgroundColor:      statusMissing,
+  dangerBorderColor:          statusMissing,
+  dangerHoverBackgroundColor: '#b03f36',
+  dangerHoverBorderColor:     '#9b362d',
+
+  iconButtonDisabledColor:    inkFaint,
+  iconButtonHoverColor:       inkSoft,
+  iconButtonHoverLightColor:  ink,
 
   //
   // Modal
 
-  modalBackdropBackgroundColor: 'rgba(0, 0, 0, 0.6)',
-  modalBackgroundColor: '#fff',
-  modalCloseButtonHoverColor: '#888',
+  modalBackdropBackgroundColor: 'rgba(0, 0, 0, 0.45)',
+  modalBackgroundColor:         paperCard,
+  modalCloseButtonHoverColor:   inkSoft,
 
   //
   // Menu
-  menuItemColor: '#e1e2e3',
-  menuItemHoverColor: '#fbfcfc',
-  menuItemHoverBackgroundColor: '#f5f7fa',
+  menuItemColor:                inkSoft,
+  menuItemHoverColor:           ink,
+  menuItemHoverBackgroundColor: paperWarm,
 
   //
-  // Toolbar
-
-  toobarButtonHoverColor: '#35c5f4',
-  toobarButtonSelectedColor: '#35c5f4',
+  // Toolbar (selected / hover accents)
+  toobarButtonSelectedColor: ember,
 
   //
   // Scroller
-
-  scrollbarBackgroundColor: '#9ea4b9',
-  scrollbarHoverBackgroundColor: '#656d8c',
+  scrollbarBackgroundColor:      hairlineStrong,
+  scrollbarHoverBackgroundColor: inkMuted,
 
   //
-  // Card
-
-  cardBackgroundColor: '#fff',
-  cardShadowColor: '#e1e1e1',
-  cardAlternateBackgroundColor: '#f5f5f5',
-  cardCenterBackgroundColor: '#fff',
+  // Card — flat at rest, lifts on hover via :hover rules in component CSS
+  cardBackgroundColor:          paperCard,
+  cardShadowColor:              'rgba(0, 0, 0, 0.08)',
+  cardAlternateBackgroundColor: paperWarm,
+  cardCenterBackgroundColor:    paperCard,
 
   //
   // Alert
+  alertDangerBorderColor:     statusMissing,
+  alertDangerBackgroundColor: 'rgba(201, 73, 63, 0.08)',
+  alertDangerColor:           '#8a2e26',
 
-  alertDangerBorderColor: '#ebccd1',
-  alertDangerBackgroundColor: '#f2dede',
-  alertDangerColor: '#a94442',
+  alertInfoBorderColor:     ember,
+  alertInfoBackgroundColor: 'color-mix(in oklch, var(--ember) 8%, transparent)',
+  alertInfoColor:           emberDeep,
 
-  alertInfoBorderColor: '#bce8f1',
-  alertInfoBackgroundColor: '#d9edf7',
-  alertInfoColor: '#31708f',
+  alertSuccessBorderColor:     statusAiring,
+  alertSuccessBackgroundColor: 'rgba(81, 153, 93, 0.08)',
+  alertSuccessColor:           '#36683f',
 
-  alertSuccessBorderColor: '#d6e9c6',
-  alertSuccessBackgroundColor: '#dff0d8',
-  alertSuccessColor: '#3c763d',
-
-  alertWarningBorderColor: '#faebcc',
-  alertWarningBackgroundColor: '#fcf8e3',
-  alertWarningColor: '#8a6d3b',
+  alertWarningBorderColor:     statusUpcoming,
+  alertWarningBackgroundColor: 'rgba(220, 146, 66, 0.08)',
+  alertWarningColor:           '#8e5b29',
 
   //
   // Slider
-
-  sliderAccentColor: '#5d9cec',
+  sliderAccentColor: ember,
 
   //
   // Form
-
-  inputBackgroundColor: '#fff',
-  inputReadOnlyBackgroundColor: '#eee',
-  inputHoverBackgroundColor: '#f8f8f8',
-  inputSelectedBackgroundColor: '#e2e2e2',
-  advancedFormLabelColor: '#ff902b',
-  disabledCheckInputColor: '#ddd',
-  disabledInputColor: '#808080',
+  inputBackgroundColor:         paper,
+  inputReadOnlyBackgroundColor: paperWarm,
+  inputHoverBackgroundColor:    paperCard,
+  inputSelectedBackgroundColor: 'color-mix(in oklch, var(--ember) 6%, transparent)',
+  advancedFormLabelColor:       statusUpcoming,
+  disabledCheckInputColor:      hairline,
+  disabledInputColor:           inkFaint,
 
   //
   // Popover
+  popoverTitleBackgroundColor:  paperWarm,
+  popoverTitleBorderColor:      hairline,
+  popoverBodyBackgroundColor:   paperCard,
+  popoverShadowColor:           'rgba(0, 0, 0, 0.18)',
+  popoverArrowBorderColor:      paperCard,
 
-  popoverTitleBackgroundColor: '#f7f7f7',
-  popoverTitleBorderColor: '#ebebeb',
-  popoverBodyBackgroundColor: '#e9e9e9',
-  popoverShadowColor: 'rgba(0, 0, 0, 0.2)',
-  popoverArrowBorderColor: '#fff',
-
-  popoverTitleBackgroundInverseColor: '#3a3f51',
-  popoverTitleBorderInverseColor: '#4f566f',
-  popoverShadowInverseColor: 'rgba(0, 0, 0, 0.2)',
-  popoverArrowBorderInverseColor: 'rgba(58, 63, 81, 0.75)',
+  popoverTitleBackgroundInverseColor: ink,
+  popoverTitleBorderInverseColor:     inkSoft,
+  popoverShadowInverseColor:          'rgba(0, 0, 0, 0.32)',
+  popoverArrowBorderInverseColor:     'rgba(20, 17, 12, 0.92)',
 
   //
   // Calendar
-
-  calendarTodayBackgroundColor: '#c5c5c5',
-  calendarBackgroundColor: '#e4eaec',
-  calendarBorderColor: '#cecece',
-  calendarTextDim: '#666',
-  calendarTextDimAlternate: '#242424',
-
-  calendarFullColorFilter: 'brightness(30%)',
+  calendarTodayBackgroundColor:  paperWarm,
+  calendarBackgroundColor:       paper,
+  calendarBorderColor:           hairline,
+  calendarTextDim:               inkMuted,
+  calendarTextDimAlternate:      inkSoft,
+  calendarFullColorFilter:       'saturate(0.9) contrast(0.95)',
 
   //
   // Table
-
-  tableRowHoverBackgroundColor: '#fafbfc',
+  tableRowHoverBackgroundColor: paperWarm,
 
   //
   // Series
-
-  addSeriesBackgroundColor: '#ededed',
-  seriesBackgroundColor: '#ededed',
-  searchIconContainerBackgroundColor: offWhite,
-  collapseButtonBackgroundColor: offWhite,
+  addSeriesBackgroundColor:           paperWarm,
+  seriesBackgroundColor:              paperWarm,
+  searchIconContainerBackgroundColor: paper,
+  collapseButtonBackgroundColor:      paper,
 
   //
   // Season
-
-  seasonBackgroundColor: white,
-  episodesBackgroundColor: offWhite,
+  seasonBackgroundColor:   paperCard,
+  episodesBackgroundColor: paper,
 
   //
   // misc
-
-  progressBarFrontTextColor: white,
-  progressBarBackTextColor: darkGray,
-  progressBarBackgroundColor: white,
-  logEventsBackgroundColor: white
+  progressBarFrontTextColor:  paperCard,
+  progressBarBackTextColor:   inkSoft,
+  progressBarBackgroundColor: hairline,
+  logEventsBackgroundColor:   paperCard
 };

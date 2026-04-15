@@ -1,3 +1,21 @@
+/*
+ * Sonarr v5 — Cinema Lobby type stack
+ * Inter (single voice — body, chrome, headings)
+ * Fraunces italic (editorial guest — synopses, day labels)
+ * JetBrains Mono (machine strings — release titles, paths, episode codes)
+ *
+ * Currently loaded via Google Fonts CDN. TODO: self-host woff2 files in this directory
+ * to honour the self-hosted-software ethos. Tracking issue: see DESIGN.md and PRODUCT.md.
+ *
+ * Legacy Roboto / Ubuntu Mono @font-face rules are kept below so any unrebuilt surface
+ * that still references those families during the trojan-horse migration keeps working,
+ * but they fall through to the new families via the family stack in scaffolding.css.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,14,400;0,14,500;1,14,400;1,14,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Legacy fonts kept for transitional compat. New code never references these. */
+
 @font-face {
   font-weight: 300;
   font-style: normal;
