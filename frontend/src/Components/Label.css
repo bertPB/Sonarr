@@ -1,122 +1,102 @@
+/* Sonarr v5 — chip / label.
+ * Per DESIGN.md: pill, paper-warm bg, ink-soft text, Label typography
+ * (11px / 500 / +0.06em / ALL CAPS), 4px filled dot prefix in the kind color.
+ * The chip background NEVER carries the kind color — only the dot does. */
+
 .label {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin: 2px;
-  border: 1px solid;
-  border-radius: 2px;
-  color: var(--white);
+  padding: 4px 10px;
+  background-color: var(--paperWarm);
+  border: none;
+  border-radius: 999px;
+  color: var(--inkSoft);
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
   line-height: 1;
   cursor: default;
 }
 
-/** Kinds **/
-
-.danger {
-  border-color: var(--dangerColor);
-  background-color: var(--dangerColor);
-
-  &.outline {
-    color: var(--dangerColor);
-  }
+/* The state dot — set per-kind via background-color below. Some legacy callers
+   pass the icon-only kind (no children) and rely on bg fill; for those we hide
+   the dot (see :empty rule below). */
+.label::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background-color: currentColor;
+  opacity: 0.55;
 }
 
-.default {
-  border-color: var(--themeLightColor);
-  background-color: var(--themeLightColor);
-
-  &.outline {
-    color: var(--themeLightColor);
-  }
+/* If a label has no children (rare — used for spacing/anchors), suppress the dot. */
+.label:empty::before {
+  display: none;
 }
 
-.disabled {
-  border-color: var(--disabledColor);
-  background-color: var(--disabledColor);
+/** Kinds — dot color via custom property, bg stays paper-warm. **/
 
-  &.outline {
-    color: var(--white);
-  }
-}
-
-.info {
-  border-color: var(--infoColor);
-  background-color: var(--infoColor);
-  color: var(--infoTextColor);
-
-  &.outline {
-    color: var(--infoColor);
-  }
-}
-
+.danger::before { background-color: var(--dangerColor); opacity: 1; }
+.default::before { background-color: var(--inkMuted); opacity: 0.6; }
+.disabled::before { background-color: var(--inkMuted); opacity: 0.4; }
+.info::before { background-color: var(--infoColor); opacity: 1; }
 .inverse {
-  border-color: var(--inverseLabelColor);
-  background-color: var(--inverseLabelColor);
-  color: var(--inverseLabelTextColor);
-
-  &.outline {
-    background-color: var(--inverseLabelTextColor) !important;
-    color: var(--inverseLabelColor);
-  }
+  background-color: var(--ink);
+  color: var(--paper);
 }
+.inverse::before { background-color: var(--paper); opacity: 0.85; }
+.primary::before { background-color: var(--primaryColor); opacity: 1; }
+.success::before { background-color: var(--successColor); opacity: 1; }
+.warning::before { background-color: var(--warningColor); opacity: 1; }
+.purple::before { background-color: var(--purple); opacity: 1; }
 
-.primary {
-  border-color: var(--primaryColor);
-  background-color: var(--primaryColor);
-
-  &.outline {
-    color: var(--primaryColor);
-  }
-}
-
-.success {
-  border-color: var(--successColor);
-  background-color: var(--successColor);
-  color: #eee;
-
-  &.outline {
-    color: var(--successColor);
-  }
-}
-
-.warning {
-  border-color: var(--warningColor);
-  background-color: var(--warningColor);
-
-  &.outline {
-    color: var(--warningColor);
-  }
-}
-
-.purple {
-  border-color: var(--purple);
-  background-color: var(--purple);
-
-  &.outline {
-    color: var(--purple);
-  }
-}
+.danger { color: var(--ink); }
+.success { color: var(--ink); }
+.warning { color: var(--ink); }
+.info { color: var(--ink); }
+.primary { color: var(--ink); }
+.purple { color: var(--ink); }
 
 /** Sizes **/
 
 .small {
-  padding: 1px 3px;
-  font-size: 11px;
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
 }
 
 .medium {
-  padding: 2px 5px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
 }
 
 .large {
-  padding: 3px 7px;
-  font-weight: bold;
-  font-size: $defaultFontSize;
+  padding: 5px 12px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
 
-/** Outline **/
+/** Outline — text-only variant, used for non-state chips like genre. **/
 
 .outline {
-  background-color: var(--disabledLabelColor);
+  background-color: transparent;
+  border: 1px solid var(--borderColor);
+  color: var(--inkSoft);
 }
+
+.outline.danger { color: var(--dangerColor); border-color: var(--dangerColor); }
+.outline.success { color: var(--successColor); border-color: var(--successColor); }
+.outline.warning { color: var(--warningColor); border-color: var(--warningColor); }
+.outline.info { color: var(--infoColor); border-color: var(--infoColor); }
+.outline.primary { color: var(--primaryColor); border-color: var(--primaryColor); }
+.outline.purple { color: var(--purple); border-color: var(--purple); }
+.outline.disabled { color: var(--inkMuted); border-color: var(--borderColor); }

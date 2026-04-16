@@ -1,11 +1,18 @@
+/* Sonarr v5 — form label.
+ * Sits above the input as a calm identifier. Inter 500 / 13px / sentence-case
+ * / ink-soft. No tracked-caps shouting (Label typography is reserved for chips
+ * and group dividers per spec), no right-alignment, no min-height matched to
+ * the input. The label is a quiet name, not a banner. */
+
 .label {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: $formLabelRightMarginWidth;
-  padding-top: 8px;
-  min-height: 35px;
-  text-align: end;
-  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--inkSoft);
 }
 
 .hasError {
@@ -16,16 +23,8 @@
   color: var(--advancedFormLabelColor);
 }
 
-@media only screen and (max-width: $breakpointLarge) {
-  .label {
-    justify-content: flex-start;
-  }
-}
-
-.small {
-  flex: 0 0 $formLabelSmallWidth;
-}
-
+.small,
 .large {
-  flex: 0 0 $formLabelLargeWidth;
+  /* Size hints from FormGroup are no longer about flex basis — drop the
+     fixed-width allotments. Kept as classnames so existing markup compiles. */
 }

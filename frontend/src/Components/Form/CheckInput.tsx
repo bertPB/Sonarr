@@ -22,6 +22,14 @@ export interface CheckInputProps {
   helpTextWarning?: string;
   isDisabled?: boolean;
   kind?: Extract<Kind, keyof typeof styles>;
+  /**
+   * v5 — when true, the inline `helpText` / `helpTextWarning` text node next to
+   * the checkbox is suppressed. Used by FormGroup's two-column layout: the
+   * description belongs on the left under the FormLabel, not duplicated here.
+   * The `<label>` element still wraps the visual checkbox so click delegation
+   * keeps working.
+   */
+  suppressInlineLabel?: boolean;
   onChange: (changes: CheckInputChanged) => void;
 }
 
@@ -37,6 +45,7 @@ function CheckInput(props: CheckInputProps) {
     helpTextWarning,
     isDisabled,
     kind = 'primary',
+    suppressInlineLabel = false,
     onChange,
   } = props;
 
@@ -121,11 +130,11 @@ function CheckInput(props: CheckInputProps) {
           {isIndeterminate ? <Icon name={icons.CHECK_INDETERMINATE} /> : null}
         </div>
 
-        {helpText ? (
+        {!suppressInlineLabel && helpText ? (
           <FormInputHelpText className={styles.helpText} text={helpText} />
         ) : null}
 
-        {!helpText && helpTextWarning ? (
+        {!suppressInlineLabel && !helpText && helpTextWarning ? (
           <FormInputHelpText
             className={styles.helpText}
             text={helpTextWarning}

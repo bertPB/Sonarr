@@ -185,6 +185,19 @@ export type FormInputGroupProps<V, C extends InputType> = Omit<
   helpTexts?: string[];
   helpTextWarning?: string;
   helpLink?: string;
+  /**
+   * v5 — when true, FormInputGroup does not render its own inline help-text
+   * elements. The wrapping FormGroup has lifted them into the left text stack
+   * (label + description column). The input still receives helpText for a11y.
+   */
+  suppressHelpText?: boolean;
+  /**
+   * v5 — for `type === 'check'` inputs, suppress CheckInput's inline label
+   * (the text node next to the checkbox). Passed down from FormGroup so the
+   * description sits on the left under the FormLabel instead of duplicating
+   * itself next to the checkbox.
+   */
+  suppressInlineLabel?: boolean;
   pending?: boolean;
   placeholder?: string;
   unit?: string;
@@ -206,6 +219,7 @@ function FormInputGroup<T, C extends InputType>(
     helpTexts = [],
     helpTextWarning,
     helpLink,
+    suppressHelpText = false,
     pending,
     errors: serverErrors = [],
     warnings: serverWarnings = [],
@@ -242,7 +256,16 @@ function FormInputGroup<T, C extends InputType>(
       setClientWarnings={setClientWarnings}
     >
       <div className={containerClassName}>
-        <div className={className}>
+        <div
+          className={[
+            className,
+            hasButton ? styles.hasButtons : null,
+            hasButton && hasError ? styles.hasError : null,
+            hasButton && hasWarning ? styles.hasWarning : null,
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
           <div className={styles.inputContainer}>
             {/* @ts-expect-error - types are validated already */}
             <InputComponent
@@ -290,9 +313,11 @@ function FormInputGroup<T, C extends InputType>(
         </div> */}
         </div>
 
-        {!checkInput && helpText ? <FormInputHelpText text={helpText} /> : null}
+        {!suppressHelpText && !checkInput && helpText ? (
+          <FormInputHelpText text={helpText} />
+        ) : null}
 
-        {!checkInput && helpTexts ? (
+        {!suppressHelpText && !checkInput && helpTexts ? (
           <div>
             {helpTexts.map((text, index) => {
               return (
@@ -306,7 +331,7 @@ function FormInputGroup<T, C extends InputType>(
           </div>
         ) : null}
 
-        {(!checkInput || helpText) && helpTextWarning ? (
+        {!suppressHelpText && (!checkInput || helpText) && helpTextWarning ? (
           <FormInputHelpText text={helpTextWarning} isWarning={true} />
         ) : null}
 

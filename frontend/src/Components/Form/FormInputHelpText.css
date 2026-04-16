@@ -1,30 +1,62 @@
+/* Sonarr v5 — form input help text.
+ * Body Small typography below an input. Error and warning shifts are tonal,
+ * not glow — settings should not shout. */
+
 .helpText {
-  margin-top: 5px;
-  color: var(--helpTextColor);
-  line-height: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 6px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--inkMuted);
+  max-width: 65ch;
+}
+
+/* Error / warning prefix dot — small status pip, NOT a full-text color shift.
+   Per DESIGN.md: "warnings are tonal shifts, not glow". Settings should not
+   shout at the user just because something needs a restart. */
+.isError::before,
+.isWarning::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  transform: translateY(-1px);
 }
 
 .isError {
+  color: var(--inkSoft);
+}
+
+.isError::before {
+  background-color: var(--dangerColor);
+}
+
+.isError .link {
   color: var(--dangerColor);
 
-  .link {
-    color: var(--dangerColor);
-
-    &:hover {
-      color: #e01313;
-    }
+  &:hover {
+    color: var(--ember);
   }
 }
 
 .isWarning {
+  color: var(--inkSoft);
+}
+
+.isWarning::before {
+  background-color: var(--warningColor);
+}
+
+.isWarning .link {
   color: var(--warningColor);
 
-  .link {
-    color: var(--warningColor);
-
-    &:hover {
-      color: #e36c00;
-    }
+  &:hover {
+    color: var(--ember);
   }
 }
 

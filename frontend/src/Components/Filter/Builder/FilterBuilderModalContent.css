@@ -1,16 +1,35 @@
+.intro {
+  margin: 0 0 8px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
 .labelContainer {
   margin-bottom: 20px;
 }
 
 .label {
   margin-bottom: 5px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
 }
 
 .labelInputContainer {
   width: 300px;
 }
 
-.rows {
-  margin-bottom: 100px;
+.bordered {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperWarm);
+  overflow: hidden;
+  margin-bottom: 24px;
 }

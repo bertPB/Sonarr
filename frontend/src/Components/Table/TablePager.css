@@ -1,7 +1,14 @@
+/* Sonarr v5 — table pager.
+ * Quiet footer rhythm: hairline above, mono page numerals as machine values,
+ * records summary as a small tracked-caps caption. */
+
 .pager {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--borderColor);
 }
 
 .loadingContainer,
@@ -29,28 +36,51 @@
 }
 
 .controls {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 2px;
   text-align: center;
 }
 
 .pageNumber {
-  line-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 30px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--inkSoft);
 }
 
 .pageLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: var(--inkMuted);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1), color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--paperWarm);
+    color: var(--ember);
+  }
 }
 
 .records {
-  color: var(--disabledColor);
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
 }
 
 .disabledPageButton {
-  color: var(--disabledColor);
+  color: var(--inkFaint);
+  pointer-events: none;
 }
 
 .pageSelect {

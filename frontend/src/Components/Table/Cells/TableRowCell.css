@@ -1,7 +1,10 @@
 .cell {
-  padding: 8px;
+  padding: 12px 10px;
   border-top: 1px solid var(--borderColor);
-  line-height: 1.52857143;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 @media only screen and (max-width: $breakpointMedium) {

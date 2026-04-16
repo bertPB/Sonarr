@@ -8,6 +8,7 @@ import ImportSeriesPage from 'AddSeries/ImportSeries/ImportSeriesPage';
 import CalendarPage from 'Calendar/CalendarPage';
 import NotFound from 'Components/NotFound';
 import Switch from 'Components/Router/Switch';
+import HomePage from 'Home/HomePage';
 import SeriesDetailsPage from 'Series/Details/SeriesDetailsPage';
 import SeriesIndex from 'Series/Index/SeriesIndex';
 import CustomFormatSettingsPage from 'Settings/CustomFormats/CustomFormatSettingsPage';
@@ -38,14 +39,18 @@ function RedirectWithUrlBase() {
   return <Redirect to={getPathWithUrlBase('/')} />;
 }
 
+function RedirectToSeries() {
+  return <Redirect to={getPathWithUrlBase('/series')} />;
+}
+
 function AppRoutes() {
   return (
     <Switch>
       {/*
-        Series
+        Home (v5)
       */}
 
-      <Route exact={true} path="/" component={SeriesIndex} />
+      <Route exact={true} path="/" component={HomePage} />
 
       {window.Sonarr.urlBase && (
         <Route
@@ -58,13 +63,19 @@ function AppRoutes() {
         />
       )}
 
+      {/*
+        Series
+      */}
+
+      <Route exact={true} path="/series" component={SeriesIndex} />
+
       <Route path="/add/new" component={AddNewSeries} />
 
       <Route path="/add/import" component={ImportSeriesPage} />
 
-      <Route path="/serieseditor" exact={true} render={RedirectWithUrlBase} />
+      <Route path="/serieseditor" exact={true} render={RedirectToSeries} />
 
-      <Route path="/seasonpass" exact={true} render={RedirectWithUrlBase} />
+      <Route path="/seasonpass" exact={true} render={RedirectToSeries} />
 
       <Route path="/series/:titleSlug" component={SeriesDetailsPage} />
 
