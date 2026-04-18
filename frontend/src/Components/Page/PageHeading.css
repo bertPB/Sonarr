@@ -1,0 +1,100 @@
+/* Sonarr v5 — page heading.
+ * Scope-frame (ember-tipped hairline + mono caption) above a Headline title.
+ * The right side carries a calm mono meta line ("5 records · 1 warning") and
+ * page actions. The Fraunces editorial subtitle is reserved for moments that
+ * actually warrant editorial voice (Series Detail, Empty States) — utility
+ * pages use the meta line instead. */
+
+.heading {
+  margin-bottom: 24px;
+}
+
+.scopeLine {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.scope {
+  flex: 0 0 auto;
+  padding-right: 8px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--emberDeep);
+  font-weight: 500;
+}
+
+.scopeLine::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  /* Mid-weight rule — visible but doesn't compete with the title. */
+  background-color: var(--inputBorderColor);
+  opacity: 0.5;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-family: $defaultFontFamily;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+
+/* Editorial subtitle — Fraunces italic. Used sparingly: pages where an
+   editorial voice is warranted (Series Detail, Home empty state). */
+.subtitle {
+  margin: 0;
+  font-family: $editorialFontFamily;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--inkMuted);
+}
+
+/* Meta line — calm mono micro-caption with the page's stat readout. */
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkMuted);
+  white-space: nowrap;
+}
+
+.metaSep {
+  color: var(--inkMuted);
+  opacity: 0.6;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

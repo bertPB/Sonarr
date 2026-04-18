@@ -1,20 +1,30 @@
 .menuButton {
-  margin-right: 15px;
-  width: 30px;
-  height: 60px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: 4px;
+  color: var(--inkSoft);
+  border-radius: 6px;
+  transition:
+    color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
 
   &:hover {
-    color: var(--themeDarkColor);
+    color: var(--ink);
+    background-color: var(--menuItemHoverBackgroundColor);
   }
 }
 
 .itemIcon {
-  margin-right: 8px;
+  margin-right: 0;
+  width: 16px;
+  color: var(--inkMuted);
 }
 
 @media only screen and (max-width: $breakpointSmall) {
   .menuButton {
-    margin-right: 5px;
+    margin-right: 0;
   }
 }

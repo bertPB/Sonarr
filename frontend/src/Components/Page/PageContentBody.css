@@ -5,6 +5,7 @@
 
 .innerContentBody {
   padding: $pageContentBodyPadding;
+  padding-top: 24px;
 }
 
 @media only screen and (max-width: $breakpointSmall) {
