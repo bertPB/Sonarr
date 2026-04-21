@@ -1,0 +1,53 @@
+.strip {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  padding: 4px 0 0;
+}
+
+.dot {
+  flex: 1 1 0;
+  height: 4px;
+  min-width: 3px;
+  max-width: 14px;
+  border-radius: 1px;
+  background-color: var(--borderColor);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.is_owned {
+  background-color: var(--ink);
+}
+
+.is_missing {
+  background-color: var(--statusMissing);
+}
+
+.is_airing {
+  background-color: var(--statusAiring);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.is_grabbing {
+  background-color: var(--statusGrabbing);
+}
+
+.is_future {
+  background-color: var(--borderColor);
+}
+
+.courBreak {
+  width: 1px;
+  align-self: stretch;
+  margin: 0 4px;
+  background-color: var(--inputBorderColor);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is_airing { animation: none; }
+}
