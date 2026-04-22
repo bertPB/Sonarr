@@ -37,6 +37,13 @@ const posterSizeOptions: EnhancedSelectInputValue<string>[] = [
   },
 ];
 
+const showStatusOptions: EnhancedSelectInputValue<string>[] = [
+  { key: 'none', value: 'None — fully calm' },
+  { key: 'deleted', value: 'Deleted only' },
+  { key: 'active', value: 'Active — continuing, upcoming, deleted' },
+  { key: 'all', value: 'All four — continuing, upcoming, ended, deleted' },
+];
+
 interface SeriesIndexPosterOptionsModalContentProps {
   onModalClose(...args: unknown[]): unknown;
 }
@@ -52,6 +59,7 @@ function SeriesIndexPosterOptionsModalContent({
     showQualityProfile,
     showTags,
     showSearchAction,
+    showStatus,
   } = useSeriesPosterOptions();
 
   const onPosterOptionChange = useCallback(
@@ -147,6 +155,19 @@ function SeriesIndexPosterOptionsModalContent({
               name="showSearchAction"
               value={showSearchAction}
               helpText={translate('ShowSearchHelpText')}
+              onChange={onPosterOptionChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>Status chip</FormLabel>
+
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="showStatus"
+              value={showStatus ?? 'deleted'}
+              values={showStatusOptions}
+              helpText="Which series statuses surface a chip on the poster. Calm by default — only Deleted is shown."
               onChange={onPosterOptionChange}
             />
           </FormGroup>

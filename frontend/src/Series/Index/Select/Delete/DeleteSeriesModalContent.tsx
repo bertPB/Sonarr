@@ -72,6 +72,8 @@ function DeleteSeriesModalContent({
       <ModalHeader>{translate('DeleteSelectedSeries')}</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('DeleteSeriesBulkIntro')}</p>
+
         <div>
           <FormGroup>
             <FormLabel>{translate('AddListExclusion')}</FormLabel>

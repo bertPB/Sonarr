@@ -37,6 +37,8 @@ function DeleteSeriesFilesModalContent({
       <ModalHeader>{translate('DeleteSelectedSeriesFiles')}</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('DeleteSeriesFilesIntro')}</p>
+
         <div className={styles.message}>
           {translate('DeleteSeriesFilesConfirmation', {
             count: series.length,

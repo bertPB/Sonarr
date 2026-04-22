@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { useCallback, useMemo, useState } from 'react';
-import TextTruncate from 'react-text-truncate';
 import CommandNames from 'Commands/CommandNames';
 import { useExecuteCommand } from 'Commands/useCommands';
 import IconButton from 'Components/Link/IconButton';
@@ -16,7 +15,6 @@ import { Statistics } from 'Series/Series';
 import { useSeriesOverviewOptions } from 'Series/seriesOptionsStore';
 import SeriesPoster from 'Series/SeriesPoster';
 import dimensions from 'Styles/Variables/dimensions';
-import fonts from 'Styles/Variables/fonts';
 import translate from 'Utilities/String/translate';
 import useSeriesIndexItem from '../useSeriesIndexItem';
 import SeriesIndexOverviewInfo from './SeriesIndexOverviewInfo';
@@ -26,12 +24,13 @@ const columnPadding = parseInt(dimensions.seriesIndexColumnPadding);
 const columnPaddingSmallScreen = parseInt(
   dimensions.seriesIndexColumnPaddingSmallScreen
 );
-const defaultFontSize = parseInt(fonts.defaultFontSize);
-const lineHeight = parseFloat(fonts.lineHeight);
+const SYNOPSIS_FONT_SIZE = 13.5; // matches SeriesIndexOverview.css .synopsis font-size
+const SYNOPSIS_LINE_HEIGHT = 1.6; // matches SeriesIndexOverview.css .synopsis line-height
 
-// Hardcoded height based on line-height of 32 + bottom margin of 10.
-// Less side-effecty than using react-measure.
-const TITLE_HEIGHT = 42;
+// 28px (action button height) + 4px (titleRow margin-bottom) + 6px (info flex-gap) = 38.
+const TITLE_HEIGHT = 38;
+// Chip strip: chip ~19px rendered height + ~9px breathing room = 28.
+const CHIP_STRIP_HEIGHT = 28;
 
 interface SeriesIndexOverviewProps {
   seriesId: number;
@@ -100,7 +99,13 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
     return rowHeight - padding;
   }, [rowHeight, isSmallScreen]);
 
-  const overviewHeight = contentHeight - TITLE_HEIGHT;
+  const synopsisLines = Math.max(
+    1,
+    Math.floor(
+      (contentHeight - TITLE_HEIGHT - CHIP_STRIP_HEIGHT) /
+        (SYNOPSIS_FONT_SIZE * SYNOPSIS_LINE_HEIGHT)
+    )
+  );
 
   if (!series) {
     return null;
@@ -137,6 +142,24 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
     height: `${posterHeight}px`,
   };
 
+  const statusLabel =
+    status === 'ended'
+      ? translate('Ended')
+      : status === 'deleted'
+        ? translate('Deleted')
+        : status === 'continuing'
+          ? translate('Continuing')
+          : null;
+
+  const statusPillClass =
+    status === 'ended'
+      ? styles.ended
+      : status === 'deleted'
+        ? styles.deleted
+        : status === 'continuing'
+          ? styles.continuing
+          : undefined;
+
   return (
     <div>
       <div className={styles.content}>
@@ -149,23 +172,15 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
               />
             ) : null}
 
-            {status === 'ended' ? (
-              <div
-                className={classNames(styles.status, styles.ended)}
-                title={translate('Ended')}
-              />
-            ) : null}
-
-            {status === 'deleted' ? (
-              <div
-                className={classNames(styles.status, styles.deleted)}
-                title={translate('Deleted')}
-              />
+            {statusLabel ? (
+              <div className={classNames(styles.statusPill, statusPillClass)}>
+                {statusLabel}
+              </div>
             ) : null}
 
             <Link className={styles.link} style={elementStyle} to={link}>
               <SeriesPoster
-                className={styles.poster}
+                className={styles.posterImage}
                 style={elementStyle}
                 images={images}
                 size={250}
@@ -197,6 +212,7 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
 
             <div className={styles.actions}>
               <SpinnerIconButton
+                className={styles.action}
                 name={icons.REFRESH}
                 title={translate('RefreshSeries')}
                 isSpinning={isRefreshingSeries}
@@ -205,6 +221,7 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
 
               {overviewOptions.showSearchAction ? (
                 <SpinnerIconButton
+                  className={styles.action}
                   name={icons.SEARCH}
                   title={translate('SearchForMonitoredEpisodes')}
                   isSpinning={isSearchingSeries}
@@ -213,6 +230,7 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
               ) : null}
 
               <IconButton
+                className={styles.action}
                 name={icons.EDIT}
                 title={translate('EditSeries')}
                 aria-label={translate('EditSeries')}
@@ -221,38 +239,40 @@ function SeriesIndexOverview(props: SeriesIndexOverviewProps) {
             </div>
           </div>
 
-          <div className={styles.details}>
-            <div className={styles.overviewContainer}>
-              <Link className={styles.overview} to={link}>
-                <TextTruncate
-                  line={Math.floor(
-                    overviewHeight / (defaultFontSize * lineHeight)
-                  )}
-                  text={overview}
-                />
-              </Link>
+          <Link
+            className={styles.synopsis}
+            to={link}
+            style={{ WebkitLineClamp: synopsisLines }}
+          >
+            {overview}
+          </Link>
 
-              {overviewOptions.showTags ? (
-                <div className={styles.tags}>
-                  <SeriesTagList tags={tags} />
-                </div>
-              ) : null}
+          <SeriesIndexOverviewInfo
+            monitored={monitored}
+            network={network}
+            nextAiring={nextAiring}
+            previousAiring={previousAiring}
+            added={added}
+            seasonCount={seasonCount}
+            qualityProfile={qualityProfile}
+            sizeOnDisk={sizeOnDisk}
+            path={path}
+            sortKey={sortKey}
+            showNetwork={overviewOptions.showNetwork}
+            showMonitored={overviewOptions.showMonitored}
+            showQualityProfile={overviewOptions.showQualityProfile}
+            showPreviousAiring={overviewOptions.showPreviousAiring}
+            showAdded={overviewOptions.showAdded}
+            showSeasonCount={overviewOptions.showSeasonCount}
+            showPath={overviewOptions.showPath}
+            showSizeOnDisk={overviewOptions.showSizeOnDisk}
+          />
+
+          {overviewOptions.showTags ? (
+            <div className={styles.tags}>
+              <SeriesTagList tags={tags} />
             </div>
-            <SeriesIndexOverviewInfo
-              height={overviewHeight}
-              monitored={monitored}
-              network={network}
-              nextAiring={nextAiring}
-              previousAiring={previousAiring}
-              added={added}
-              seasonCount={seasonCount}
-              qualityProfile={qualityProfile}
-              sizeOnDisk={sizeOnDisk}
-              path={path}
-              sortKey={sortKey}
-              {...overviewOptions}
-            />
-          </div>
+          ) : null}
         </div>
       </div>
 

@@ -199,6 +199,8 @@ function EditSeriesModalContent(props: EditSeriesModalContentProps) {
       <ModalHeader>{translate('EditSelectedSeries')}</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('EditSeriesBulkIntro')}</p>
+
         <FormGroup>
           <FormLabel>{translate('Monitored')}</FormLabel>
 

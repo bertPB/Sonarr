@@ -126,29 +126,33 @@ export default function SeriesIndexPosters({
   const posterHeight = Math.ceil((250 / 170) * posterWidth);
 
   const rowHeight = useMemo(() => {
-    const nextAiringHeight = 19;
+    const nextAiringHeight = 22;
+    const cellPadding = isSmallScreen
+      ? columnPaddingSmallScreen
+      : columnPadding;
 
     const heights = [
       posterHeight,
       detailedProgressBar ? detailedProgressBarHeight : progressBarHeight,
       nextAiringHeight,
-      isSmallScreen ? columnPaddingSmallScreen : columnPadding,
+      // Cell has padding top AND bottom — account for both, plus a small breathing constant.
+      cellPadding * 2 + 8,
     ];
 
     if (showTitle) {
-      heights.push(19);
+      heights.push(22);
     }
 
-    if (showMonitored) {
-      heights.push(19);
+    // Monitored and Quality Profile now share one inline meta row.
+    if (showMonitored || showQualityProfile) {
+      heights.push(22);
     }
 
-    if (showQualityProfile) {
-      heights.push(19);
-    }
-
-    if (showTags) {
-      heights.push(21);
+    // Only reserve the tags row if at least one series actually has tags.
+    // Sonarr exposes the toggle globally; without this guard, an empty 24px sits
+    // beneath every card even when no series has been tagged.
+    if (showTags && items.some((s) => s.tags && s.tags.length > 0)) {
+      heights.push(24);
     }
 
     switch (sortKey) {
@@ -159,16 +163,16 @@ export default function SeriesIndexPosters({
       case 'path':
       case 'sizeOnDisk':
       case 'ratings':
-        heights.push(19);
+        heights.push(22);
         break;
       case 'qualityProfileId':
         if (!showQualityProfile) {
-          heights.push(19);
+          heights.push(22);
         }
         break;
       case 'tags':
-        if (!showTags) {
-          heights.push(21);
+        if (!showTags && items.some((s) => s.tags && s.tags.length > 0)) {
+          heights.push(24);
         }
         break;
       default:
@@ -185,6 +189,7 @@ export default function SeriesIndexPosters({
     showTags,
     sortKey,
     posterHeight,
+    items,
   ]);
 
   useEffect(() => {

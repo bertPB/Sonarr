@@ -1,111 +1,185 @@
-$hoverScale: 1.05;
-
 .content {
   display: flex;
-  flex-grow: 1;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--borderColor);
+  transition: background 160ms ease;
+
+  &:first-child {
+    border-top: 1px solid var(--borderColor);
+  }
+
+  &:hover {
+    background: var(--defaultHoverBackgroundColor);
+  }
 }
+
+/* ── Poster column ─────────────────────────────────────── */
 
 .poster {
   position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .posterContainer {
   position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--seriesBackgroundColor);
+}
+
+.posterImage {
+  display: block;
 }
 
 .link {
   composes: link from '~Components/Link/Link.css';
 
   display: block;
-  color: var(--defaultColor);
+  background-color: var(--seriesBackgroundColor);
 
   &:hover {
     color: var(--defaultColor);
     text-decoration: none;
   }
-
-  .posterContainer & {
-    background-color: var(--seriesBackgroundColor);
-  }
 }
 
-.status {
+/* Frosted status pill — top-left, replaces v3 corner dog-ear */
+.statusPill {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 7px;
+  left: 7px;
   z-index: 1;
-  width: 0;
-  height: 0;
-  border-width: 0 25px 25px 0;
-  border-style: solid;
-  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: rgba(10, 8, 6, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  font-family: $defaultFontFamily;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: rgba(241, 238, 234, 0.88);
+  white-space: nowrap;
+  line-height: 1;
+  pointer-events: none;
 
-  &.ended {
-    border-color: transparent var(--dangerColor) transparent transparent;
-  }
-
-  &.deleted {
-    border-color: transparent var(--gray) transparent transparent;
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    flex-shrink: 0;
   }
 }
+
+.ended::before {
+  background: var(--statusFinished);
+}
+
+.deleted::before {
+  background: var(--statusHiatus);
+}
+
+.continuing::before {
+  background: var(--statusAiring);
+}
+
+/* ── Info column ───────────────────────────────────────── */
 
 .info {
   display: flex;
   flex: 1 0 1px;
   flex-direction: column;
+  gap: 6px;
   overflow: hidden;
-  padding-left: 10px;
+  min-width: 0;
+  padding-top: 2px;
 }
 
 .titleRow {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
-  flex: 0 0 auto;
-  margin-bottom: 10px;
-  line-height: 32px;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-bottom: 4px;
 }
 
 .title {
   @add-mixin truncate;
-  composes: link;
+  composes: link from '~Components/Link/Link.css';
 
   flex: 1 0 1px;
-  font-weight: 300;
-  font-size: 30px;
+  font-family: $defaultFontFamily;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+  color: var(--ink);
+  background-color: transparent;
 }
 
 .actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  align-items: center;
   white-space: nowrap;
 }
 
-.details {
-  display: flex;
-  justify-content: space-between;
-  flex: 1 0 auto;
+.action {
+  composes: link from '~Components/Link/Link.css';
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--inkMuted);
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--ink);
+  }
 }
 
-.overviewContainer {
-  display: flex;
-  justify-content: space-between;
-  flex: 0 1 1000px;
-  flex-direction: column;
-}
-
-.overview {
-  composes: link;
+.synopsis {
+  composes: link from '~Components/Link/Link.css';
 
   overflow: hidden;
-  min-height: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  font-family: $editorialFontFamily;
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--inkSoft);
 }
 
 .tags {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
 @media only screen and (max-width: $breakpointSmall) {
-  .overview {
+  .synopsis {
     display: none;
   }
 }

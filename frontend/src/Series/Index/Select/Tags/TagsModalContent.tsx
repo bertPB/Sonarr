@@ -85,6 +85,8 @@ function TagsModalContent({
       <ModalHeader>{translate('Tags')}</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('EditTagsIntro')}</p>
+
         <Form>
           <FormGroup>
             <FormLabel>{translate('Tags')}</FormLabel>
