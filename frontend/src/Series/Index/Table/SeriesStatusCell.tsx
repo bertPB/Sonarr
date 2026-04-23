@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useCallback } from 'react';
 import Icon from 'Components/Icon';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
@@ -15,6 +16,7 @@ interface SeriesStatusCellProps {
   monitored: boolean;
   status: SeriesStatus;
   isSelectMode: boolean;
+  isImminentAiring?: boolean;
   component?: React.ElementType;
 }
 
@@ -24,6 +26,7 @@ function SeriesStatusCell({
   monitored,
   status,
   isSelectMode,
+  isImminentAiring = false,
   component: Component = VirtualTableRowCell,
   ...otherProps
 }: SeriesStatusCellProps) {
@@ -57,7 +60,7 @@ function SeriesStatusCell({
       )}
 
       <Icon
-        className={styles.statusIcon}
+        className={classNames(styles.statusIcon, isImminentAiring && styles.pulsing)}
         name={statusDetails.icon}
         title={`${statusDetails.title}: ${statusDetails.message}`}
       />

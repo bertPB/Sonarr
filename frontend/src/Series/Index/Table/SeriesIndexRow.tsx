@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import moment from 'moment';
 import React, { useCallback, useState } from 'react';
 import { useSelect } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
@@ -154,8 +155,19 @@ function SeriesIndexRow(props: SeriesIndexRowProps) {
     episodeFileQualities = [],
   } = statistics;
 
+  const isContinuing = monitored && status === 'continuing';
+
+  const now = moment();
+  const isImminentAiring = Boolean(
+    nextAiring &&
+      moment(nextAiring).isAfter(now) &&
+      moment(nextAiring).diff(now, 'hours') < 24
+  );
+
   return (
     <>
+      {isContinuing && <div className={styles.emberLeft} />}
+
       {isSelectMode ? (
         <VirtualTableSelectCell
           id={seriesId}
@@ -181,6 +193,7 @@ function SeriesIndexRow(props: SeriesIndexRowProps) {
               monitored={monitored}
               status={status}
               isSelectMode={isSelectMode}
+              isImminentAiring={isImminentAiring}
               component={VirtualTableRowCell}
             />
           );
@@ -213,7 +226,11 @@ function SeriesIndexRow(props: SeriesIndexRowProps) {
                   )}
                 </Link>
               ) : (
-                <SeriesTitleLink titleSlug={titleSlug} title={title} />
+                <SeriesTitleLink
+                  className={styles.titleLink}
+                  titleSlug={titleSlug}
+                  title={title}
+                />
               )}
             </VirtualTableRowCell>
           );
@@ -254,18 +271,37 @@ function SeriesIndexRow(props: SeriesIndexRowProps) {
         if (name === 'qualityProfileId') {
           return (
             <VirtualTableRowCell key={name} className={styles[name]}>
-              {qualityProfile?.name ?? ''}
+              <span
+                className={classNames(
+                  styles.qualityChip,
+                  isImminentAiring && styles.qualityChipActive
+                )}
+              >
+                {qualityProfile?.name ?? ''}
+              </span>
             </VirtualTableRowCell>
           );
         }
 
         if (name === 'nextAiring') {
+          if (!nextAiring) {
+            return (
+              <VirtualTableRowCell key={name} className={styles[name]}>
+                <span className={styles.nextAiringEmpty}>—</span>
+              </VirtualTableRowCell>
+            );
+          }
+
           return (
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore ts(2739)
             <RelativeDateCell
               key={name}
-              className={styles[name]}
+              className={classNames(
+                styles[name],
+                styles.nextAiringMono,
+                isImminentAiring && styles.nextAiringSoon
+              )}
               date={nextAiring}
               component={VirtualTableRowCell}
             />
@@ -368,9 +404,27 @@ function SeriesIndexRow(props: SeriesIndexRowProps) {
         }
 
         if (name === 'episodeCount') {
+          const isComplete =
+            totalEpisodeCount > 0 && episodeFileCount >= totalEpisodeCount;
+          const fillPercent =
+            totalEpisodeCount > 0
+              ? Math.min(100, (episodeFileCount / totalEpisodeCount) * 100)
+              : 0;
+
           return (
             <VirtualTableRowCell key={name} className={styles[name]}>
-              {totalEpisodeCount}
+              <span>
+                {episodeFileCount} / {totalEpisodeCount}
+              </span>
+              <div className={styles.episodeBar}>
+                <div
+                  className={classNames(
+                    styles.episodeBarFill,
+                    isComplete && styles.episodeBarFillComplete
+                  )}
+                  style={{ width: `${fillPercent}%` }}
+                />
+              </div>
             </VirtualTableRowCell>
           );
         }

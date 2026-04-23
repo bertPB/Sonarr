@@ -8,3 +8,13 @@
   width: 20px !important;
   text-align: center;
 }
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+
+  50% { opacity: 0.4; }
+}
+
+.pulsing {
+  animation: statusPulse 2s ease-in-out infinite;
+}

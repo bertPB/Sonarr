@@ -4,10 +4,10 @@ import { useAppDimension } from 'App/appStore';
 import { SelectProvider } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
 import { useCommandExecuting, useExecuteCommand } from 'Commands/useCommands';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageJumpBar, { PageJumpBarItems } from 'Components/Page/PageJumpBar';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
@@ -15,7 +15,7 @@ import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import TableOptionsModalWrapper from 'Components/Table/TableOptions/TableOptionsModalWrapper';
 import { useCustomFiltersList } from 'Filters/useCustomFilters';
-import { align, icons, kinds } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import { DESCENDING } from 'Helpers/Props/sortDirections';
 import ParseToolbarButton from 'Parse/ParseToolbarButton';
 import NoSeries from 'Series/NoSeries';
@@ -279,6 +279,21 @@ function SeriesIndex() {
               />
             </PageToolbarSection>
           </PageToolbar>
+          <div className={styles.pageHeadingWrapper}>
+            <PageHeading
+              scope={`${translate('Media')} · ${translate('Library')}`}
+              title={translate('Series')}
+              meta={
+                data.length > 0
+                  ? [
+                      translate('SeriesIndexTitlesCount', {
+                        count: data.length,
+                      }),
+                    ]
+                  : [translate('Empty')]
+              }
+            />
+          </div>
           <div className={styles.pageContentBodyWrapper}>
             <PageContentBody
               ref={scrollerRef}
@@ -292,9 +307,9 @@ function SeriesIndex() {
               {isFetching && !isFetched ? <LoadingIndicator /> : null}
 
               {!isFetching && !!error ? (
-                <Alert kind={kinds.DANGER}>
+                <p className={styles.error}>
                   {translate('SeriesLoadError')}
-                </Alert>
+                </p>
               ) : null}
 
               {isLoaded ? (
