@@ -14,11 +14,11 @@ function findImage(images: Image[], coverType: CoverType) {
 }
 
 function getUrl(image: Image, coverType: CoverType, size: number) {
-  const imageUrl = image?.url;
-
-  return imageUrl
-    ? imageUrl.replace(`${coverType}.jpg`, `${coverType}-${size}.jpg`)
-    : null;
+  const localUrl = image?.url;
+  if (localUrl) {
+    return localUrl.replace(`${coverType}.jpg`, `${coverType}-${size}.jpg`);
+  }
+  return image?.remoteUrl ?? null;
 }
 
 export interface SeriesImageProps {

@@ -167,6 +167,8 @@ function EditSeriesModalContent({
       <ModalHeader>{translate('EditSeriesModalHeader', { title })}</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('EditSeriesIntro')}</p>
+
         <Form {...otherSettings}>
           <FormGroup size={sizes.MEDIUM}>
             <FormLabel>{translate('Monitored')}</FormLabel>

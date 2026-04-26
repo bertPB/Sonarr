@@ -1,12 +1,8 @@
-.intro {
+.error {
   margin: 0 0 8px;
   font-family: $defaultFontFamily;
   font-size: 13px;
   line-height: 1.55;
-  color: var(--inkMuted);
+  color: var(--dangerColor);
   max-width: 70ch;
-}
-
-.labelIcon {
-  margin-left: 8px;
 }

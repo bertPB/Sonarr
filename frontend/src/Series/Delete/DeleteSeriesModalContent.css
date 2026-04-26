@@ -1,3 +1,12 @@
+.intro {
+  margin: 0 0 12px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+  max-width: 70ch;
+}
+
 .pathContainer {
   margin-bottom: 20px;
 }
@@ -7,7 +16,7 @@
 }
 
 .folderPath {
-  font-weight: bold;
+  font-weight: 600;
   font-family: var(--defaultFontFamily);
 }
 

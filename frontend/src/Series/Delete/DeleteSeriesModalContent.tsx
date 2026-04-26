@@ -72,6 +72,8 @@ function DeleteSeriesModalContent({
       </ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('DeleteSeriesIntro')}</p>
+
         <div className={styles.pathContainer}>
           <Icon className={styles.pathIcon} name={icons.FOLDER} />
 
