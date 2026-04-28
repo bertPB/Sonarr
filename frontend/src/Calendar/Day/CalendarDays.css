@@ -1,5 +1,10 @@
+/* Sonarr v5 — calendar days container.
+ * CSS grid for month view so rows distribute the available height instead of
+ * collapsing to content. Other views remain a flat flex strip. */
+
 .days {
   display: flex;
+  flex-grow: 1;
   border-right: 1px solid var(--calendarBorderColor);
 }
 
@@ -10,5 +15,7 @@
 }
 
 .month {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(140px, 1fr);
 }

@@ -1,9 +1,22 @@
+/* Sonarr v5 — calendar day cell.
+ * Per DESIGN.md Calendar Card spec: each cell is NOT a box — it's a column of
+ * episode rows on a hairline-separated surface. Vertical hairlines separate
+ * columns; today gets paper-warm + a 1px ember left hairline. */
+
 .day {
+  position: relative;
   flex: 1 0 14.28%;
   overflow: hidden;
-  min-height: 70px;
+  min-height: 110px;
+  padding: 6px 6px 8px;
   border-bottom: 1px solid var(--calendarBorderColor);
   border-left: 1px solid var(--calendarBorderColor);
+  background-color: var(--pageBackground);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--paperWarm);
+  }
 }
 
 .isSingleDay {
@@ -11,15 +24,29 @@
 }
 
 .dayOfMonth {
-  padding-right: 5px;
-  border-bottom: 1px solid var(--calendarBorderColor);
-  text-align: right;
+  display: flex;
+  align-items: baseline;
+  padding: 2px 4px 8px;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--inkSoft);
+}
+
+/* Today: paper-warm bed + 1px ember hairline on the LEFT (per DESIGN.md spec).
+   .isTodayCell goes on the root in every view; .dayOfMonth.isToday only shows
+   in month view (date numeral coloring). */
+.isTodayCell {
+  background-color: var(--paperWarm);
+  border-left: 1px solid var(--ember);
 }
 
 .isToday {
-  background-color: var(--calendarTodayBackgroundColor);
+  color: var(--ember);
+  font-weight: 600;
 }
 
 .isDifferentMonth {
-  color: var(--disabledColor);
+  color: var(--inkMuted);
+  opacity: 0.4;
 }
