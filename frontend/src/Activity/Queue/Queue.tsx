@@ -9,11 +9,11 @@ import React, {
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
 import { useCommandExecuting, useExecuteCommand } from 'Commands/useCommands';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -24,7 +24,7 @@ import TableOptionsModalWrapper from 'Components/Table/TableOptions/TableOptions
 import TablePager from 'Components/Table/TablePager';
 import useEpisodes from 'Episode/useEpisodes';
 import { useCustomFiltersList } from 'Filters/useCustomFilters';
-import { align, icons, kinds } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import { SortDirection } from 'Helpers/Props/sortDirections';
 import InteractiveImportModal from 'InteractiveImport/InteractiveImportModal';
 import { CheckInputChanged } from 'typings/inputs';
@@ -36,6 +36,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
+import styles from './Queue.css';
 import QueueFilterModal from './QueueFilterModal';
 import {
   setQueueOption,
@@ -227,18 +228,31 @@ function QueueContent() {
   if (!shouldBlockRefresh.current) {
     currentQueue.current = (
       <PageContentBody>
+        <PageHeading
+          scope={`${translate('Activity')} · ${translate('Queue')}`}
+          title={translate('Queue')}
+          meta={
+            count > 0
+              ? [
+                  translate('QueueActiveCount', { count }),
+                  translate('QueueRecordsCount', { count: totalRecords }),
+                ]
+              : [translate('QueueNoActiveDownloads')]
+          }
+        />
+
         {isRefreshing && !isAllPopulated ? <LoadingIndicator /> : null}
 
         {!isRefreshing && hasError ? (
-          <Alert kind={kinds.DANGER}>{translate('QueueLoadError')}</Alert>
+          <p className={styles.error}>{translate('QueueLoadError')}</p>
         ) : null}
 
         {isAllPopulated && !hasError && !records.length ? (
-          <Alert kind={kinds.INFO}>
+          <p className={styles.message}>
             {selectedFilterKey !== 'all' && count > 0
               ? translate('QueueFilterHasNoItems')
               : translate('QueueIsEmpty')}
-          </Alert>
+          </p>
         ) : null}
 
         {isAllPopulated && !hasError && !!records.length ? (

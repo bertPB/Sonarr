@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -13,7 +13,7 @@ import TableOptionsModalWrapper from 'Components/Table/TableOptions/TableOptions
 import TablePager from 'Components/Table/TablePager';
 import useEpisodes from 'Episode/useEpisodes';
 import { useCustomFiltersList } from 'Filters/useCustomFilters';
-import { align, icons, kinds } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import { SortDirection } from 'Helpers/Props/sortDirections';
 import HistoryItem from 'typings/History';
 import { TableOptionsChangePayload } from 'typings/Table';
@@ -23,6 +23,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
+import styles from './History.css';
 import HistoryFilterModal from './HistoryFilterModal';
 import {
   setHistoryOption,
@@ -149,10 +150,20 @@ function History() {
       </PageToolbar>
 
       <PageContentBody>
+        <PageHeading
+          scope={`${translate('Activity')} · ${translate('History')}`}
+          title={translate('History')}
+          meta={
+            totalRecords > 0
+              ? [translate('HistoryEventsCount', { count: totalRecords })]
+              : [translate('HistoryNoEvents')]
+          }
+        />
+
         {isFetchingAny && !isAllPopulated ? <LoadingIndicator /> : null}
 
         {!isFetchingAny && hasError ? (
-          <Alert kind={kinds.DANGER}>{translate('HistoryLoadError')}</Alert>
+          <p className={styles.error}>{translate('HistoryLoadError')}</p>
         ) : null}
 
         {
@@ -160,7 +171,7 @@ function History() {
           // wait for the episodes to populate because they are never coming.
 
           isFetched && !hasError && !records.length ? (
-            <Alert kind={kinds.INFO}>{translate('NoHistoryFound')}</Alert>
+            <p className={styles.message}>{translate('NoHistoryFound')}</p>
           ) : null
         }
 

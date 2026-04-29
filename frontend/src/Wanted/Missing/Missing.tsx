@@ -3,12 +3,12 @@ import QueueDetailsProvider from 'Activity/Queue/Details/QueueDetailsProvider';
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
 import { useCommandExecuting, useExecuteCommand } from 'Commands/useCommands';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -42,6 +42,7 @@ import {
 } from './missingOptionsStore';
 import MissingRow from './MissingRow';
 import useMissing, { FILTERS, useFilters } from './useMissing';
+import styles from './Missing.css';
 
 function getMonitoredValue(
   filters: Filter[],
@@ -271,14 +272,26 @@ function MissingContent() {
         </PageToolbar>
 
         <PageContentBody>
+          <PageHeading
+            scope={`${translate('Activity')} · ${translate(
+              'Wanted'
+            )} · ${translate('Missing')}`}
+            title={translate('Missing')}
+            meta={
+              totalRecords > 0
+                ? [translate('MissingEpisodesCount', { count: totalRecords })]
+                : [translate('MissingNothingMissing')]
+            }
+          />
+
           {isFetching && isLoading ? <LoadingIndicator /> : null}
 
           {!isFetching && error ? (
-            <Alert kind={kinds.DANGER}>{translate('MissingLoadError')}</Alert>
+            <p className={styles.error}>{translate('MissingLoadError')}</p>
           ) : null}
 
           {!isLoading && !error && !records.length ? (
-            <Alert kind={kinds.INFO}>{translate('MissingNoItems')}</Alert>
+            <p className={styles.message}>{translate('MissingNoItems')}</p>
           ) : null}
 
           {!isLoading && !error && !!records.length ? (

@@ -1,0 +1,11 @@
+.error {
+  margin-bottom: 20px;
+  color: var(--dangerColor);
+  font-size: 13px;
+}
+
+.message {
+  margin-bottom: 20px;
+  color: var(--inkMuted);
+  font-size: 13px;
+}

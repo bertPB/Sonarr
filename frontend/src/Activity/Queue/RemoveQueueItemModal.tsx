@@ -152,7 +152,7 @@ function RemoveQueueItemModal(props: RemoveQueueItemModalProps) {
         <ModalHeader>{title}</ModalHeader>
 
         <ModalBody>
-          <div className={styles.message}>{message}</div>
+          <p className={styles.intro}>{message}</p>
 
           {isPending ? null : (
             <FormGroup>

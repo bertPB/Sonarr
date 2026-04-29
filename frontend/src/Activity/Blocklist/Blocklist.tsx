@@ -3,12 +3,12 @@ import { setQueueOptions } from 'Activity/Queue/queueOptionsStore';
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
 import { useCommandExecuting, useExecuteCommand } from 'Commands/useCommands';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -27,6 +27,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
+import styles from './Blocklist.css';
 import BlocklistFilterModal from './BlocklistFilterModal';
 import {
   setBlocklistOption,
@@ -203,18 +204,32 @@ function BlocklistContent() {
       </PageToolbar>
 
       <PageContentBody>
+        <PageHeading
+          scope={`${translate('Activity')} · ${translate('Blocklist')}`}
+          title={translate('Blocklist')}
+          meta={
+            totalRecords > 0
+              ? [
+                  translate('BlocklistReleasesHeldCount', {
+                    count: totalRecords,
+                  }),
+                ]
+              : [translate('Empty')]
+          }
+        />
+
         {isLoading && !isFetched ? <LoadingIndicator /> : null}
 
         {!isLoading && !!error ? (
-          <Alert kind={kinds.DANGER}>{translate('BlocklistLoadError')}</Alert>
+          <p className={styles.error}>{translate('BlocklistLoadError')}</p>
         ) : null}
 
         {isFetched && !error && !records.length ? (
-          <Alert kind={kinds.INFO}>
+          <p className={styles.message}>
             {selectedFilterKey === 'all'
               ? translate('NoBlocklistItems')
               : translate('BlocklistFilterHasNoItems')}
-          </Alert>
+          </p>
         ) : null}
 
         {isFetched && !error && !!records.length ? (

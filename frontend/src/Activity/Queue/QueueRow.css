@@ -28,3 +28,17 @@
   width: 70px;
   text-align: right;
 }
+
+/* Per Mono-Means-Machine Rule — when the queue item has no matched series,
+   the raw release title is a literal string from the indexer, not a name.
+   `overflow-wrap: anywhere` lets the browser prefer natural breakpoints
+   (dots, dashes) before falling back to mid-token breaks. */
+.unmatchedTitle {
+  display: inline-block;
+  font-family: $monoSpaceFontFamily;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--inkSoft);
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
