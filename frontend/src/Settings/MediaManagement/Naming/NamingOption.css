@@ -7,11 +7,11 @@
 
   &:hover {
     .token {
-      background-color: #ddd;
+      background-color: var(--hairline);
     }
 
     .example {
-      background-color: #ccc;
+      background-color: var(--hairlineStrong);
     }
   }
 }
@@ -41,7 +41,7 @@
 
   .footNotes {
     padding: 2px;
-    color: #aaa;
+    color: var(--inkFaint);
   }
 }
 

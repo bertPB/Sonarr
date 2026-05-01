@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -27,7 +25,6 @@ import {
 import { createProviderSettingsSelectorHook } from 'Store/Selectors/createProviderSettingsSelector';
 import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
-import AddSpecificationModal from './Specifications/AddSpecificationModal';
 import EditSpecificationModal from './Specifications/EditSpecificationModal';
 import Specification from './Specifications/Specification';
 import styles from './EditAutoTaggingModalContent.css';
@@ -61,24 +58,14 @@ export default function EditAutoTaggingModalContent({
   const dispatch = useDispatch();
   const [isAddSpecificationModalOpen, setIsAddSpecificationModalOpen] =
     useState(false);
-  const [isEditSpecificationModalOpen, setIsEditSpecificationModalOpen] =
-    useState(false);
 
   const handleAddSpecificationPress = useCallback(() => {
     setIsAddSpecificationModalOpen(true);
-  }, [setIsAddSpecificationModalOpen]);
+  }, []);
 
-  const handleAddSpecificationModalClose = useCallback(
-    ({ specificationSelected = false } = {}) => {
-      setIsAddSpecificationModalOpen(false);
-      setIsEditSpecificationModalOpen(specificationSelected);
-    },
-    [setIsAddSpecificationModalOpen]
-  );
-
-  const handleEditSpecificationModalClose = useCallback(() => {
-    setIsEditSpecificationModalOpen(false);
-  }, [setIsEditSpecificationModalOpen]);
+  const handleAddSpecificationModalClose = useCallback(() => {
+    setIsAddSpecificationModalOpen(false);
+  }, []);
 
   const handleInputChange = useCallback(
     ({ name, value }: InputChanged) => {
@@ -133,51 +120,63 @@ export default function EditAutoTaggingModalContent({
           {isFetching ? <LoadingIndicator /> : null}
 
           {!isFetching && !!error ? (
-            <Alert kind={kinds.DANGER}>{translate('AddAutoTagError')}</Alert>
+            <p className={styles.error}>{translate('AddAutoTagError')}</p>
           ) : null}
 
           {!isFetching && !error && specificationsPopulated ? (
             <div>
-              <Form
-                validationErrors={validationErrors}
-                validationWarnings={validationWarnings}
-              >
-                <FormGroup>
-                  <FormLabel>{translate('Name')}</FormLabel>
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Details')}
+                </h3>
 
-                  <FormInputGroup
-                    type={inputTypes.TEXT}
-                    name="name"
-                    {...name}
-                    onChange={handleInputChange}
-                  />
-                </FormGroup>
+                <Form
+                  validationErrors={validationErrors}
+                  validationWarnings={validationWarnings}
+                >
+                  <FormGroup>
+                    <FormLabel>{translate('Name')}</FormLabel>
 
-                <FormGroup>
-                  <FormLabel>{translate('RemoveTagsAutomatically')}</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.TEXT}
+                      name="name"
+                      {...name}
+                      onChange={handleInputChange}
+                    />
+                  </FormGroup>
 
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="removeTagsAutomatically"
-                    helpText={translate('RemoveTagsAutomaticallyHelpText')}
-                    {...removeTagsAutomatically}
-                    onChange={handleInputChange}
-                  />
-                </FormGroup>
+                  <FormGroup>
+                    <FormLabel>
+                      {translate('RemoveTagsAutomatically')}
+                    </FormLabel>
 
-                <FormGroup>
-                  <FormLabel>{translate('Tags')}</FormLabel>
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="removeTagsAutomatically"
+                      helpText={translate('RemoveTagsAutomaticallyHelpText')}
+                      {...removeTagsAutomatically}
+                      onChange={handleInputChange}
+                    />
+                  </FormGroup>
 
-                  <FormInputGroup
-                    type={inputTypes.TAG}
-                    name="tags"
-                    onChange={handleInputChange}
-                    {...tags}
-                  />
-                </FormGroup>
-              </Form>
+                  <FormGroup>
+                    <FormLabel>{translate('Tags')}</FormLabel>
 
-              <FieldSet legend={translate('Conditions')}>
+                    <FormInputGroup
+                      type={inputTypes.TAG}
+                      name="tags"
+                      onChange={handleInputChange}
+                      {...tags}
+                    />
+                  </FormGroup>
+                </Form>
+              </section>
+
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Conditions')}
+                </h3>
+
                 <div className={styles.autoTaggings}>
                   {specifications.map((specification) => {
                     return (
@@ -199,20 +198,18 @@ export default function EditAutoTaggingModalContent({
                     onPress={handleAddSpecificationPress}
                   >
                     <div className={styles.center}>
-                      <Icon name={icons.ADD} size={45} />
+                      <Icon name={icons.ADD} size={20} />
                     </div>
+
+                    <div className={styles.addLabel}>{translate('Add')}</div>
                   </Card>
                 </div>
-              </FieldSet>
-
-              <AddSpecificationModal
-                isOpen={isAddSpecificationModalOpen}
-                onModalClose={handleAddSpecificationModalClose}
-              />
+              </section>
 
               <EditSpecificationModal
-                isOpen={isEditSpecificationModalOpen}
-                onModalClose={handleEditSpecificationModalClose}
+                mode="add"
+                isOpen={isAddSpecificationModalOpen}
+                onModalClose={handleAddSpecificationModalClose}
               />
 
               {/* <ImportAutoTaggingModal

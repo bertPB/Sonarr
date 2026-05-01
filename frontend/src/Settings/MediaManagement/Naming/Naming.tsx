@@ -268,7 +268,10 @@ function Naming({ setChildSave, onChildStateChange }: NamingProps) {
   }, [setChildSave, saveSettings]);
 
   return (
-    <FieldSet legend={translate('EpisodeNaming')}>
+    <FieldSet
+      legend={translate('EpisodeNaming')}
+      caption={translate('EpisodeNamingCaption')}
+    >
       {isFetching ? <LoadingIndicator /> : null}
 
       {!isFetching && error ? (

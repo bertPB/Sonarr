@@ -30,7 +30,10 @@ function BackupSettings({
   }
 
   return (
-    <FieldSet legend={translate('Backups')}>
+    <FieldSet
+      legend={translate('Backups')}
+      caption={translate('BackupsCaption')}
+    >
       <FormGroup advancedSettings={showAdvancedSettings} isAdvanced={true}>
         <FormLabel>{translate('Folder')}</FormLabel>
 

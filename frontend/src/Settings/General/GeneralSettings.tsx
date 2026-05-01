@@ -7,8 +7,10 @@ import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import usePrevious from 'Helpers/Hooks/usePrevious';
 import { kinds } from 'Helpers/Props';
+import settingsStyles from 'Settings/Settings.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import { useIsWindowsService } from 'System/Status/useSystemStatus';
 import { useRestart } from 'System/useSystem';
@@ -109,86 +111,93 @@ function GeneralSettings() {
       />
 
       <PageContentBody>
-        {isFetching && !isFetched ? <LoadingIndicator /> : null}
+        <div className={settingsStyles.section}>
+          <PageHeading
+            scope={`${translate('Configuration')} · ${translate('General')}`}
+            title={translate('GeneralSettings')}
+          />
 
-        {!isFetching && error ? (
-          <Alert kind={kinds.DANGER}>
-            {translate('GeneralSettingsLoadError')}
-          </Alert>
-        ) : null}
+          {isFetching && !isFetched ? <LoadingIndicator /> : null}
 
-        {settings && isFetched && !error ? (
-          <Form
-            id="generalSettings"
-            validationErrors={validationErrors}
-            validationWarnings={validationWarnings}
-          >
-            <HostSettings
-              bindAddress={settings.bindAddress}
-              port={settings.port}
-              urlBase={settings.urlBase}
-              instanceName={settings.instanceName}
-              applicationUrl={settings.applicationUrl}
-              enableSsl={settings.enableSsl}
-              sslPort={settings.sslPort}
-              sslCertPath={settings.sslCertPath}
-              sslKeyPath={settings.sslKeyPath}
-              sslCertPassword={settings.sslCertPassword}
-              launchBrowser={settings.launchBrowser}
-              onInputChange={handleInputChange}
-            />
+          {!isFetching && error ? (
+            <Alert kind={kinds.DANGER}>
+              {translate('GeneralSettingsLoadError')}
+            </Alert>
+          ) : null}
 
-            <SecuritySettings
-              authenticationMethod={settings.authenticationMethod}
-              authenticationRequired={settings.authenticationRequired}
-              username={settings.username}
-              password={settings.password}
-              passwordConfirmation={settings.passwordConfirmation}
-              apiKey={settings.apiKey}
-              certificateValidation={settings.certificateValidation}
-              isResettingApiKey={isResettingApiKey}
-              onInputChange={handleInputChange}
-            />
+          {settings && isFetched && !error ? (
+            <Form
+              id="generalSettings"
+              validationErrors={validationErrors}
+              validationWarnings={validationWarnings}
+            >
+              <HostSettings
+                bindAddress={settings.bindAddress}
+                port={settings.port}
+                urlBase={settings.urlBase}
+                instanceName={settings.instanceName}
+                applicationUrl={settings.applicationUrl}
+                enableSsl={settings.enableSsl}
+                sslPort={settings.sslPort}
+                sslCertPath={settings.sslCertPath}
+                sslKeyPath={settings.sslKeyPath}
+                sslCertPassword={settings.sslCertPassword}
+                launchBrowser={settings.launchBrowser}
+                onInputChange={handleInputChange}
+              />
 
-            <ProxySettings
-              proxyEnabled={settings.proxyEnabled}
-              proxyType={settings.proxyType}
-              proxyHostname={settings.proxyHostname}
-              proxyPort={settings.proxyPort}
-              proxyUsername={settings.proxyUsername}
-              proxyPassword={settings.proxyPassword}
-              proxyBypassFilter={settings.proxyBypassFilter}
-              proxyBypassLocalAddresses={settings.proxyBypassLocalAddresses}
-              onInputChange={handleInputChange}
-            />
+              <SecuritySettings
+                authenticationMethod={settings.authenticationMethod}
+                authenticationRequired={settings.authenticationRequired}
+                username={settings.username}
+                password={settings.password}
+                passwordConfirmation={settings.passwordConfirmation}
+                apiKey={settings.apiKey}
+                certificateValidation={settings.certificateValidation}
+                isResettingApiKey={isResettingApiKey}
+                onInputChange={handleInputChange}
+              />
 
-            <LoggingSettings
-              logLevel={settings.logLevel}
-              logSizeLimit={settings.logSizeLimit}
-              onInputChange={handleInputChange}
-            />
+              <ProxySettings
+                proxyEnabled={settings.proxyEnabled}
+                proxyType={settings.proxyType}
+                proxyHostname={settings.proxyHostname}
+                proxyPort={settings.proxyPort}
+                proxyUsername={settings.proxyUsername}
+                proxyPassword={settings.proxyPassword}
+                proxyBypassFilter={settings.proxyBypassFilter}
+                proxyBypassLocalAddresses={settings.proxyBypassLocalAddresses}
+                onInputChange={handleInputChange}
+              />
 
-            <AnalyticSettings
-              analyticsEnabled={settings.analyticsEnabled}
-              onInputChange={handleInputChange}
-            />
+              <LoggingSettings
+                logLevel={settings.logLevel}
+                logSizeLimit={settings.logSizeLimit}
+                onInputChange={handleInputChange}
+              />
 
-            <UpdateSettings
-              branch={settings.branch}
-              updateAutomatically={settings.updateAutomatically}
-              updateMechanism={settings.updateMechanism}
-              updateScriptPath={settings.updateScriptPath}
-              onInputChange={handleInputChange}
-            />
+              <AnalyticSettings
+                analyticsEnabled={settings.analyticsEnabled}
+                onInputChange={handleInputChange}
+              />
 
-            <BackupSettings
-              backupFolder={settings.backupFolder}
-              backupInterval={settings.backupInterval}
-              backupRetention={settings.backupRetention}
-              onInputChange={handleInputChange}
-            />
-          </Form>
-        ) : null}
+              <UpdateSettings
+                branch={settings.branch}
+                updateAutomatically={settings.updateAutomatically}
+                updateMechanism={settings.updateMechanism}
+                updateScriptPath={settings.updateScriptPath}
+                onInputChange={handleInputChange}
+              />
+
+              <BackupSettings
+                backupFolder={settings.backupFolder}
+                backupInterval={settings.backupInterval}
+                backupRetention={settings.backupRetention}
+                onInputChange={handleInputChange}
+              />
+            </Form>
+          ) : null}
+        </div>
       </PageContentBody>
 
       <ConfirmModal

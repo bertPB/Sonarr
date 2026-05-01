@@ -53,7 +53,10 @@ function UpdateSettings({
   updateOptions.push({ key: 'script', value: translate('Script') });
 
   return (
-    <FieldSet legend={translate('Updates')}>
+    <FieldSet
+      legend={translate('Updates')}
+      caption={translate('UpdatesCaption')}
+    >
       <FormGroup advancedSettings={showAdvancedSettings} isAdvanced={true}>
         <FormLabel>{translate('Branch')}</FormLabel>
 

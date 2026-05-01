@@ -49,7 +49,7 @@ function ProxySettings({
   ];
 
   return (
-    <FieldSet legend={translate('Proxy')}>
+    <FieldSet legend={translate('Proxy')} caption={translate('ProxyCaption')}>
       <FormGroup size={sizes.MEDIUM}>
         <FormLabel>{translate('UseProxy')}</FormLabel>
 

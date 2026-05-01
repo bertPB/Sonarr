@@ -9,9 +9,11 @@ import { EnhancedSelectInputValue } from 'Components/Form/Select/EnhancedSelectI
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import { inputTypes, kinds, sizes } from 'Helpers/Props';
 import RootFolders from 'RootFolder/RootFolders';
 import { useShowAdvancedSettings } from 'Settings/advancedSettingsStore';
+import settingsStyles from 'Settings/Settings.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import { useIsWindows } from 'System/Status/useSystemStatus';
 import { InputChanged } from 'typings/inputs';
@@ -186,116 +188,331 @@ function MediaManagement() {
       />
 
       <PageContentBody>
-        <Naming
-          setChildSave={handleSetNamingSave}
-          onChildStateChange={setNaming}
-        />
+        <div className={settingsStyles.section}>
+          <PageHeading
+            scope={`${translate('Configuration')} · ${translate(
+              'MediaManagement'
+            )}`}
+            title={translate('MediaManagement')}
+          />
 
-        {isFetching ? (
-          <FieldSet legend={translate('NamingSettings')}>
-            <LoadingIndicator />
-          </FieldSet>
-        ) : null}
+          <Naming
+            setChildSave={handleSetNamingSave}
+            onChildStateChange={setNaming}
+          />
 
-        {!isFetching && error ? (
-          <FieldSet legend={translate('NamingSettings')}>
-            <Alert kind={kinds.DANGER}>
-              {translate('MediaManagementSettingsLoadError')}
-            </Alert>
-          </FieldSet>
-        ) : null}
+          {isFetching ? (
+            <FieldSet legend={translate('NamingSettings')}>
+              <LoadingIndicator />
+            </FieldSet>
+          ) : null}
 
-        {hasSettings && isPopulated && !error ? (
-          <Form
-            id="mediaManagementSettings"
-            validationErrors={validationErrors}
-            validationWarnings={validationWarnings}
-          >
-            {showAdvancedSettings ? (
-              <FieldSet legend={translate('Folders')}>
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.MEDIUM}
+          {!isFetching && error ? (
+            <FieldSet legend={translate('NamingSettings')}>
+              <Alert kind={kinds.DANGER}>
+                {translate('MediaManagementSettingsLoadError')}
+              </Alert>
+            </FieldSet>
+          ) : null}
+
+          {hasSettings && isPopulated && !error ? (
+            <Form
+              id="mediaManagementSettings"
+              validationErrors={validationErrors}
+              validationWarnings={validationWarnings}
+            >
+              {showAdvancedSettings ? (
+                <FieldSet
+                  legend={translate('Folders')}
+                  caption={translate('FoldersCaption')}
                 >
-                  <FormLabel>{translate('CreateEmptySeriesFolders')}</FormLabel>
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>
+                      {translate('CreateEmptySeriesFolders')}
+                    </FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="createEmptySeriesFolders"
+                      helpText={translate('CreateEmptySeriesFoldersHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.createEmptySeriesFolders}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>{translate('DeleteEmptyFolders')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="deleteEmptyFolders"
+                      helpText={translate('DeleteEmptySeriesFoldersHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.deleteEmptyFolders}
+                    />
+                  </FormGroup>
+                </FieldSet>
+              ) : null}
+
+              {showAdvancedSettings ? (
+                <FieldSet
+                  legend={translate('Importing')}
+                  caption={translate('ImportingCaption')}
+                >
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.SMALL}
+                  >
+                    <FormLabel>{translate('EpisodeTitleRequired')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.SELECT}
+                      name="episodeTitleRequired"
+                      helpText={translate('EpisodeTitleRequiredHelpText')}
+                      values={episodeTitleRequiredOptions}
+                      onChange={handleInputChange}
+                      {...settings.episodeTitleRequired}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>{translate('SkipFreeSpaceCheck')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="skipFreeSpaceCheckWhenImporting"
+                      helpText={translate('SkipFreeSpaceCheckHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.skipFreeSpaceCheckWhenImporting}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>{translate('MinimumFreeSpace')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.NUMBER}
+                      unit="MB"
+                      name="minimumFreeSpaceWhenImporting"
+                      helpText={translate('MinimumFreeSpaceHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.minimumFreeSpaceWhenImporting}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>
+                      {translate('UseHardlinksInsteadOfCopy')}
+                    </FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="copyUsingHardlinks"
+                      helpText={translate('CopyUsingHardlinksSeriesHelpText')}
+                      helpTextWarning={translate(
+                        'CopyUsingHardlinksHelpTextWarning'
+                      )}
+                      onChange={handleInputChange}
+                      {...settings.copyUsingHardlinks}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                    size={sizes.MEDIUM}
+                  >
+                    <FormLabel>{translate('ImportUsingScript')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="useScriptImport"
+                      helpText={translate('ImportUsingScriptHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.useScriptImport}
+                    />
+                  </FormGroup>
+
+                  {settings.useScriptImport.value ? (
+                    <FormGroup
+                      advancedSettings={showAdvancedSettings}
+                      isAdvanced={true}
+                    >
+                      <FormLabel>{translate('ImportScriptPath')}</FormLabel>
+
+                      <FormInputGroup
+                        type={inputTypes.PATH}
+                        includeFiles={true}
+                        name="scriptImportPath"
+                        helpText={translate('ImportScriptPathHelpText')}
+                        onChange={handleInputChange}
+                        {...settings.scriptImportPath}
+                      />
+                    </FormGroup>
+                  ) : null}
+
+                  <FormGroup size={sizes.MEDIUM}>
+                    <FormLabel>{translate('ImportExtraFiles')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="importExtraFiles"
+                      helpText={translate('ImportExtraFilesEpisodeHelpText')}
+                      onChange={handleInputChange}
+                      {...settings.importExtraFiles}
+                    />
+                  </FormGroup>
+
+                  {settings.importExtraFiles.value ? (
+                    <FormGroup
+                      advancedSettings={showAdvancedSettings}
+                      isAdvanced={true}
+                    >
+                      <FormLabel>{translate('ImportExtraFiles')}</FormLabel>
+
+                      <FormInputGroup
+                        type={inputTypes.TEXT}
+                        name="extraFileExtensions"
+                        helpTexts={[
+                          translate('ExtraFileExtensionsHelpText'),
+                          translate('ExtraFileExtensionsHelpTextsExamples'),
+                        ]}
+                        onChange={handleInputChange}
+                        {...settings.extraFileExtensions}
+                      />
+                    </FormGroup>
+                  ) : null}
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>{translate('UserRejectedExtensions')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.TEXT}
+                      name="userRejectedExtensions"
+                      helpTexts={[
+                        translate('UserRejectedExtensionsHelpText'),
+                        translate('UserRejectedExtensionsTextsExamples'),
+                      ]}
+                      onChange={handleInputChange}
+                      {...settings.userRejectedExtensions}
+                    />
+                  </FormGroup>
+
+                  {showAdvancedSettings && (
+                    <>
+                      <FormGroup
+                        advancedSettings={showAdvancedSettings}
+                        isAdvanced={true}
+                        size={sizes.MEDIUM}
+                      >
+                        <FormLabel>
+                          {translate('SeasonPackUpgradeAllowLabel')}
+                        </FormLabel>
+                        <FormInputGroup
+                          type={inputTypes.SELECT}
+                          name="seasonPackUpgrade"
+                          helpText={translate('SeasonPackUpgradeAllowHelpText')}
+                          helpTextWarning={
+                            settings.seasonPackUpgrade.value === 'any'
+                              ? translate('SeasonPackUpgradeAllowAnyWarning')
+                              : undefined
+                          }
+                          values={seasonPackUpgradeOptions}
+                          onChange={handleInputChange}
+                          {...settings.seasonPackUpgrade}
+                        />
+                      </FormGroup>
+
+                      {settings.seasonPackUpgrade.value === 'threshold' && (
+                        <FormGroup
+                          advancedSettings={showAdvancedSettings}
+                          isAdvanced={true}
+                          size={sizes.MEDIUM}
+                        >
+                          <FormLabel>
+                            {translate('SeasonPackUpgradeThresholdLabel')}
+                          </FormLabel>
+                          <FormInputGroup
+                            type={inputTypes.FLOAT}
+                            name="seasonPackUpgradeThreshold"
+                            unit="%"
+                            step={0.01}
+                            min={0}
+                            max={100}
+                            helpTexts={[
+                              translate('SeasonPackUpgradeThresholdHelpText'),
+                              translate(
+                                'SeasonPackUpgradeThresholdHelpTextExample',
+                                {
+                                  numberEpisodes: 2,
+                                  totalEpisodes: 8,
+                                  count: Math.ceil((100 * 2) / 8),
+                                }
+                              ),
+                              translate(
+                                'SeasonPackUpgradeThresholdHelpTextExample',
+                                {
+                                  numberEpisodes: 3,
+                                  totalEpisodes: 12,
+                                  count: Math.ceil((100 * 3) / 12),
+                                }
+                              ),
+                              translate(
+                                'SeasonPackUpgradeThresholdHelpTextExample',
+                                {
+                                  numberEpisodes: 6,
+                                  totalEpisodes: 24,
+                                  count: Math.ceil((100 * 6) / 24),
+                                }
+                              ),
+                            ]}
+                            onChange={handleInputChange}
+                            {...settings.seasonPackUpgradeThreshold}
+                          />
+                        </FormGroup>
+                      )}
+                    </>
+                  )}
+                </FieldSet>
+              ) : null}
+
+              <FieldSet
+                legend={translate('FileManagement')}
+                caption={translate('FileManagementCaption')}
+              >
+                <FormGroup size={sizes.MEDIUM}>
+                  <FormLabel>{translate('UnmonitorDeletedEpisodes')}</FormLabel>
 
                   <FormInputGroup
                     type={inputTypes.CHECK}
-                    name="createEmptySeriesFolders"
-                    helpText={translate('CreateEmptySeriesFoldersHelpText')}
+                    name="autoUnmonitorPreviouslyDownloadedEpisodes"
+                    helpText={translate('UnmonitorDeletedEpisodesHelpText')}
                     onChange={handleInputChange}
-                    {...settings.createEmptySeriesFolders}
-                  />
-                </FormGroup>
-
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.MEDIUM}
-                >
-                  <FormLabel>{translate('DeleteEmptyFolders')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="deleteEmptyFolders"
-                    helpText={translate('DeleteEmptySeriesFoldersHelpText')}
-                    onChange={handleInputChange}
-                    {...settings.deleteEmptyFolders}
-                  />
-                </FormGroup>
-              </FieldSet>
-            ) : null}
-
-            {showAdvancedSettings ? (
-              <FieldSet legend={translate('Importing')}>
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.SMALL}
-                >
-                  <FormLabel>{translate('EpisodeTitleRequired')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.SELECT}
-                    name="episodeTitleRequired"
-                    helpText={translate('EpisodeTitleRequiredHelpText')}
-                    values={episodeTitleRequiredOptions}
-                    onChange={handleInputChange}
-                    {...settings.episodeTitleRequired}
-                  />
-                </FormGroup>
-
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.MEDIUM}
-                >
-                  <FormLabel>{translate('SkipFreeSpaceCheck')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="skipFreeSpaceCheckWhenImporting"
-                    helpText={translate('SkipFreeSpaceCheckHelpText')}
-                    onChange={handleInputChange}
-                    {...settings.skipFreeSpaceCheckWhenImporting}
-                  />
-                </FormGroup>
-
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.MEDIUM}
-                >
-                  <FormLabel>{translate('MinimumFreeSpace')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.NUMBER}
-                    unit="MB"
-                    name="minimumFreeSpaceWhenImporting"
-                    helpText={translate('MinimumFreeSpaceHelpText')}
-                    onChange={handleInputChange}
-                    {...settings.minimumFreeSpaceWhenImporting}
+                    {...settings.autoUnmonitorPreviouslyDownloadedEpisodes}
                   />
                 </FormGroup>
 
@@ -305,18 +522,26 @@ function MediaManagement() {
                   size={sizes.MEDIUM}
                 >
                   <FormLabel>
-                    {translate('UseHardlinksInsteadOfCopy')}
+                    {translate('DownloadPropersAndRepacks')}
                   </FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="copyUsingHardlinks"
-                    helpText={translate('CopyUsingHardlinksSeriesHelpText')}
-                    helpTextWarning={translate(
-                      'CopyUsingHardlinksHelpTextWarning'
-                    )}
+                    type={inputTypes.SELECT}
+                    name="downloadPropersAndRepacks"
+                    helpTexts={[
+                      translate('DownloadPropersAndRepacksHelpText'),
+                      translate(
+                        'DownloadPropersAndRepacksHelpTextCustomFormat'
+                      ),
+                    ]}
+                    helpTextWarning={
+                      settings.downloadPropersAndRepacks.value === 'doNotPrefer'
+                        ? translate('DownloadPropersAndRepacksHelpTextWarning')
+                        : undefined
+                    }
+                    values={downloadPropersAndRepacksOptions}
                     onChange={handleInputChange}
-                    {...settings.copyUsingHardlinks}
+                    {...settings.downloadPropersAndRepacks}
                   />
                 </FormGroup>
 
@@ -325,351 +550,158 @@ function MediaManagement() {
                   isAdvanced={true}
                   size={sizes.MEDIUM}
                 >
-                  <FormLabel>{translate('ImportUsingScript')}</FormLabel>
+                  <FormLabel>{translate('AnalyseVideoFiles')}</FormLabel>
 
                   <FormInputGroup
                     type={inputTypes.CHECK}
-                    name="useScriptImport"
-                    helpText={translate('ImportUsingScriptHelpText')}
+                    name="enableMediaInfo"
+                    helpText={translate('AnalyseVideoFilesHelpText')}
                     onChange={handleInputChange}
-                    {...settings.useScriptImport}
+                    {...settings.enableMediaInfo}
                   />
                 </FormGroup>
 
-                {settings.useScriptImport.value ? (
+                <FormGroup
+                  advancedSettings={showAdvancedSettings}
+                  isAdvanced={true}
+                >
+                  <FormLabel>
+                    {translate('RescanSeriesFolderAfterRefresh')}
+                  </FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.SELECT}
+                    name="rescanAfterRefresh"
+                    helpText={translate('RescanAfterRefreshSeriesHelpText')}
+                    helpTextWarning={translate(
+                      'RescanAfterRefreshHelpTextWarning'
+                    )}
+                    values={rescanAfterRefreshOptions}
+                    onChange={handleInputChange}
+                    {...settings.rescanAfterRefresh}
+                  />
+                </FormGroup>
+
+                <FormGroup
+                  advancedSettings={showAdvancedSettings}
+                  isAdvanced={true}
+                >
+                  <FormLabel>{translate('ChangeFileDate')}</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.SELECT}
+                    name="fileDate"
+                    helpText={translate('ChangeFileDateHelpText')}
+                    values={fileDateOptions}
+                    onChange={handleInputChange}
+                    {...settings.fileDate}
+                  />
+                </FormGroup>
+
+                <FormGroup
+                  advancedSettings={showAdvancedSettings}
+                  isAdvanced={true}
+                >
+                  <FormLabel>{translate('RecyclingBin')}</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.PATH}
+                    name="recycleBin"
+                    helpText={translate('RecyclingBinHelpText')}
+                    includeFiles={false}
+                    onChange={handleInputChange}
+                    {...settings.recycleBin}
+                  />
+                </FormGroup>
+
+                <FormGroup
+                  advancedSettings={showAdvancedSettings}
+                  isAdvanced={true}
+                >
+                  <FormLabel>{translate('RecyclingBinCleanup')}</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.NUMBER}
+                    name="recycleBinCleanupDays"
+                    helpText={translate('RecyclingBinCleanupHelpText')}
+                    helpTextWarning={translate(
+                      'RecyclingBinCleanupHelpTextWarning'
+                    )}
+                    min={0}
+                    onChange={handleInputChange}
+                    {...settings.recycleBinCleanupDays}
+                  />
+                </FormGroup>
+              </FieldSet>
+
+              {showAdvancedSettings && !isWindows ? (
+                <FieldSet
+                  legend={translate('Permissions')}
+                  caption={translate('PermissionsCaption')}
+                >
                   <FormGroup
                     advancedSettings={showAdvancedSettings}
                     isAdvanced={true}
+                    size={sizes.MEDIUM}
                   >
-                    <FormLabel>{translate('ImportScriptPath')}</FormLabel>
+                    <FormLabel>{translate('SetPermissions')}</FormLabel>
 
                     <FormInputGroup
-                      type={inputTypes.PATH}
-                      includeFiles={true}
-                      name="scriptImportPath"
-                      helpText={translate('ImportScriptPathHelpText')}
+                      type={inputTypes.CHECK}
+                      name="setPermissionsLinux"
+                      helpText={translate('SetPermissionsLinuxHelpText')}
+                      helpTextWarning={translate(
+                        'SetPermissionsLinuxHelpTextWarning'
+                      )}
                       onChange={handleInputChange}
-                      {...settings.scriptImportPath}
+                      {...settings.setPermissionsLinux}
                     />
                   </FormGroup>
-                ) : null}
 
-                <FormGroup size={sizes.MEDIUM}>
-                  <FormLabel>{translate('ImportExtraFiles')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="importExtraFiles"
-                    helpText={translate('ImportExtraFilesEpisodeHelpText')}
-                    onChange={handleInputChange}
-                    {...settings.importExtraFiles}
-                  />
-                </FormGroup>
-
-                {settings.importExtraFiles.value ? (
                   <FormGroup
                     advancedSettings={showAdvancedSettings}
                     isAdvanced={true}
                   >
-                    <FormLabel>{translate('ImportExtraFiles')}</FormLabel>
+                    <FormLabel>{translate('ChmodFolder')}</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.UMASK}
+                      name="chmodFolder"
+                      helpText={translate('ChmodFolderHelpText')}
+                      helpTextWarning={translate('ChmodFolderHelpTextWarning')}
+                      onChange={handleInputChange}
+                      {...settings.chmodFolder}
+                    />
+                  </FormGroup>
+
+                  <FormGroup
+                    advancedSettings={showAdvancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>{translate('ChownGroup')}</FormLabel>
 
                     <FormInputGroup
                       type={inputTypes.TEXT}
-                      name="extraFileExtensions"
-                      helpTexts={[
-                        translate('ExtraFileExtensionsHelpText'),
-                        translate('ExtraFileExtensionsHelpTextsExamples'),
-                      ]}
+                      name="chownGroup"
+                      helpText={translate('ChownGroupHelpText')}
+                      helpTextWarning={translate('ChownGroupHelpTextWarning')}
                       onChange={handleInputChange}
-                      {...settings.extraFileExtensions}
+                      {...settings.chownGroup}
                     />
                   </FormGroup>
-                ) : null}
+                </FieldSet>
+              ) : null}
+            </Form>
+          ) : null}
 
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                >
-                  <FormLabel>{translate('UserRejectedExtensions')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.TEXT}
-                    name="userRejectedExtensions"
-                    helpTexts={[
-                      translate('UserRejectedExtensionsHelpText'),
-                      translate('UserRejectedExtensionsTextsExamples'),
-                    ]}
-                    onChange={handleInputChange}
-                    {...settings.userRejectedExtensions}
-                  />
-                </FormGroup>
-
-                {showAdvancedSettings && (
-                  <>
-                    <FormGroup
-                      advancedSettings={showAdvancedSettings}
-                      isAdvanced={true}
-                      size={sizes.MEDIUM}
-                    >
-                      <FormLabel>
-                        {translate('SeasonPackUpgradeAllowLabel')}
-                      </FormLabel>
-                      <FormInputGroup
-                        type={inputTypes.SELECT}
-                        name="seasonPackUpgrade"
-                        helpText={translate('SeasonPackUpgradeAllowHelpText')}
-                        helpTextWarning={
-                          settings.seasonPackUpgrade.value === 'any'
-                            ? translate('SeasonPackUpgradeAllowAnyWarning')
-                            : undefined
-                        }
-                        values={seasonPackUpgradeOptions}
-                        onChange={handleInputChange}
-                        {...settings.seasonPackUpgrade}
-                      />
-                    </FormGroup>
-
-                    {settings.seasonPackUpgrade.value === 'threshold' && (
-                      <FormGroup
-                        advancedSettings={showAdvancedSettings}
-                        isAdvanced={true}
-                        size={sizes.MEDIUM}
-                      >
-                        <FormLabel>
-                          {translate('SeasonPackUpgradeThresholdLabel')}
-                        </FormLabel>
-                        <FormInputGroup
-                          type={inputTypes.FLOAT}
-                          name="seasonPackUpgradeThreshold"
-                          unit="%"
-                          step={0.01}
-                          min={0}
-                          max={100}
-                          helpTexts={[
-                            translate('SeasonPackUpgradeThresholdHelpText'),
-                            translate(
-                              'SeasonPackUpgradeThresholdHelpTextExample',
-                              {
-                                numberEpisodes: 2,
-                                totalEpisodes: 8,
-                                count: Math.ceil((100 * 2) / 8),
-                              }
-                            ),
-                            translate(
-                              'SeasonPackUpgradeThresholdHelpTextExample',
-                              {
-                                numberEpisodes: 3,
-                                totalEpisodes: 12,
-                                count: Math.ceil((100 * 3) / 12),
-                              }
-                            ),
-                            translate(
-                              'SeasonPackUpgradeThresholdHelpTextExample',
-                              {
-                                numberEpisodes: 6,
-                                totalEpisodes: 24,
-                                count: Math.ceil((100 * 6) / 24),
-                              }
-                            ),
-                          ]}
-                          onChange={handleInputChange}
-                          {...settings.seasonPackUpgradeThreshold}
-                        />
-                      </FormGroup>
-                    )}
-                  </>
-                )}
-              </FieldSet>
-            ) : null}
-
-            <FieldSet legend={translate('FileManagement')}>
-              <FormGroup size={sizes.MEDIUM}>
-                <FormLabel>{translate('UnmonitorDeletedEpisodes')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.CHECK}
-                  name="autoUnmonitorPreviouslyDownloadedEpisodes"
-                  helpText={translate('UnmonitorDeletedEpisodesHelpText')}
-                  onChange={handleInputChange}
-                  {...settings.autoUnmonitorPreviouslyDownloadedEpisodes}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-                size={sizes.MEDIUM}
-              >
-                <FormLabel>{translate('DownloadPropersAndRepacks')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.SELECT}
-                  name="downloadPropersAndRepacks"
-                  helpTexts={[
-                    translate('DownloadPropersAndRepacksHelpText'),
-                    translate('DownloadPropersAndRepacksHelpTextCustomFormat'),
-                  ]}
-                  helpTextWarning={
-                    settings.downloadPropersAndRepacks.value === 'doNotPrefer'
-                      ? translate('DownloadPropersAndRepacksHelpTextWarning')
-                      : undefined
-                  }
-                  values={downloadPropersAndRepacksOptions}
-                  onChange={handleInputChange}
-                  {...settings.downloadPropersAndRepacks}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-                size={sizes.MEDIUM}
-              >
-                <FormLabel>{translate('AnalyseVideoFiles')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.CHECK}
-                  name="enableMediaInfo"
-                  helpText={translate('AnalyseVideoFilesHelpText')}
-                  onChange={handleInputChange}
-                  {...settings.enableMediaInfo}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-              >
-                <FormLabel>
-                  {translate('RescanSeriesFolderAfterRefresh')}
-                </FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.SELECT}
-                  name="rescanAfterRefresh"
-                  helpText={translate('RescanAfterRefreshSeriesHelpText')}
-                  helpTextWarning={translate(
-                    'RescanAfterRefreshHelpTextWarning'
-                  )}
-                  values={rescanAfterRefreshOptions}
-                  onChange={handleInputChange}
-                  {...settings.rescanAfterRefresh}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-              >
-                <FormLabel>{translate('ChangeFileDate')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.SELECT}
-                  name="fileDate"
-                  helpText={translate('ChangeFileDateHelpText')}
-                  values={fileDateOptions}
-                  onChange={handleInputChange}
-                  {...settings.fileDate}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-              >
-                <FormLabel>{translate('RecyclingBin')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.PATH}
-                  name="recycleBin"
-                  helpText={translate('RecyclingBinHelpText')}
-                  includeFiles={false}
-                  onChange={handleInputChange}
-                  {...settings.recycleBin}
-                />
-              </FormGroup>
-
-              <FormGroup
-                advancedSettings={showAdvancedSettings}
-                isAdvanced={true}
-              >
-                <FormLabel>{translate('RecyclingBinCleanup')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.NUMBER}
-                  name="recycleBinCleanupDays"
-                  helpText={translate('RecyclingBinCleanupHelpText')}
-                  helpTextWarning={translate(
-                    'RecyclingBinCleanupHelpTextWarning'
-                  )}
-                  min={0}
-                  onChange={handleInputChange}
-                  {...settings.recycleBinCleanupDays}
-                />
-              </FormGroup>
-            </FieldSet>
-
-            {showAdvancedSettings && !isWindows ? (
-              <FieldSet legend={translate('Permissions')}>
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                  size={sizes.MEDIUM}
-                >
-                  <FormLabel>{translate('SetPermissions')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="setPermissionsLinux"
-                    helpText={translate('SetPermissionsLinuxHelpText')}
-                    helpTextWarning={translate(
-                      'SetPermissionsLinuxHelpTextWarning'
-                    )}
-                    onChange={handleInputChange}
-                    {...settings.setPermissionsLinux}
-                  />
-                </FormGroup>
-
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                >
-                  <FormLabel>{translate('ChmodFolder')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.UMASK}
-                    name="chmodFolder"
-                    helpText={translate('ChmodFolderHelpText')}
-                    helpTextWarning={translate('ChmodFolderHelpTextWarning')}
-                    onChange={handleInputChange}
-                    {...settings.chmodFolder}
-                  />
-                </FormGroup>
-
-                <FormGroup
-                  advancedSettings={showAdvancedSettings}
-                  isAdvanced={true}
-                >
-                  <FormLabel>{translate('ChownGroup')}</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.TEXT}
-                    name="chownGroup"
-                    helpText={translate('ChownGroupHelpText')}
-                    helpTextWarning={translate('ChownGroupHelpTextWarning')}
-                    onChange={handleInputChange}
-                    {...settings.chownGroup}
-                  />
-                </FormGroup>
-              </FieldSet>
-            ) : null}
-          </Form>
-        ) : null}
-
-        <FieldSet legend={translate('RootFolders')}>
-          <RootFolders />
-          <AddRootFolder />
-        </FieldSet>
+          <FieldSet
+            legend={translate('RootFolders')}
+            caption={translate('RootFoldersCaption')}
+          >
+            <RootFolders />
+            <AddRootFolder />
+          </FieldSet>
+        </div>
       </PageContentBody>
     </PageContent>
   );

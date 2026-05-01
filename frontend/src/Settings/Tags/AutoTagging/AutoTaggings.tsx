@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AutoTaggingAppState } from 'App/State/SettingsAppState';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import { icons } from 'Helpers/Props';
@@ -63,40 +62,40 @@ export default function AutoTaggings() {
   }, [dispatch]);
 
   return (
-    <FieldSet legend={translate('AutoTagging')}>
-      <PageSectionContent
-        errorMessage={translate('AutoTaggingLoadError')}
-        error={error}
-        isFetching={isFetching}
-        isPopulated={isPopulated}
-      >
-        <div className={styles.autoTaggings}>
-          {items.map((item) => {
-            return (
-              <AutoTagging
-                key={item.id}
-                {...item}
-                isDeleting={isDeleting}
-                tagList={tagList}
-                onConfirmDeleteAutoTagging={onConfirmDelete}
-                onCloneAutoTaggingPress={onClonePress}
-              />
-            );
-          })}
+    <PageSectionContent
+      errorMessage={translate('AutoTaggingLoadError')}
+      error={error}
+      isFetching={isFetching}
+      isPopulated={isPopulated}
+    >
+      <div className={styles.autoTaggings}>
+        {items.map((item) => {
+          return (
+            <AutoTagging
+              key={item.id}
+              {...item}
+              isDeleting={isDeleting}
+              tagList={tagList}
+              onConfirmDeleteAutoTagging={onConfirmDelete}
+              onCloneAutoTaggingPress={onClonePress}
+            />
+          );
+        })}
 
-          <Card className={styles.addAutoTagging} onPress={onEditPress}>
-            <div className={styles.center}>
-              <Icon name={icons.ADD} size={45} />
-            </div>
-          </Card>
-        </div>
+        <Card className={styles.addAutoTagging} onPress={onEditPress}>
+          <div className={styles.center}>
+            <Icon name={icons.ADD} size={20} />
+          </div>
 
-        <EditAutoTaggingModal
-          isOpen={isEditModalOpen}
-          tagsFromId={tagsFromId}
-          onModalClose={onEditModalClose}
-        />
-      </PageSectionContent>
-    </FieldSet>
+          <div className={styles.addLabel}>{translate('Add')}</div>
+        </Card>
+      </div>
+
+      <EditAutoTaggingModal
+        isOpen={isEditModalOpen}
+        tagsFromId={tagsFromId}
+        onModalClose={onEditModalClose}
+      />
+    </PageSectionContent>
   );
 }

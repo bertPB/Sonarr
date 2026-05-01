@@ -46,7 +46,10 @@ function LoggingSettings({
   const showAdvancedSettings = useShowAdvancedSettings();
 
   return (
-    <FieldSet legend={translate('Logging')}>
+    <FieldSet
+      legend={translate('Logging')}
+      caption={translate('LoggingCaption')}
+    >
       <FormGroup>
         <FormLabel>{translate('LogLevel')}</FormLabel>
 

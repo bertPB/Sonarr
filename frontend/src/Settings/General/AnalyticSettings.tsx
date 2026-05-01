@@ -19,7 +19,10 @@ function AnalyticSettings({
   onInputChange,
 }: AnalyticSettingsProps) {
   return (
-    <FieldSet legend={translate('Analytics')}>
+    <FieldSet
+      legend={translate('Analytics')}
+      caption={translate('AnalyticsCaption')}
+    >
       <FormGroup size={sizes.MEDIUM}>
         <FormLabel>{translate('SendAnonymousUsageData')}</FormLabel>
 

@@ -139,7 +139,10 @@ function SecuritySettings({
     authenticationMethod && authenticationMethod.value !== 'none';
 
   return (
-    <FieldSet legend={translate('Security')}>
+    <FieldSet
+      legend={translate('Security')}
+      caption={translate('SecurityCaption')}
+    >
       <FormGroup>
         <FormLabel>{translate('Authentication')}</FormLabel>
 
