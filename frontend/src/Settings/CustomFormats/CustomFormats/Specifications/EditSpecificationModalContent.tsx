@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomFormatSpecificationAppState } from 'App/State/SettingsAppState';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -90,27 +89,23 @@ function EditSpecificationModalContent({
               x.label ===
               translate('CustomFormatsSpecificationRegularExpression')
           ) ? (
-            <Alert kind={kinds.INFO}>
-              <div>
-                <InlineMarkdown
-                  data={translate('ConditionUsingRegularExpressions')}
-                />
-              </div>
-              <div>
-                <InlineMarkdown
-                  data={translate('RegularExpressionsTutorialLink', {
-                    url: 'https://www.regular-expressions.info/tutorial.html',
-                  })}
-                />
-              </div>
-              <div>
-                <InlineMarkdown
-                  data={translate('RegularExpressionsCanBeTested', {
-                    url: 'http://regexstorm.net/tester',
-                  })}
-                />
-              </div>
-            </Alert>
+            <p className={styles.intro}>
+              <InlineMarkdown
+                data={translate('ConditionUsingRegularExpressions')}
+              />
+              {' '}
+              <InlineMarkdown
+                data={translate('RegularExpressionsTutorialLink', {
+                  url: 'https://www.regular-expressions.info/tutorial.html',
+                })}
+              />
+              {' '}
+              <InlineMarkdown
+                data={translate('RegularExpressionsCanBeTested', {
+                  url: 'http://regexstorm.net/tester',
+                })}
+              />
+            </p>
           ) : null}
 
           <FormGroup>

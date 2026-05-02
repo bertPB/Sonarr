@@ -1,8 +1,8 @@
 declare const styles: {
-  readonly "deleteButton": string;
-  readonly "intro": string;
   readonly "section": string;
+  readonly "sectionHeaderRow": string;
   readonly "sectionHeading": string;
+  readonly "sectionLede": string;
 };
 export = styles;
 

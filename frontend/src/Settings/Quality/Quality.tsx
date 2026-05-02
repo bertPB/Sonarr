@@ -4,9 +4,11 @@ import { useCommandExecuting, useExecuteCommand } from 'Commands/useCommands';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import { icons } from 'Helpers/Props';
+import settingsStyles from 'Settings/Settings.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import {
   SaveCallback,
@@ -86,11 +88,17 @@ function Quality() {
         onSavePress={handleSavePress}
       />
       <PageContentBody>
-        <QualityDefinitions
-          isResettingQualityDefinitions={isResettingQualityDefinitions}
-          setChildSave={handleSetChildSave}
-          onChildStateChange={handleChildStateChange}
-        />
+        <div className={settingsStyles.section}>
+          <PageHeading
+            scope={`${translate('Configuration')} · ${translate('Quality')}`}
+            title={translate('QualitySettings')}
+          />
+          <QualityDefinitions
+            isResettingQualityDefinitions={isResettingQualityDefinitions}
+            setChildSave={handleSetChildSave}
+            onChildStateChange={handleChildStateChange}
+          />
+        </div>
       </PageContentBody>
 
       <ConfirmModal

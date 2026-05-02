@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -13,7 +12,7 @@ import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { inputTypes, kinds, sizes } from 'Helpers/Props';
+import { inputTypes, sizes } from 'Helpers/Props';
 import { clearPendingChanges } from 'Store/Actions/baseActions';
 import {
   clearCustomFormatSpecificationPending,
@@ -182,9 +181,7 @@ function ImportCustomFormatModalContent({
           {isFetching ? <LoadingIndicator /> : null}
 
           {!isFetching && error ? (
-            <Alert kind={kinds.DANGER}>
-              {translate('CustomFormatsLoadError')}
-            </Alert>
+            <p className={styles.error}>{translate('CustomFormatsLoadError')}</p>
           ) : null}
 
           {!isFetching && !error && isSpecificationsPopulated ? (

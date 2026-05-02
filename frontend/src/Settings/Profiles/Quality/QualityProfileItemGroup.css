@@ -1,11 +1,17 @@
+/* Sonarr v5 — Quality Profile Group container.
+ * A group contains multiple draggable rows. The container itself sits inside
+ * the .qualities bordered list as a hairline-separated row, with a 2px
+ * ember-tinted left border to signal nesting. Inner rows render below the
+ * group header inside the .items indent. */
+
 .qualityProfileItemGroup {
   width: 100%;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  background: var(--inputBackgroundColor);
+  border-top: 1px solid var(--borderColor);
+  border-left: 2px solid var(--ember);
+  background: transparent;
 
   &.editGroups {
-    background: var(--inputBackgroundColor);
+    background: transparent;
   }
 
   &.editSizes {
@@ -47,7 +53,7 @@
   flex-shrink: 0;
 
   &.notAllowed {
-    color: #c6c6c6;
+    color: var(--inkFaint);
   }
 }
 

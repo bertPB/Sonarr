@@ -82,130 +82,154 @@ function EditReleaseProfileModalContent({
           validationErrors={validationErrors}
           validationWarnings={validationWarnings}
         >
-          <FormGroup>
-            <FormLabel>{translate('Name')}</FormLabel>
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>
+              {translate('ProfileSectionIdentity')}
+            </h3>
 
-            <FormInputGroup
-              type={inputTypes.TEXT}
-              name="name"
-              {...name}
-              placeholder={translate('OptionalName')}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>{translate('EnableProfile')}</FormLabel>
-
-            <FormInputGroup
-              type={inputTypes.CHECK}
-              name="enabled"
-              helpText={translate('EnableProfileHelpText')}
-              {...enabled}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>{translate('MustContain')}</FormLabel>
-
-            <FormInputGroup
-              {...required}
-              inputClassName={styles.tagInternalInput}
-              type={inputTypes.TEXT_TAG}
-              name="required"
-              helpText={translate('MustContainHelpText')}
-              kind={kinds.SUCCESS}
-              placeholder={translate('AddNewRestriction')}
-              delimiters={tagInputDelimiters}
-              canEdit={true}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>{translate('MustNotContain')}</FormLabel>
-
-            <FormInputGroup
-              {...ignored}
-              inputClassName={styles.tagInternalInput}
-              type={inputTypes.TEXT_TAG}
-              name="ignored"
-              helpText={translate('MustNotContainHelpText')}
-              kind={kinds.DANGER}
-              placeholder={translate('AddNewRestriction')}
-              delimiters={tagInputDelimiters}
-              canEdit={true}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <FormLabel>{translate('AirDateRestriction')}</FormLabel>
-
-            <FormInputGroup
-              {...airDateRestriction}
-              type={inputTypes.CHECK}
-              name="airDateRestriction"
-              helpText={translate('AirDateRestrictionHelpText')}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-
-          {airDateRestriction.value ? (
             <FormGroup>
-              <FormLabel>{translate('AirDateGracePeriod')}</FormLabel>
+              <FormLabel>{translate('Name')}</FormLabel>
 
               <FormInputGroup
-                {...airDateGracePeriod}
-                type={inputTypes.NUMBER}
-                unit="days"
-                name="airDateGracePeriod"
-                helpText={translate('AirDateGracePeriodHelpText')}
+                type={inputTypes.TEXT}
+                name="name"
+                {...name}
+                placeholder={translate('OptionalName')}
                 onChange={handleInputChange}
               />
             </FormGroup>
-          ) : null}
 
-          <FormGroup>
-            <FormLabel>{translate('Indexer')}</FormLabel>
+            <FormGroup>
+              <FormLabel>{translate('EnableProfile')}</FormLabel>
 
-            <FormInputGroup
-              type={inputTypes.INDEXER_SELECT}
-              name="indexerIds"
-              helpText={translate('ReleaseProfileIndexerHelpText')}
-              helpTextWarning={translate(
-                'ReleaseProfileIndexerHelpTextWarning'
-              )}
-              {...indexerIds}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+              <FormInputGroup
+                type={inputTypes.CHECK}
+                name="enabled"
+                helpText={translate('EnableProfileHelpText')}
+                {...enabled}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+          </section>
 
-          <FormGroup>
-            <FormLabel>{translate('Tags')}</FormLabel>
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>
+              {translate('ProfileSectionPatterns')}
+            </h3>
 
-            <FormInputGroup
-              type={inputTypes.TAG}
-              name="tags"
-              helpText={translate('ReleaseProfileTagSeriesHelpText')}
-              {...tags}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+            <FormGroup>
+              <FormLabel>{translate('MustContain')}</FormLabel>
 
-          <FormGroup>
-            <FormLabel>{translate('ExcludedTags')}</FormLabel>
+              <FormInputGroup
+                {...required}
+                inputClassName={styles.tagInternalInput}
+                type={inputTypes.TEXT_TAG}
+                name="required"
+                helpText={translate('MustContainHelpText')}
+                kind={kinds.SUCCESS}
+                placeholder={translate('AddNewRestriction')}
+                delimiters={tagInputDelimiters}
+                canEdit={true}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
 
-            <FormInputGroup
-              type={inputTypes.TAG}
-              name="excludedTags"
-              helpText={translate('ReleaseProfileExcludedTagSeriesHelpText')}
-              kind={kinds.DANGER}
-              {...excludedTags}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+            <FormGroup>
+              <FormLabel>{translate('MustNotContain')}</FormLabel>
+
+              <FormInputGroup
+                {...ignored}
+                inputClassName={styles.tagInternalInput}
+                type={inputTypes.TEXT_TAG}
+                name="ignored"
+                helpText={translate('MustNotContainHelpText')}
+                kind={kinds.DANGER}
+                placeholder={translate('AddNewRestriction')}
+                delimiters={tagInputDelimiters}
+                canEdit={true}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+          </section>
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>
+              {translate('AirDateRestriction')}
+            </h3>
+
+            <FormGroup>
+              <FormLabel>{translate('AirDateRestriction')}</FormLabel>
+
+              <FormInputGroup
+                {...airDateRestriction}
+                type={inputTypes.CHECK}
+                name="airDateRestriction"
+                helpText={translate('AirDateRestrictionHelpText')}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+
+            {airDateRestriction.value ? (
+              <FormGroup>
+                <FormLabel>{translate('AirDateGracePeriod')}</FormLabel>
+
+                <FormInputGroup
+                  {...airDateGracePeriod}
+                  type={inputTypes.NUMBER}
+                  unit="days"
+                  name="airDateGracePeriod"
+                  helpText={translate('AirDateGracePeriodHelpText')}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            ) : null}
+          </section>
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>
+              {translate('ProfileSectionScope')}
+            </h3>
+
+            <FormGroup>
+              <FormLabel>{translate('Indexer')}</FormLabel>
+
+              <FormInputGroup
+                type={inputTypes.INDEXER_SELECT}
+                name="indexerIds"
+                helpText={translate('ReleaseProfileIndexerHelpText')}
+                helpTextWarning={translate(
+                  'ReleaseProfileIndexerHelpTextWarning'
+                )}
+                {...indexerIds}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <FormLabel>{translate('Tags')}</FormLabel>
+
+              <FormInputGroup
+                type={inputTypes.TAG}
+                name="tags"
+                helpText={translate('ReleaseProfileTagSeriesHelpText')}
+                {...tags}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <FormLabel>{translate('ExcludedTags')}</FormLabel>
+
+              <FormInputGroup
+                type={inputTypes.TAG}
+                name="excludedTags"
+                helpText={translate('ReleaseProfileExcludedTagSeriesHelpText')}
+                kind={kinds.DANGER}
+                {...excludedTags}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+          </section>
         </Form>
       </ModalBody>
 

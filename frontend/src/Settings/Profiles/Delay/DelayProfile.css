@@ -1,54 +1,85 @@
+/* Sonarr v5 — Delay Profile data row.
+ * Column widths must match DelayProfiles.css header row. */
+
 .delayProfile {
   display: flex;
-  align-items: stretch;
-  margin-bottom: 10px;
-  height: 30px;
-  border-bottom: 1px solid var(--borderColor);
-  line-height: 30px;
-}
-
-.column {
-  flex: 0 0 200px;
-}
-
-.actions {
-  display: flex;
-}
-
-.dragHandle {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-left: auto;
-  width: $dragHandleWidth;
-  text-align: center;
-  cursor: grab;
+  height: 44px;
+  border-top: 1px solid var(--borderColor);
 }
 
-.dragIcon {
-  top: 0;
+/* Ember-tinted row for the Default profile (id=1) */
+.isDefault {
+  background-color: color-mix(in oklch, var(--ember) 4%, var(--paperCard));
 }
 
+/* isDragging: ghost the row being dragged */
 .isDragging {
   opacity: 0.25;
 }
 
-.editButton {
-  width: $dragHandleWidth;
-  text-align: center;
+/* Column widths — must match DelayProfiles.css */
+.colDrag    { flex: 0 0 32px; }
+.colScope   { flex: 1 1 auto; min-width: 80px; padding-right: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.colProto   { flex: 0 0 180px; font-family: $monoSpaceFontFamily; font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+.colUsenet  { flex: 0 0 120px; font-family: $monoSpaceFontFamily; font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+.colTorrent { flex: 0 0 120px; font-family: $monoSpaceFontFamily; font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+
+/* Action buttons: hover-reveal at the right edge */
+.colActions {
+  flex: 0 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
 }
 
+.actions {
+  display: inline-flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.delayProfile:hover .actions {
+  opacity: 1;
+}
+
+.actionButton {
+  composes: button from '~Components/Link/IconButton.css';
+
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+/* Drag handle: revealed on row hover */
+.dragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 44px;
+  cursor: grab;
+  color: var(--inkFaint);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.delayProfile:hover .dragHandle {
+  opacity: 1;
+}
+
+/* Drag-and-drop placeholder line shown before/after dragged row */
 .placeholder {
-  width: 100%;
-  height: 30px;
-  border-bottom: 1px dotted #aaa;
+  height: 44px;
+  border-top: 2px solid var(--ember);
 }
 
-.placeholderBefore {
-  margin-bottom: 8px;
-}
-
-.placeholderAfter {
-  margin-top: 8px;
+/* "Any" text when scope has no tags */
+.anyText {
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkFaint);
 }

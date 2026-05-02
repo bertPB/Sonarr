@@ -1,25 +1,106 @@
+/* Sonarr v5 — Release Profile card. Same vocabulary as QualityProfile.css. */
+
 .releaseProfile {
   composes: card from '~Components/Card.css';
 
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 290px;
 }
 
-.enabled {
+.nameContainer {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 5px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .name {
   @add-mixin truncate;
 
-  margin-bottom: 20px;
-  font-weight: 300;
-  font-size: 24px;
+  flex: 1 1 auto;
+  font-family: $defaultFontFamily;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
-.label {
-  composes: label from '~Components/Label.css';
+.rightCluster {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
 
-  max-width: 100%;
+.releaseProfile:hover .rightCluster {
+  opacity: 1;
+}
+
+.actionButton {
+  composes: button from '~Components/Link/IconButton.css';
+
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.statusLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkMuted);
+}
+
+.statusDot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--statusAiring);
+}
+
+.statusSeparator {
+  color: var(--inkFaint);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.chipsClipped {
+  composes: chips;
+
+  max-height: 72px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 48px, transparent 72px);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: linear-gradient(to bottom, black 48px, transparent 72px);
+}
+
+.showAll {
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkMuted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.showAll:hover {
+  color: var(--ember);
 }

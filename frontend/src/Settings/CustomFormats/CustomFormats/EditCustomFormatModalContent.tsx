@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -128,9 +126,7 @@ function EditCustomFormatModalContent({
           {isFetching ? <LoadingIndicator /> : null}
 
           {!isFetching && error ? (
-            <Alert kind={kinds.DANGER}>
-              {translate('AddCustomFormatError')}
-            </Alert>
+            <p className={styles.error}>{translate('AddCustomFormatError')}</p>
           ) : null}
 
           {!isFetching && !error && isSpecificationsPopulated ? (
@@ -167,10 +163,14 @@ function EditCustomFormatModalContent({
                 </FormGroup>
               </Form>
 
-              <FieldSet legend={translate('Conditions')}>
-                <Alert kind={kinds.INFO}>
-                  <div>{translate('CustomFormatsSettingsTriggerInfo')}</div>
-                </Alert>
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Conditions')}
+                </h3>
+
+                <p className={styles.intro}>
+                  {translate('CustomFormatsSettingsTriggerInfo')}
+                </p>
 
                 <div className={styles.customFormats}>
                   {specifications.map((tag) => {
@@ -182,11 +182,14 @@ function EditCustomFormatModalContent({
                     onPress={handleAddSpecificationPress}
                   >
                     <div className={styles.center}>
-                      <Icon name={icons.ADD} size={45} />
+                      <Icon name={icons.ADD} size={20} />
+                    </div>
+                    <div className={styles.addLabel}>
+                      {translate('AddCondition')}
                     </div>
                   </Card>
                 </div>
-              </FieldSet>
+              </section>
 
               <AddSpecificationModal
                 isOpen={isAddSpecificationModalOpen}

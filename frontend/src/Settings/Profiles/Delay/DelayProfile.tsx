@@ -3,9 +3,9 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop, XYCoord } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link/Link';
+import Label from 'Components/Label';
+import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
-import TagList from 'Components/TagList';
 import DragType from 'Helpers/DragType';
 import { icons, kinds } from 'Helpers/Props';
 import { deleteDelayProfile } from 'Store/Actions/settingsActions';
@@ -17,7 +17,7 @@ import styles from './DelayProfile.css';
 
 function getDelay(enabled: boolean, delay: number) {
   if (!enabled) {
-    return '-';
+    return '—';
   }
 
   if (!delay) {
@@ -28,7 +28,6 @@ function getDelay(enabled: boolean, delay: number) {
     return translate('OneMinute');
   }
 
-  // TODO: use better units of time than just minutes
   return translate('DelayMinutes', { delay });
 }
 
@@ -70,73 +69,62 @@ function DelayProfile({
 }: DelayProfileProps) {
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
+  const isDefault = id === 1;
 
-  const [isEditDelayProfileModalOpen, setIsEditDelayProfileModalOpen] =
-    useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const [isDeleteDelayProfileModalOpen, setIsDeleteDelayProfileModalOpen] =
-    useState(false);
-
-  const preferred = useMemo(() => {
-    if (!enableUsenet) {
-      return translate('OnlyTorrent');
-    } else if (!enableTorrent) {
-      return translate('OnlyUsenet');
-    }
+  const protocolLabel = useMemo(() => {
+    if (!enableUsenet) return translate('OnlyTorrent');
+    if (!enableTorrent) return translate('OnlyUsenet');
 
     return titleCase(translate('PreferProtocol', { preferredProtocol }));
   }, [preferredProtocol, enableUsenet, enableTorrent]);
 
-  const handleEditDelayProfilePress = useCallback(() => {
-    setIsEditDelayProfileModalOpen(true);
+  const scopeTags = useMemo(
+    () => tagList.filter((t) => tags.includes(t.id)),
+    [tagList, tags]
+  );
+
+  const handleEditPress = useCallback(() => {
+    setIsEditModalOpen(true);
   }, []);
 
-  const handleEditDelayProfileModalClose = useCallback(() => {
-    setIsEditDelayProfileModalOpen(false);
+  const handleEditModalClose = useCallback(() => {
+    setIsEditModalOpen(false);
   }, []);
 
-  const handleDeleteDelayProfilePress = useCallback(() => {
-    setIsEditDelayProfileModalOpen(false);
-    setIsDeleteDelayProfileModalOpen(true);
+  const handleDeletePress = useCallback(() => {
+    setIsEditModalOpen(false);
+    setIsDeleteModalOpen(true);
   }, []);
 
-  const handleDeleteDelayProfileModalClose = useCallback(() => {
-    setIsDeleteDelayProfileModalOpen(false);
+  const handleDeleteModalClose = useCallback(() => {
+    setIsDeleteModalOpen(false);
   }, []);
 
-  const handleConfirmDeleteDelayProfile = useCallback(() => {
-    dispatch(deleteDelayProfile(id));
+  const handleConfirmDelete = useCallback(() => {
+    dispatch(deleteDelayProfile({ id }));
   }, [id, dispatch]);
 
   const [{ isOver }, dropRef] = useDrop<DragItem, void, { isOver: boolean }>({
     accept: DragType.DelayProfile,
     collect(monitor) {
-      return {
-        isOver: monitor.isOver(),
-      };
+      return { isOver: monitor.isOver() };
     },
     hover(item: DragItem, monitor) {
-      if (!ref.current) {
-        return;
-      }
+      if (!ref.current) return;
+
       const dragIndex = item.order;
       const hoverIndex = order;
 
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
+      if (dragIndex === hoverIndex) return;
 
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-
-      // When moving up, only trigger if drag position is above 50% and
-      // when moving down, only trigger if drag position is below 50%.
-      // If we're moving down the hoverIndex needs to be increased
-      // by one so it's ordered properly. Otherwise the hoverIndex will work.
 
       if (dragIndex < hoverIndex && hoverClientY > hoverMiddleY) {
         onDelayProfileDragMove(dragIndex, hoverIndex + 1);
@@ -152,12 +140,7 @@ function DelayProfile({
     { isDragging: boolean }
   >({
     type: DragType.DelayProfile,
-    item: () => {
-      return {
-        id,
-        order,
-      };
-    },
+    item: () => ({ id, order }),
     collect: (monitor: DragSourceMonitor<unknown, unknown>) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -172,66 +155,90 @@ function DelayProfile({
   const isAfter = !isDragging && isDraggingDown && isOver;
 
   return (
-    <div ref={id === 1 ? undefined : ref}>
-      {isBefore ? (
-        <div
-          className={classNames(styles.placeholder, styles.placeholderBefore)}
-        />
-      ) : null}
+    <div ref={isDefault ? undefined : ref}>
+      {isBefore ? <div className={styles.placeholder} /> : null}
 
       <div
         className={classNames(
           styles.delayProfile,
+          isDefault && styles.isDefault,
           isDragging && styles.isDragging
         )}
       >
-        <div className={styles.column}>{preferred}</div>
-        <div className={styles.column}>
-          {getDelay(enableUsenet, usenetDelay)}
-        </div>
-        <div className={styles.column}>
-          {getDelay(enableTorrent, torrentDelay)}
-        </div>
-
-        <TagList tags={tags} tagList={tagList} />
-
-        <div className={styles.actions}>
-          <Link
-            className={id === 1 ? styles.editButton : undefined}
-            onPress={handleEditDelayProfilePress}
-          >
-            <Icon name={icons.EDIT} />
-          </Link>
-
-          {id === 1 ? null : (
+        {/* Drag handle column */}
+        <div className={styles.colDrag}>
+          {isDefault ? null : (
             <div ref={dragRef} className={styles.dragHandle}>
-              <Icon className={styles.dragIcon} name={icons.REORDER} />
+              <Icon name={icons.REORDER} />
             </div>
           )}
         </div>
+
+        {/* Scope column: tag chips or "Any" */}
+        <div className={styles.colScope}>
+          {scopeTags.length > 0 ? (
+            scopeTags.map((tag) => (
+              <Label key={tag.id} kind={kinds.DEFAULT}>
+                {tag.label}
+              </Label>
+            ))
+          ) : (
+            <span className={styles.anyText}>any</span>
+          )}
+        </div>
+
+        {/* Protocol column */}
+        <div className={styles.colProto}>{protocolLabel}</div>
+
+        {/* Usenet delay column */}
+        <div className={styles.colUsenet}>
+          {getDelay(enableUsenet, usenetDelay)}
+        </div>
+
+        {/* Torrent delay column */}
+        <div className={styles.colTorrent}>
+          {getDelay(enableTorrent, torrentDelay)}
+        </div>
+
+        {/* Actions column */}
+        <div className={styles.colActions}>
+          <div className={styles.actions}>
+            <IconButton
+              className={styles.actionButton}
+              title={translate('EditDelayProfile')}
+              name={icons.EDIT}
+              onPress={handleEditPress}
+            />
+
+            {isDefault ? null : (
+              <IconButton
+                className={styles.actionButton}
+                title={translate('DeleteDelayProfile')}
+                name={icons.DELETE}
+                onPress={handleDeletePress}
+              />
+            )}
+          </div>
+        </div>
       </div>
 
-      {isAfter ? (
-        <div
-          className={classNames(styles.placeholder, styles.placeholderAfter)}
-        />
-      ) : null}
+      {isAfter ? <div className={styles.placeholder} /> : null}
 
       <EditDelayProfileModal
         id={id}
-        isOpen={isEditDelayProfileModalOpen}
-        onModalClose={handleEditDelayProfileModalClose}
-        onDeleteDelayProfilePress={handleDeleteDelayProfilePress}
+        isOpen={isEditModalOpen}
+        onModalClose={handleEditModalClose}
+        onDeleteDelayProfilePress={handleDeletePress}
       />
 
       <ConfirmModal
-        isOpen={isDeleteDelayProfileModalOpen}
+        isOpen={isDeleteModalOpen}
         kind={kinds.DANGER}
         title={translate('DeleteDelayProfile')}
         message={translate('DeleteDelayProfileMessageText')}
         confirmLabel={translate('Delete')}
-        onConfirm={handleConfirmDeleteDelayProfile}
-        onCancel={handleDeleteDelayProfileModalClose}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleDeleteModalClose}
       />
     </div>
   );

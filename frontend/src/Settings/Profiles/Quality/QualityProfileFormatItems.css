@@ -1,13 +1,33 @@
+/* Sonarr v5 — Quality Profile Custom Formats list.
+ * Bordered list surface (paperWarm) holding a tracked-caps mono header row
+ * and one .qualityProfileFormatItem child per format. Mirrors the
+ * Settings/Profiles/Delay/DelayProfiles.css .delayList + .headerRow precedent
+ * but with the column widths tuned for [Format Name | Score]. */
+
 .formats {
   margin-top: 10px;
-  /* TODO: This should consider the number of languages in the list */
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperWarm);
+  overflow: hidden;
   user-select: none;
 }
 
+/* Tracked-caps mono header row — sits at the top inside the bordered
+ * surface, draws the divider above the first data row. */
 .headerContainer {
   display: flex;
-  font-weight: bold;
-  line-height: 35px;
+  align-items: center;
+  padding: 0 16px;
+  height: 36px;
+  background-color: var(--paperWarm);
+  border-bottom: 1px solid var(--borderColor);
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
 }
 
 .headerTitle {
@@ -22,10 +42,13 @@
   width: 100px;
 }
 
+/* Empty-state copy — "Want more control? Add a custom format." Reskinned to
+ * Body Small ink-muted, no centered display-weight chrome. */
 .addCustomFormatMessage {
   max-width: $formGroupExtraSmallWidth;
-  color: var(--helpTextColor);
-  text-align: center;
-  font-weight: 300;
-  font-size: 20px;
+  margin-top: 10px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
 }

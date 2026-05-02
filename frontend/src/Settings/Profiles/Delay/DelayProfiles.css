@@ -1,38 +1,62 @@
-.horizontalScroll {
-  overflow-x: auto;
-}
+/* Sonarr v5 — Delay Profile list container + header row.
+ * Column widths must match DelayProfile.css data rows. */
 
-.delayProfiles {
+/* Bordered list container */
+.delayList {
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperCard);
+  overflow: hidden;
   user-select: none;
 }
 
-.delayProfilesHeader {
+/* Tracked-caps column header row */
+.headerRow {
   display: flex;
-  margin-bottom: 10px;
-  font-weight: bold;
+  align-items: center;
+  padding: 0 12px;
+  height: 36px;
+  background-color: var(--paperWarm);
+  border-bottom: 1px solid var(--borderColor);
 }
 
-.column {
-  flex: 0 0 200px;
+/* Column widths — must match DelayProfile.css */
+.colDrag    { flex: 0 0 32px; }
+.colScope   { flex: 1 1 auto; min-width: 80px; padding-right: 8px; }
+.colProto   { flex: 0 0 180px; }
+.colUsenet  { flex: 0 0 120px; }
+.colTorrent { flex: 0 0 120px; }
+.colActions { flex: 0 0 56px; }
+
+/* Header cell typography: tracked-caps Label */
+.headerCell {
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--inkMuted);
 }
 
-.tags {
-  flex: 1 0 auto;
-}
-
-.addDelayProfile {
+/* Ghost "add" row above the Default row */
+.ghostRow {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 0;
+  border-top: 1px dashed var(--borderColor);
+  cursor: pointer;
+  color: var(--inkMuted);
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: none;
+  width: 100%;
 }
 
-.addButton {
-  width: $dragHandleWidth;
-  text-align: center;
-}
-
-@media only screen and (max-width: $breakpointSmall) {
-  .horizontalScroll {
-    overflow-y: hidden;
-    width: 100%;
-  }
+.ghostRow:hover {
+  color: var(--ember);
+  background-color: var(--paperWarm);
 }

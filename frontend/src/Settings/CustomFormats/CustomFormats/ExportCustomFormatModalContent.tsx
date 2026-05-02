@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
 import Button from 'Components/Link/Button';
 import ClipboardButton from 'Components/Link/ClipboardButton';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -79,9 +78,7 @@ function ExportCustomFormatModalContent({
           {isFetching ? <LoadingIndicator /> : null}
 
           {!isFetching && error ? (
-            <Alert kind={kinds.DANGER}>
-              {translate('CustomFormatsLoadError')}
-            </Alert>
+            <p className={styles.error}>{translate('CustomFormatsLoadError')}</p>
           ) : null}
 
           {!isFetching && !error ? (

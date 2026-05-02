@@ -2,12 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import AppState from 'App/State/AppState';
-import FieldSet from 'Components/FieldSet';
-import Icon from 'Components/Icon';
-import Link from 'Components/Link/Link';
 import PageSectionContent from 'Components/Page/PageSectionContent';
-import Scroller from 'Components/Scroller/Scroller';
-import { icons, scrollDirections } from 'Helpers/Props';
 import {
   fetchDelayProfiles,
   reorderDelayProfile,
@@ -53,19 +48,20 @@ function createDisplayProfilesSelector() {
   );
 }
 
+const displayProfilesSelector = createDisplayProfilesSelector();
+
 function DelayProfiles() {
   const dispatch = useDispatch();
 
   const { error, isFetching, isPopulated, items, defaultProfile } = useSelector(
-    createDisplayProfilesSelector()
+    displayProfilesSelector
   );
 
   const tagList = useTagList();
 
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [dropIndex, setDropIndex] = useState<number | null>(null);
-  const [isAddDelayProfileModalOpen, setIsAddDelayProfileModalOpen] =
-    useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const isDragging = dropIndex !== null;
   const isDraggingUp =
@@ -79,15 +75,15 @@ function DelayProfiles() {
     dragIndex != null &&
     dropIndex > dragIndex;
 
-  const handleAddDelayProfilePress = useCallback(() => {
-    setIsAddDelayProfileModalOpen(true);
+  const handleAddPress = useCallback(() => {
+    setIsAddModalOpen(true);
   }, []);
 
-  const handleAddDelayProfileModalClose = useCallback(() => {
-    setIsAddDelayProfileModalOpen(false);
+  const handleAddModalClose = useCallback(() => {
+    setIsAddModalOpen(false);
   }, []);
 
-  const handleDelayProfileDragMove = useCallback(
+  const handleDragMove = useCallback(
     (newDragIndex: number, newDropIndex: number) => {
       setDragIndex(newDragIndex);
       setDropIndex(newDropIndex);
@@ -95,7 +91,7 @@ function DelayProfiles() {
     []
   );
 
-  const handleDelayProfileDragEnd = useCallback(
+  const handleDragEnd = useCallback(
     (id: number, didDrop: boolean) => {
       if (didDrop && dropIndex !== null) {
         dispatch(reorderDelayProfile({ id, moveIndex: dropIndex - 1 }));
@@ -112,74 +108,71 @@ function DelayProfiles() {
   }, [dispatch]);
 
   return (
-    <FieldSet legend={translate('DelayProfiles')}>
-      <PageSectionContent
-        errorMessage={translate('DelayProfilesLoadError')}
-        error={error}
-        isFetching={isFetching}
-        isPopulated={isPopulated}
-      >
-        <Scroller
-          className={styles.horizontalScroll}
-          scrollDirection={scrollDirections.HORIZONTAL}
-          autoFocus={false}
-        >
-          <div>
-            <div className={styles.delayProfilesHeader}>
-              <div className={styles.column}>
-                {translate('PreferredProtocol')}
-              </div>
-              <div className={styles.column}>{translate('UsenetDelay')}</div>
-              <div className={styles.column}>{translate('TorrentDelay')}</div>
-              <div className={styles.tags}>{translate('Tags')}</div>
-            </div>
-
-            <div className={styles.delayProfiles}>
-              {items.map((item) => {
-                return (
-                  <DelayProfile
-                    key={item.id}
-                    {...item}
-                    tagList={tagList}
-                    isDraggingUp={isDraggingUp}
-                    isDraggingDown={isDraggingDown}
-                    onDelayProfileDragEnd={handleDelayProfileDragEnd}
-                    onDelayProfileDragMove={handleDelayProfileDragMove}
-                  />
-                );
-              })}
-            </div>
-
-            {defaultProfile ? (
-              <div>
-                <DelayProfile
-                  {...defaultProfile}
-                  tagList={tagList}
-                  isDraggingDown={false}
-                  isDraggingUp={false}
-                  onDelayProfileDragEnd={handleDelayProfileDragEnd}
-                  onDelayProfileDragMove={handleDelayProfileDragMove}
-                />
-              </div>
-            ) : null}
+    <PageSectionContent
+      errorMessage={translate('DelayProfilesLoadError')}
+      error={error}
+      isFetching={isFetching}
+      isPopulated={isPopulated}
+    >
+      <div className={styles.delayList}>
+        {/* Header row */}
+        <div className={styles.headerRow}>
+          <div className={styles.colDrag} />
+          <div className={`${styles.colScope} ${styles.headerCell}`}>
+            {translate('Tags')}
           </div>
-        </Scroller>
-
-        <div className={styles.addDelayProfile}>
-          <Link
-            className={styles.addButton}
-            onPress={handleAddDelayProfilePress}
-          >
-            <Icon name={icons.ADD} />
-          </Link>
+          <div className={`${styles.colProto} ${styles.headerCell}`}>
+            {translate('PreferredProtocol')}
+          </div>
+          <div className={`${styles.colUsenet} ${styles.headerCell}`}>
+            {translate('UsenetDelay')}
+          </div>
+          <div className={`${styles.colTorrent} ${styles.headerCell}`}>
+            {translate('TorrentDelay')}
+          </div>
+          <div className={styles.colActions} />
         </div>
 
-        <EditDelayProfileModal
-          isOpen={isAddDelayProfileModalOpen}
-          onModalClose={handleAddDelayProfileModalClose}
-        />
-      </PageSectionContent>
-    </FieldSet>
+        {/* Reorderable non-default rows */}
+        {items.map((item) => (
+          <DelayProfile
+            key={item.id}
+            {...item}
+            tagList={tagList}
+            isDraggingUp={isDraggingUp}
+            isDraggingDown={isDraggingDown}
+            onDelayProfileDragEnd={handleDragEnd}
+            onDelayProfileDragMove={handleDragMove}
+          />
+        ))}
+
+        {/* Ghost add row — sits above the pinned Default row */}
+        <button
+          className={styles.ghostRow}
+          type="button"
+          onClick={handleAddPress}
+        >
+          {translate('AddDelayProfile')}
+        </button>
+
+        {/* Default profile — pinned at bottom, non-reorderable */}
+        {defaultProfile ? (
+          <DelayProfile
+            {...defaultProfile}
+            tagList={tagList}
+            isDraggingDown={false}
+            isDraggingUp={false}
+            onDelayProfileDragEnd={handleDragEnd}
+            onDelayProfileDragMove={handleDragMove}
+          />
+        ) : null}
+      </div>
+
+      <EditDelayProfileModal
+        isOpen={isAddModalOpen}
+        onModalClose={handleAddModalClose}
+      />
+    </PageSectionContent>
   );
 }
 

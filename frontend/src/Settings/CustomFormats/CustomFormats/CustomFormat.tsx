@@ -1,11 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Card from 'Components/Card';
-import Label from 'Components/Label';
 import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import { icons, kinds } from 'Helpers/Props';
-import { Kind } from 'Helpers/Props/kinds';
 import { deleteCustomFormat } from 'Store/Actions/settingsActions';
 import CustomFormatSpecification from 'typings/CustomFormatSpecification';
 import translate from 'Utilities/String/translate';
@@ -70,6 +68,9 @@ function CustomFormat({
     setIsExportCustomFormatModalOpen(false);
   }, []);
 
+  const conditionCount = specifications.length;
+  const isActive = conditionCount > 0;
+
   return (
     <Card
       className={styles.customFormat}
@@ -79,9 +80,9 @@ function CustomFormat({
       <div className={styles.nameContainer}>
         <div className={styles.name}>{name}</div>
 
-        <div className={styles.buttons}>
+        <div className={styles.rightCluster}>
           <IconButton
-            className={styles.cloneButton}
+            className={styles.iconButton}
             title={translate('CloneCustomFormat')}
             aria-label={translate('CloneCustomFormat')}
             name={icons.CLONE}
@@ -89,7 +90,7 @@ function CustomFormat({
           />
 
           <IconButton
-            className={styles.cloneButton}
+            className={styles.iconButton}
             title={translate('ExportCustomFormat')}
             aria-label={translate('ExportCustomFormat')}
             name={icons.EXPORT}
@@ -98,27 +99,9 @@ function CustomFormat({
         </div>
       </div>
 
-      <div>
-        {specifications.map((item, index) => {
-          if (!item) {
-            return null;
-          }
-
-          let kind: Kind = kinds.DEFAULT;
-
-          if (item.required) {
-            kind = kinds.SUCCESS;
-          }
-          if (item.negate) {
-            kind = kinds.DANGER;
-          }
-
-          return (
-            <Label key={index} className={styles.label} kind={kind}>
-              {item.name}
-            </Label>
-          );
-        })}
+      <div className={styles.statusLine}>
+        <span className={isActive ? styles.statusDot : styles.statusDotMuted} />
+        <span>{translate('ConditionsCount', { count: conditionCount })}</span>
       </div>
 
       <EditCustomFormatModal

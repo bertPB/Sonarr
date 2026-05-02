@@ -1,14 +1,15 @@
+/* Sonarr v5 — Quality Profile draggable row.
+ * Lives inside the .qualities bordered list surface (paperWarm). Per-row
+ * border becomes a hairline top border; the first child suppresses it so
+ * the list rim defines the top edge. Background stays transparent so the
+ * paperWarm surface reads through. */
+
 .qualityProfileItem {
   display: flex;
   align-items: stretch;
   width: 100%;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  background: var(--inputBackgroundColor);
-
-  &.isInGroup {
-    border-style: dashed;
-  }
+  border-top: 1px solid var(--borderColor);
+  background: transparent;
 
   &.editSizes {
     flex-direction: column;
@@ -49,7 +50,7 @@
   }
 
   &.notAllowed {
-    color: #c6c6c6;
+    color: var(--inkFaint);
   }
 }
 

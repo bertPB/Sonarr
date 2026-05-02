@@ -1,0 +1,30 @@
+/* Sonarr v5 — Profiles page shell.
+ * Three section wrappers with tracked-caps headings and 13px lede lines. */
+
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sectionHeading {
+  margin: 0;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+.sectionLede {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--inkMuted);
+}

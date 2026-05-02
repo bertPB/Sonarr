@@ -1,7 +1,19 @@
+/* Sonarr v5 — Edit Custom Format modal: Conditions section. Replaces the
+ * v3 FieldSet legend + INFO Alert with a section/h3 tracked-caps heading
+ * and a calm body-small intro. The Specifications grid mirrors the v5
+ * CustomFormats grid (auto-fill 290px, align-items: start) and the
+ * Add Condition card is the dashed v5 "empty slot" affordance. */
+
 .deleteButton {
   composes: button from '~Components/Link/Button.css';
 
   margin-right: auto;
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
 }
 
 .rightButtons {
@@ -9,24 +21,84 @@
   margin-right: auto;
 }
 
-.addSpecification {
-  composes: customFormat from '~./CustomFormat.css';
-
-  background-color: var(--cardAlternateBackgroundColor);
-  color: var(--gray);
-  text-align: center;
-  font-size: 45px;
+.section {
+  margin-top: 24px;
 }
 
-.center {
-  display: inline-block;
-  padding: 5px 20px 0;
-  border: 1px solid var(--borderColor);
-  border-radius: 4px;
-  background-color: var(--cardCenterBackgroundColor);
+.sectionHeading {
+  margin: 0 0 12px;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+/* Calm intro — explanatory paragraph above the conditions grid. NOT an
+   alert (the prior `<Alert kind=info>` with a coloured rim read as a
+   warning, which the copy is not). Body Small ink-muted, capped at 70ch. */
+.intro {
+  margin: 0 0 12px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
 }
 
 .customFormats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  /* Each card sizes to its content height — without this, cards with few
+     labels inherit the Add card's height and the labels row gets stranded
+     near the top with empty space below. */
+  align-items: start;
+  gap: 16px;
+}
+
+/* Add Condition card — dashed hairline "empty slot" affordance. Sizes to
+   its own content (icon + label) so it sits visually balanced next to the
+   shortest condition card in the row. */
+.addSpecification {
+  composes: customFormat from '~./CustomFormat.css';
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: transparent;
+  border: 1px dashed var(--inputBorderColor);
+  color: var(--inkMuted);
+  text-align: center;
+  transition:
+    border-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 200ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--paperWarm);
+    border-color: var(--ember);
+    color: var(--ember);
+    /* Override the parent .customFormat (=.card) hover lift since this is
+       an "empty slot" affordance, not a tangible content card. */
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addLabel {
+  font-family: $defaultFontFamily;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
 }

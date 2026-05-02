@@ -1,38 +1,127 @@
+/* Sonarr v5 — Quality Profile card.
+ * Mirrors Indexer.css vocabulary: name/rightCluster row, mono statusLine,
+ * chip cluster with optional cluster-cap for overflow. */
+
 .qualityProfile {
   composes: card from '~Components/Card.css';
 
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 290px;
 }
 
 .nameContainer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .name {
   @add-mixin truncate;
 
-  margin-bottom: 20px;
-  font-weight: 300;
-  font-size: 24px;
+  flex: 1 1 auto;
+  font-family: $defaultFontFamily;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
-.cloneButton {
+/* rightCluster fades in on card hover */
+.rightCluster {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.qualityProfile:hover .rightCluster {
+  opacity: 1;
+}
+
+.actionButton {
   composes: button from '~Components/Link/IconButton.css';
 
-  height: 36px;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
 }
 
-.qualities {
+/* Mono status line: "● UPGRADES ON · CUTOFF WEB-DL" */
+.statusLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkMuted);
+}
+
+.statusDot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--statusAiring);
+}
+
+.statusSeparator {
+  color: var(--inkFaint);
+}
+
+/* Chip cluster */
+.chips {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 5px;
-  pointer-events: all;
+  gap: 4px;
 }
 
-.tooltipLabel {
-  composes: label from '~Components/Label.css';
+/* Cluster-cap: fades bottom content, shows showAll link when active */
+.chipsClipped {
+  composes: chips;
 
-  margin: 0;
+  max-height: 72px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 48px, transparent 72px);
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: linear-gradient(to bottom, black 48px, transparent 72px);
+}
+
+/* "Show all N qualities ↓" expand link */
+.showAll {
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkMuted);
+  cursor: pointer;
+  background: none;
   border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.showAll:hover {
+  color: var(--ember);
+}
+
+/* Group chips (outline variant): suppress the default dot prefix */
+.groupLabel::before {
+  display: none;
+}
+
+/* "+N" member count badge inside a group chip */
+.groupCount {
+  margin-left: 4px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--inkFaint);
 }

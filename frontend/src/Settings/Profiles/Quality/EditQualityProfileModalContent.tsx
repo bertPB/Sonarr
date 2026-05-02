@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -530,15 +529,21 @@ function EditQualityProfileModalContent({
           {isSchemaFetched ? null : <LoadingIndicator />}
 
           {!isSchemaFetching && schemaError ? (
-            <Alert kind={kinds.DANGER}>
+            <p className={styles.intro}>
               {translate('AddQualityProfileError')}
-            </Alert>
+            </p>
           ) : null}
 
           {isSchemaFetched && !schemaError ? (
             <Form>
               <div className={styles.formGroupsContainer}>
-                <div className={styles.formGroupWrapper}>
+                <section
+                  className={`${styles.section} ${styles.formGroupWrapper}`}
+                >
+                  <h3 className={styles.sectionHeading}>
+                    {translate('General')}
+                  </h3>
+
                   <FormGroup size={sizes.EXTRA_SMALL}>
                     <FormLabel size={sizes.SMALL}>
                       {translate('Name')}
@@ -637,18 +642,26 @@ function EditQualityProfileModalContent({
                   ) : null}
 
                   <div className={styles.formatItemLarge}>
-                    <QualityProfileFormatItems
-                      profileFormatItems={formatItems.value}
-                      errors={formatItems.errors}
-                      warnings={formatItems.warnings}
-                      onQualityProfileFormatItemScoreChange={
-                        handleFormatItemScoreChange
-                      }
-                    />
-                  </div>
-                </div>
+                    <section className={styles.section}>
+                      <h3 className={styles.sectionHeading}>
+                        {translate('CustomFormats')}
+                      </h3>
 
-                <div className={styles.formGroupWrapper}>
+                      <QualityProfileFormatItems
+                        profileFormatItems={formatItems.value}
+                        errors={formatItems.errors}
+                        warnings={formatItems.warnings}
+                        onQualityProfileFormatItemScoreChange={
+                          handleFormatItemScoreChange
+                        }
+                      />
+                    </section>
+                  </div>
+                </section>
+
+                <section
+                  className={`${styles.section} ${styles.formGroupWrapper}`}
+                >
                   <QualityProfileItems
                     mode={mode}
                     qualityProfileItems={items.value}
@@ -667,17 +680,23 @@ function EditQualityProfileModalContent({
                     onDragEnd={handleDragEnd}
                     onSizeChange={handleSizeChange}
                   />
-                </div>
+                </section>
 
                 <div className={styles.formatItemSmall}>
-                  <QualityProfileFormatItems
-                    profileFormatItems={formatItems.value}
-                    errors={formatItems.errors}
-                    warnings={formatItems.warnings}
-                    onQualityProfileFormatItemScoreChange={
-                      handleFormatItemScoreChange
-                    }
-                  />
+                  <section className={styles.section}>
+                    <h3 className={styles.sectionHeading}>
+                      {translate('CustomFormats')}
+                    </h3>
+
+                    <QualityProfileFormatItems
+                      profileFormatItems={formatItems.value}
+                      errors={formatItems.errors}
+                      warnings={formatItems.warnings}
+                      onQualityProfileFormatItemScoreChange={
+                        handleFormatItemScoreChange
+                      }
+                    />
+                  </section>
                 </div>
               </div>
             </Form>

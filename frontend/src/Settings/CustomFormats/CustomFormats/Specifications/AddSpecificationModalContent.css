@@ -1,3 +1,16 @@
+.intro {
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 70ch;
+  color: var(--inkMuted);
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+}
+
 .specifications {
   display: flex;
   justify-content: center;

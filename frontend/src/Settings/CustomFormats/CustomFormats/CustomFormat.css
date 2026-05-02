@@ -1,49 +1,72 @@
+/* Sonarr v5 — Custom format card.
+ * Inherits the global v5 Card (paper-card + hairline rim + hover lift).
+ * Layout: name row carries the title plus a top-right cluster of icon
+ * buttons (Clone, Export). A mono status line below shows a single
+ * "{n} CONDITIONS" token prefixed by an active/disabled state dot. */
+
 .customFormat {
   composes: card from '~Components/Card.css';
 
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 290px;
 }
 
 .nameContainer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .name {
   @add-mixin truncate;
 
-  margin-bottom: 20px;
-  font-weight: 300;
-  font-size: 24px;
+  flex: 1 1 auto;
+  font-family: $defaultFontFamily;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
-.buttons {
-  flex: 0 0 auto;
+.rightCluster {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
 }
 
-.cloneButton {
+.iconButton {
   composes: button from '~Components/Link/IconButton.css';
-
-  height: 36px;
 }
 
-.formats {
+.statusLine {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 5px;
-  pointer-events: all;
+  gap: 8px;
+  font-family: $monoSpaceFontFamily;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
 }
 
-.tooltipLabel {
-  composes: label from '~Components/Label.css';
-
-  margin: 0;
-  border: none;
+.statusDot,
+.statusDotMuted {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
 }
 
-.label {
-  @add-mixin truncate;
-  composes: label from '~Components/Label.css';
+.statusDot {
+  background-color: var(--statusAiring);
+}
 
-  max-width: 100%;
+.statusDotMuted {
+  background-color: var(--inkFaint);
 }

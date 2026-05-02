@@ -1,3 +1,9 @@
+.error {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+}
+
 .button {
   composes: button from '~Components/Link/Button.css';
 
