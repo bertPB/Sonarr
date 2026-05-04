@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
-import Alert from 'Components/Alert';
 import Button from 'Components/Link/Button';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -12,7 +11,6 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import Column from 'Components/Table/Column';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
-import { kinds } from 'Helpers/Props';
 import {
   IndexerModel,
   useBulkDeleteIndexers,
@@ -24,6 +22,7 @@ import {
   setManageIndexersSort,
   useManageIndexersOptions,
 } from 'Settings/Indexers/useManageIndexersOptionsStore';
+import { kinds } from 'Helpers/Props';
 import { CheckInputChanged } from 'typings/inputs';
 import getErrorMessage from 'Utilities/Object/getErrorMessage';
 import translate from 'Utilities/String/translate';
@@ -205,7 +204,7 @@ function ManageIndexersModalContentInner(
         {error ? <div>{errorMessage}</div> : null}
 
         {isFetched && !error && !data.length ? (
-          <Alert kind={kinds.INFO}>{translate('NoIndexersFound')}</Alert>
+          <p className={styles.filteredMessage}>{translate('NoIndexersFound')}</p>
         ) : null}
 
         {isFetched && !!data.length && !isFetching && !isFetching ? (

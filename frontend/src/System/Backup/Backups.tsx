@@ -5,6 +5,7 @@ import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -98,6 +99,8 @@ function Backups() {
       </PageToolbar>
 
       <PageContentBody>
+        <PageHeading scope={translate('System')} title={translate('Backups')} />
+
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && !!error ? (

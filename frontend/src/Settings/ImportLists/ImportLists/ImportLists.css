@@ -1,20 +1,57 @@
+/* Sonarr v5 — Import list grid + Add card. */
+
 .lists {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  /* Each card sizes to its content height — without this, untagged provider
+     cards inherit the Add card's height and the status line gets stranded
+     near the top with empty space below. */
+  align-items: start;
+  gap: 16px;
 }
 
+/* Add card — dotted hairline "empty slot" affordance. Sizes to its own
+   content (icon + label) so it sits visually balanced next to the shortest
+   provider card in the row. */
 .addList {
   composes: list from '~./ImportList.css';
 
-  background-color: var(--cardAlternateBackgroundColor);
-  color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: transparent;
+  border: 1px dashed var(--inputBorderColor);
+  color: var(--inkMuted);
   text-align: center;
+  transition:
+    border-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 200ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--paperWarm);
+    border-color: var(--ember);
+    color: var(--ember);
+    /* Override the parent .list (=.card) hover lift since this is an
+       "empty slot" affordance, not a tangible content card. */
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .center {
-  display: inline-block;
-  padding: 5px 20px 0;
-  border: 1px solid var(--borderColor);
-  border-radius: 4px;
-  background-color: var(--cardCenterBackgroundColor);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addLabel {
+  font-family: $defaultFontFamily;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
 }

@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import { icons } from 'Helpers/Props';
@@ -51,46 +50,45 @@ function Indexers() {
   }, []);
 
   return (
-    <FieldSet legend={translate('Indexers')}>
-      <PageSectionContent
-        errorMessage={translate('IndexersLoadError')}
-        error={error}
-        isFetching={isFetching}
-        isPopulated={isFetched}
-      >
-        <div className={styles.indexers}>
-          {data.map((item) => {
-            return (
-              <Indexer
-                key={item.id}
-                {...item}
-                showPriority={showPriority}
-                onCloneIndexerPress={handleCloneIndexerPress}
-              />
-            );
-          })}
+    <PageSectionContent
+      errorMessage={translate('IndexersLoadError')}
+      error={error}
+      isFetching={isFetching}
+      isPopulated={isFetched}
+    >
+      <div className={styles.indexers}>
+        {data.map((item) => {
+          return (
+            <Indexer
+              key={item.id}
+              {...item}
+              showPriority={showPriority}
+              onCloneIndexerPress={handleCloneIndexerPress}
+            />
+          );
+        })}
 
-          <Card className={styles.addIndexer} onPress={handleAddIndexerPress}>
-            <div className={styles.center}>
-              <Icon name={icons.ADD} size={45} />
-            </div>
-          </Card>
-        </div>
+        <Card className={styles.addIndexer} onPress={handleAddIndexerPress}>
+          <div className={styles.center}>
+            <Icon name={icons.ADD} size={20} />
+          </div>
+          <div className={styles.addLabel}>{translate('AddIndexer')}</div>
+        </Card>
+      </div>
 
-        <AddIndexerModal
-          isOpen={isAddIndexerModalOpen}
-          onIndexerSelect={handleIndexerSelect}
-          onModalClose={handleAddIndexerModalClose}
-        />
+      <AddIndexerModal
+        isOpen={isAddIndexerModalOpen}
+        onIndexerSelect={handleIndexerSelect}
+        onModalClose={handleAddIndexerModalClose}
+      />
 
-        <EditIndexerModal
-          isOpen={isEditIndexerModalOpen}
-          cloneId={cloneIndexerId ?? undefined}
-          selectedSchema={selectedSchema}
-          onModalClose={handleEditIndexerModalClose}
-        />
-      </PageSectionContent>
-    </FieldSet>
+      <EditIndexerModal
+        isOpen={isEditIndexerModalOpen}
+        cloneId={cloneIndexerId ?? undefined}
+        selectedSchema={selectedSchema}
+        onModalClose={handleEditIndexerModalClose}
+      />
+    </PageSectionContent>
   );
 }
 

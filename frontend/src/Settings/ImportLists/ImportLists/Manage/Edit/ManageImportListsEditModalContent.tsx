@@ -115,44 +115,56 @@ function ManageImportListsEditModalContent(
       <ModalHeader>{translate('EditSelectedImportLists')}</ModalHeader>
 
       <ModalBody>
-        <FormGroup>
-          <FormLabel>{translate('AutomaticAdd')}</FormLabel>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageImportListsEditModalContentImportSection')}
+          </h3>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="enableAutomaticAdd"
-            value={enableAutomaticAdd}
-            values={autoAddOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('AutomaticAdd')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('QualityProfile')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="enableAutomaticAdd"
+              value={enableAutomaticAdd}
+              values={autoAddOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
 
-          <FormInputGroup
-            type={inputTypes.QUALITY_PROFILE_SELECT}
-            name="qualityProfileId"
-            value={qualityProfileId}
-            includeNoChange={true}
-            includeNoChangeDisabled={false}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageImportListsEditModalContentLibrarySection')}
+          </h3>
 
-        <FormGroup>
-          <FormLabel>{translate('RootFolder')}</FormLabel>
+          <FormGroup>
+            <FormLabel>{translate('QualityProfile')}</FormLabel>
 
-          <FormInputGroup
-            type={inputTypes.ROOT_FOLDER_SELECT}
-            name="rootFolderPath"
-            value={rootFolderPath}
-            includeNoChange={true}
-            includeNoChangeDisabled={false}
-            selectedValueOptions={{ includeFreeSpace: false }}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+            <FormInputGroup
+              type={inputTypes.QUALITY_PROFILE_SELECT}
+              name="qualityProfileId"
+              value={qualityProfileId}
+              includeNoChange={true}
+              includeNoChangeDisabled={false}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>{translate('RootFolder')}</FormLabel>
+
+            <FormInputGroup
+              type={inputTypes.ROOT_FOLDER_SELECT}
+              name="rootFolderPath"
+              value={rootFolderPath}
+              includeNoChange={true}
+              includeNoChangeDisabled={false}
+              selectedValueOptions={{ includeFreeSpace: false }}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
       </ModalBody>
 
       <ModalFooter className={styles.modalFooter}>

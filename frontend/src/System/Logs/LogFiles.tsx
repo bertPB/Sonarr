@@ -4,6 +4,7 @@ import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import InlineMarkdown from 'Components/Markdown/InlineMarkdown';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
@@ -91,6 +92,11 @@ function LogFiles({
         </PageToolbarSection>
       </PageToolbar>
       <PageContentBody>
+        <PageHeading
+          scope={translate('System')}
+          title={translate('LogFiles')}
+        />
+
         <Alert>
           <div>
             {translate('LogFilesLocation', {

@@ -1,12 +1,10 @@
 import React from 'react';
-import Alert from 'Components/Alert';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { kinds } from 'Helpers/Props';
 import { SelectedSchema } from 'Settings/useProviderSchema';
 import translate from 'Utilities/String/translate';
 import { useConnectionSchema } from '../useConnections';
@@ -33,21 +31,28 @@ function AddNotificationModalContent({
         {isSchemaFetching && !isSchemaFetched ? <LoadingIndicator /> : null}
 
         {!isSchemaFetching && !!schemaError ? (
-          <Alert kind={kinds.DANGER}>{translate('AddConnectionError')}</Alert>
+          <p className={styles.error}>{translate('AddConnectionError')}</p>
         ) : null}
 
         {isSchemaFetched && !schemaError ? (
-          <div className={styles.notifications}>
-            {schema.map((notification) => {
-              return (
-                <AddNotificationItem
-                  key={notification.implementation}
-                  {...notification}
-                  implementation={notification.implementation}
-                  onNotificationSelect={onNotificationSelect}
-                />
-              );
-            })}
+          <div>
+            <p className={styles.intro}>
+              {translate('SupportedConnections')}{' '}
+              {translate('SupportedConnectionsMoreInfo')}
+            </p>
+
+            <div className={styles.notifications}>
+              {schema.map((notification) => {
+                return (
+                  <AddNotificationItem
+                    key={notification.implementation}
+                    {...notification}
+                    implementation={notification.implementation}
+                    onNotificationSelect={onNotificationSelect}
+                  />
+                );
+              })}
+            </div>
           </div>
         ) : null}
       </ModalBody>

@@ -1,8 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import Card from 'Components/Card';
-import Label from 'Components/Label';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import TagList from 'Components/TagList';
 import DownloadProtocol from 'DownloadClient/DownloadProtocol';
@@ -60,33 +58,42 @@ function DownloadClient({
     dispatch(deleteDownloadClient({ id }));
   }, [id, dispatch]);
 
+  const isActive = enable;
+  const tokens: string[] = [
+    enable ? translate('Enabled') : translate('Disabled'),
+  ];
+  if (priority > 1) {
+    tokens.push(`P${priority}`);
+  }
+
   return (
     <Card
       className={styles.downloadClient}
       overlayContent={true}
       onPress={handleEditDownloadClientPress}
     >
-      <div className={styles.name}>{name}</div>
+      <div className={styles.nameContainer}>
+        <div className={styles.name}>{name}</div>
 
-      <div className={styles.enabled}>
-        <ProtocolLabel protocol={protocol} />
-
-        {enable ? (
-          <Label kind={kinds.SUCCESS}>{translate('Enabled')}</Label>
-        ) : (
-          <Label kind={kinds.DISABLED} outline={true}>
-            {translate('Disabled')}
-          </Label>
-        )}
-
-        {priority > 1 ? (
-          <Label kind={kinds.DISABLED} outline={true}>
-            {translate('PrioritySettings', { priority })}
-          </Label>
-        ) : null}
+        <div className={styles.rightCluster}>
+          <span className={styles.protocolPill}>
+            <span className={styles.protocolDot} />
+            {protocol}
+          </span>
+        </div>
       </div>
 
-      <TagList tags={tags} tagList={tagList} />
+      <div className={styles.statusLine}>
+        <span className={isActive ? styles.statusDot : styles.statusDotMuted} />
+        {tokens.map((token, idx) => (
+          <React.Fragment key={token}>
+            {idx > 0 ? <span className={styles.statusSeparator}>·</span> : null}
+            <span>{token}</span>
+          </React.Fragment>
+        ))}
+      </div>
+
+      {tags.length > 0 ? <TagList tags={tags} tagList={tagList} /> : null}
 
       <EditDownloadClientModal
         id={id}

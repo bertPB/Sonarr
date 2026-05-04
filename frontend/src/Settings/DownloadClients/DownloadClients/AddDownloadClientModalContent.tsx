@@ -1,15 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
-import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { kinds } from 'Helpers/Props';
 import { fetchDownloadClientSchema } from 'Store/Actions/settingsActions';
 import DownloadClient from 'typings/DownloadClient';
 import translate from 'Utilities/String/translate';
@@ -63,47 +60,53 @@ function AddDownloadClientModalContent({
         {isSchemaFetching ? <LoadingIndicator /> : null}
 
         {!isSchemaFetching && !!schemaError ? (
-          <Alert kind={kinds.DANGER}>
-            {translate('AddDownloadClientError')}
-          </Alert>
+          <p className={styles.error}>{translate('AddDownloadClientError')}</p>
         ) : null}
 
         {isSchemaPopulated && !schemaError ? (
           <div>
-            <Alert kind={kinds.INFO}>
-              <div>{translate('SupportedDownloadClients')}</div>
-              <div>{translate('SupportedDownloadClientsMoreInfo')}</div>
-            </Alert>
+            <p className={styles.intro}>
+              {translate('SupportedDownloadClients')}{' '}
+              {translate('SupportedDownloadClientsMoreInfo')}
+            </p>
 
-            <FieldSet legend={translate('Usenet')}>
-              <div className={styles.downloadClients}>
-                {usenetDownloadClients.map((downloadClient) => {
-                  return (
-                    <AddDownloadClientItem
-                      key={downloadClient.implementation}
-                      {...downloadClient}
-                      implementation={downloadClient.implementation}
-                      onDownloadClientSelect={onDownloadClientSelect}
-                    />
-                  );
-                })}
-              </div>
-            </FieldSet>
+            {usenetDownloadClients.length ? (
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>{translate('Usenet')}</h3>
+                <div className={styles.downloadClients}>
+                  {usenetDownloadClients.map((downloadClient) => {
+                    return (
+                      <AddDownloadClientItem
+                        key={downloadClient.implementation}
+                        {...downloadClient}
+                        implementation={downloadClient.implementation}
+                        onDownloadClientSelect={onDownloadClientSelect}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
 
-            <FieldSet legend={translate('Torrents')}>
-              <div className={styles.downloadClients}>
-                {torrentDownloadClients.map((downloadClient) => {
-                  return (
-                    <AddDownloadClientItem
-                      key={downloadClient.implementation}
-                      {...downloadClient}
-                      implementation={downloadClient.implementation}
-                      onDownloadClientSelect={onDownloadClientSelect}
-                    />
-                  );
-                })}
-              </div>
-            </FieldSet>
+            {torrentDownloadClients.length ? (
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Torrents')}
+                </h3>
+                <div className={styles.downloadClients}>
+                  {torrentDownloadClients.map((downloadClient) => {
+                    return (
+                      <AddDownloadClientItem
+                        key={downloadClient.implementation}
+                        {...downloadClient}
+                        implementation={downloadClient.implementation}
+                        onDownloadClientSelect={onDownloadClientSelect}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
           </div>
         ) : null}
       </ModalBody>

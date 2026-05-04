@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -101,9 +100,7 @@ function EditNotificationModalContent({
           validationWarnings={validationWarnings}
         >
           {message ? (
-            <Alert className={styles.message} kind={message.value.type}>
-              {message.value.message}
-            </Alert>
+            <p className={styles.message}>{message.value.message}</p>
           ) : null}
 
           <FormGroup>

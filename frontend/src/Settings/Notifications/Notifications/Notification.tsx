@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import Card from 'Components/Card';
-import Label from 'Components/Label';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import TagList from 'Components/TagList';
 import { kinds } from 'Helpers/Props';
@@ -70,89 +69,46 @@ function Notification({
     deleteConnection();
   }, [deleteConnection]);
 
+  const triggerCount = [
+    supportsOnGrab && onGrab,
+    supportsOnDownload && onDownload,
+    supportsOnUpgrade && onDownload && onUpgrade,
+    supportsOnImportComplete && onImportComplete,
+    supportsOnRename && onRename,
+    supportsOnSeriesAdd && onSeriesAdd,
+    supportsOnSeriesDelete && onSeriesDelete,
+    supportsOnEpisodeFileDelete && onEpisodeFileDelete,
+    supportsOnEpisodeFileDeleteForUpgrade &&
+      onEpisodeFileDelete &&
+      onEpisodeFileDeleteForUpgrade,
+    supportsOnHealthIssue && onHealthIssue,
+    supportsOnHealthRestored && onHealthRestored,
+    supportsOnApplicationUpdate && onApplicationUpdate,
+    supportsOnManualInteractionRequired && onManualInteractionRequired,
+  ].filter(Boolean).length;
+
+  const isActive = triggerCount > 0;
+
   return (
     <Card
       className={styles.notification}
       overlayContent={true}
       onPress={handleEditNotificationPress}
     >
-      <div className={styles.name}>{name}</div>
+      <div className={styles.nameContainer}>
+        <div className={styles.name}>{name}</div>
+      </div>
 
-      {supportsOnGrab && onGrab ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnGrab')}</Label>
-      ) : null}
+      <div className={styles.statusLine}>
+        <span className={isActive ? styles.statusDot : styles.statusDotMuted} />
+        <span>
+          {isActive
+            ? translate('TriggersCount', { count: triggerCount })
+            : translate('Disabled')}
+        </span>
+      </div>
 
-      {supportsOnDownload && onDownload ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnFileImport')}</Label>
-      ) : null}
-
-      {supportsOnUpgrade && onDownload && onUpgrade ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnFileUpgrade')}</Label>
-      ) : null}
-
-      {supportsOnImportComplete && onImportComplete ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnImportComplete')}</Label>
-      ) : null}
-
-      {supportsOnRename && onRename ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnRename')}</Label>
-      ) : null}
-
-      {supportsOnHealthIssue && onHealthIssue ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnHealthIssue')}</Label>
-      ) : null}
-
-      {supportsOnHealthRestored && onHealthRestored ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnHealthRestored')}</Label>
-      ) : null}
-
-      {supportsOnApplicationUpdate && onApplicationUpdate ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnApplicationUpdate')}</Label>
-      ) : null}
-
-      {supportsOnSeriesAdd && onSeriesAdd ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnSeriesAdd')}</Label>
-      ) : null}
-
-      {supportsOnSeriesDelete && onSeriesDelete ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnSeriesDelete')}</Label>
-      ) : null}
-
-      {supportsOnEpisodeFileDelete && onEpisodeFileDelete ? (
-        <Label kind={kinds.SUCCESS}>{translate('OnEpisodeFileDelete')}</Label>
-      ) : null}
-
-      {supportsOnEpisodeFileDeleteForUpgrade &&
-      onEpisodeFileDelete &&
-      onEpisodeFileDeleteForUpgrade ? (
-        <Label kind={kinds.SUCCESS}>
-          {translate('OnEpisodeFileDeleteForUpgrade')}
-        </Label>
-      ) : null}
-
-      {supportsOnManualInteractionRequired && onManualInteractionRequired ? (
-        <Label kind={kinds.SUCCESS}>
-          {translate('OnManualInteractionRequired')}
-        </Label>
-      ) : null}
-
-      {!onGrab &&
-      !onDownload &&
-      !onRename &&
-      !onImportComplete &&
-      !onHealthIssue &&
-      !onHealthRestored &&
-      !onApplicationUpdate &&
-      !onSeriesAdd &&
-      !onSeriesDelete &&
-      !onEpisodeFileDelete &&
-      !onManualInteractionRequired ? (
-        <Label kind={kinds.DISABLED} outline={true}>
-          {translate('Disabled')}
-        </Label>
-      ) : null}
-
-      <TagList tags={tags} tagList={tagList} />
+      {tags.length > 0 ? <TagList tags={tags} tagList={tagList} /> : null}
 
       <EditNotificationModal
         id={id}

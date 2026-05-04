@@ -1,13 +1,10 @@
 import React, { useMemo } from 'react';
-import Alert from 'Components/Alert';
-import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { kinds } from 'Helpers/Props';
 import { SelectedSchema } from 'Settings/useProviderSchema';
 import translate from 'Utilities/String/translate';
 import { IndexerModel, useIndexerSchema } from '../useIndexers';
@@ -55,45 +52,53 @@ function AddIndexerModalContent({
         {isSchemaFetching ? <LoadingIndicator /> : null}
 
         {!isSchemaFetching && !!schemaError ? (
-          <Alert kind={kinds.DANGER}>{translate('AddIndexerError')}</Alert>
+          <p className={styles.error}>{translate('AddIndexerError')}</p>
         ) : null}
 
         {isSchemaFetched && !schemaError ? (
           <div>
-            <Alert kind={kinds.INFO}>
-              <div>{translate('SupportedIndexers')}</div>
-              <div>{translate('SupportedIndexersMoreInfo')}</div>
-            </Alert>
+            <p className={styles.intro}>
+              {translate('SupportedIndexers')}{' '}
+              {translate('SupportedIndexersMoreInfo')}
+            </p>
 
-            <FieldSet legend={translate('Usenet')}>
-              <div className={styles.indexers}>
-                {usenetIndexers.map((indexer) => {
-                  return (
-                    <AddIndexerItem
-                      key={indexer.implementation}
-                      {...indexer}
-                      implementation={indexer.implementation}
-                      onIndexerSelect={onIndexerSelect}
-                    />
-                  );
-                })}
-              </div>
-            </FieldSet>
+            {usenetIndexers.length ? (
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>{translate('Usenet')}</h3>
+                <div className={styles.indexers}>
+                  {usenetIndexers.map((indexer) => {
+                    return (
+                      <AddIndexerItem
+                        key={indexer.implementation}
+                        {...indexer}
+                        implementation={indexer.implementation}
+                        onIndexerSelect={onIndexerSelect}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
 
-            <FieldSet legend={translate('Torrents')}>
-              <div className={styles.indexers}>
-                {torrentIndexers.map((indexer) => {
-                  return (
-                    <AddIndexerItem
-                      key={indexer.implementation}
-                      {...indexer}
-                      implementation={indexer.implementation}
-                      onIndexerSelect={onIndexerSelect}
-                    />
-                  );
-                })}
-              </div>
-            </FieldSet>
+            {torrentIndexers.length ? (
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Torrents')}
+                </h3>
+                <div className={styles.indexers}>
+                  {torrentIndexers.map((indexer) => {
+                    return (
+                      <AddIndexerItem
+                        key={indexer.implementation}
+                        {...indexer}
+                        implementation={indexer.implementation}
+                        onIndexerSelect={onIndexerSelect}
+                      />
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
           </div>
         ) : null}
       </ModalBody>

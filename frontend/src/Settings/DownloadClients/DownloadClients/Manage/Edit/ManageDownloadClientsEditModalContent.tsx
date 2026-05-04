@@ -127,54 +127,66 @@ function ManageDownloadClientsEditModalContent(
       <ModalHeader>{translate('EditSelectedDownloadClients')}</ModalHeader>
 
       <ModalBody>
-        <FormGroup>
-          <FormLabel>{translate('Enabled')}</FormLabel>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageDownloadClientsEditModalContentStatusSection')}
+          </h3>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="enable"
-            value={enable}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('Enabled')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('Priority')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="enable"
+              value={enable}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
 
-          <FormInputGroup
-            type={inputTypes.NUMBER}
-            name="priority"
-            value={priority}
-            min={1}
-            max={50}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('Priority')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('RemoveCompletedDownloads')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.NUMBER}
+              name="priority"
+              value={priority}
+              min={1}
+              max={50}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="removeCompletedDownloads"
-            value={removeCompletedDownloads}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageDownloadClientsEditModalContentCompletedSection')}
+          </h3>
 
-        <FormGroup>
-          <FormLabel>{translate('RemoveFailedDownloads')}</FormLabel>
+          <FormGroup>
+            <FormLabel>{translate('RemoveCompletedDownloads')}</FormLabel>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="removeFailedDownloads"
-            value={removeFailedDownloads}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="removeCompletedDownloads"
+              value={removeCompletedDownloads}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>{translate('RemoveFailedDownloads')}</FormLabel>
+
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="removeFailedDownloads"
+              value={removeFailedDownloads}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
       </ModalBody>
 
       <ModalFooter className={styles.modalFooter}>

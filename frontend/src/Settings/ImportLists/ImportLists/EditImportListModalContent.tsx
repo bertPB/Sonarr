@@ -4,7 +4,6 @@ import SeriesMonitoringOptionsPopoverContent from 'AddSeries/SeriesMonitoringOpt
 import SeriesMonitorNewItemsOptionsPopoverContent from 'AddSeries/SeriesMonitorNewItemsOptionsPopoverContent';
 import SeriesTypePopoverContent from 'AddSeries/SeriesTypePopoverContent';
 import { ImportListAppState } from 'App/State/SettingsAppState';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -126,7 +125,7 @@ function EditImportListModalContent({
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && !!error ? (
-          <Alert kind={kinds.DANGER}>{translate('AddListError')}</Alert>
+          <p className={styles.error}>{translate('AddListError')}</p>
         ) : null}
 
         {!isFetching && !error ? (
@@ -134,11 +133,11 @@ function EditImportListModalContent({
             validationErrors={validationErrors}
             validationWarnings={validationWarnings}
           >
-            <Alert kind={kinds.INFO} className={styles.message}>
+            <p className={styles.message}>
               {translate('ListWillRefreshEveryInterval', {
                 refreshInterval: formatShortTimeSpan(minRefreshInterval.value),
               })}
-            </Alert>
+            </p>
 
             <FormGroup>
               <FormLabel>{translate('Name')}</FormLabel>

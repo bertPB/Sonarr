@@ -59,7 +59,10 @@ function IndexerOptions({
   }, [hasPendingChanges, isSaving, onChildStateChange]);
 
   return (
-    <FieldSet legend={translate('Options')}>
+    <FieldSet
+      legend={translate('Options')}
+      caption={translate('IndexerOptionsCaption')}
+    >
       {isFetching ? <LoadingIndicator /> : null}
 
       {!isFetching && error ? (

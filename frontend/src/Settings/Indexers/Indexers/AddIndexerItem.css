@@ -1,44 +1,163 @@
-.indexer {
-  composes: card from '~Components/Card.css';
+/* Sonarr v5 — Add Indexer list row.
+ * Single horizontal row inside the bordered list surface defined in
+ * AddIndexerModalContent.css. Name on left, optional Custom/Presets segmented
+ * cluster + info icon on right. */
 
+.indexer {
   position: relative;
-  width: 300px;
-  height: 100px;
+  border-top: 1px solid var(--borderColor);
+  background-color: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* List container draws the top edge — the first row doesn't need its own. */
+.indexer:first-child {
+  border-top: 0;
+}
+
+/* List bg is paper-warm; on hover the row lifts back to the modal-level
+   surface so it visibly stands up inside the inset list. */
+.indexer:hover {
+  background-color: var(--paperCard);
 }
 
 .underlay {
   @add-mixin cover;
 }
 
+/* Overlay is in-flow so it drives the row's height — the underlay sits
+   absolutely behind it as the full-rect click target. The overlay itself
+   passes pointer events through; only its inner interactive elements
+   (Custom button, Presets menu, Info link) handle their own clicks. */
 .overlay {
-  @add-mixin linkOverlay;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  pointer-events: none;
+  user-select: none;
+}
 
-  padding: 10px;
+.overlay a,
+.overlay button {
+  pointer-events: all;
 }
 
 .name {
-  text-align: center;
-  font-weight: lighter;
-  font-size: 24px;
+  @add-mixin truncate;
+  flex: 1 1 auto;
+  font-family: $defaultFontFamily;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
 .actions {
-  margin-top: 20px;
-  text-align: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
+/* Segmented Custom/Presets cluster — only on Newznab and Torznab rows. */
+.cluster {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* Cluster cells override the legacy Button kind chrome — flat tonal cells.
+   The `:global(.default)` chain bumps specificity above Button.css's kind
+   rules regardless of bundle order. */
+.clusterButton,
+.clusterButtonWithCaret,
+.clusterButton:global(.default),
+.clusterButtonWithCaret:global(.default) {
+  margin: 0;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--inkSoft);
+  font-family: $defaultFontFamily;
+  font-weight: 550;
+  font-size: 12px;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  transition:
+    background-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.clusterButton:hover,
+.clusterButtonWithCaret:hover,
+.clusterButton:global(.default):hover,
+.clusterButtonWithCaret:global(.default):hover {
+  background-color: color-mix(in oklch, var(--ember) 12%, transparent);
+  color: var(--ember);
+}
+
+/* Suppress the legacy Button outer focus-shadow inside cluster cells — it
+   leaks past `overflow: hidden` and renders as an ember bar at the cell
+   edge. Use an inset ring contained to the cell instead. */
+.clusterButton:focus-visible,
+.clusterButtonWithCaret:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--ember);
+}
+
+/* Right cell of the cluster — separated from Custom by a hairline divider,
+   carries the dropdown caret. */
+.clusterButtonWithCaret {
+  border-left: 1px solid var(--borderColor);
+}
+
+.clusterButtonWithCaret::after {
+  margin-left: 4px;
+  content: '\25BE';
+  color: var(--inkFaint);
+}
+
+.clusterButtonWithCaret:hover::after {
+  color: var(--ember);
+}
+
+/* The Menu wrapper around the Presets button needs to participate in the
+   inline cluster layout — overrides the legacy Menu inline-block default. */
 .presetsMenu {
   composes: menu from '~Components/Menu/Menu.css';
 
-  display: inline-block;
-  margin: 0 5px;
+  display: inline-flex;
+  align-items: stretch;
 }
 
-.presetsMenuButton {
-  composes: button from '~Components/Link/Button.css';
+/* Info link — small ghost icon, tonal at rest, ember tint on hover. */
+.infoLink {
+  composes: link from '~Components/Link/Link.css';
 
-  &::after {
-    margin-left: 5px;
-    content: '\25BE';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: var(--inkMuted);
+  transition:
+    background-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: color-mix(in oklch, var(--ember) 12%, transparent);
+    color: var(--ember);
+    text-decoration: none;
   }
 }

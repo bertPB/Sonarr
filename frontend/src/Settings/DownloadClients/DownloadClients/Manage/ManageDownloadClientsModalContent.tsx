@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
 import { DownloadClientAppState } from 'App/State/SettingsAppState';
-import Alert from 'Components/Alert';
 import Button from 'Components/Link/Button';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -218,7 +217,7 @@ function ManageDownloadClientsModalContentInner({
         {error ? <div>{errorMessage}</div> : null}
 
         {isPopulated && !error && !items.length ? (
-          <Alert kind={kinds.INFO}>{translate('NoDownloadClientsFound')}</Alert>
+          <p className={styles.filteredMessage}>{translate('NoDownloadClientsFound')}</p>
         ) : null}
 
         {isPopulated && !!items.length && !isFetching && !isFetching ? (

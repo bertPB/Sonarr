@@ -1,5 +1,34 @@
+/* Sonarr v5 — Add Notification (Connect) modal: list of available connection
+ * implementations. Single flat bordered list surface (per UI-SPEC: no
+ * per-category sectioning for connections). The list itself has 12px radius +
+ * 1px hairline rim and a paper-warm bg so the whole list reads as a single
+ * editorial element. Mirrors the Indexers archetype. */
+
+/* Calm intro — explanatory paragraph above the list. NOT an alert (the prior
+   `<Alert kind=info>` with a coloured rim read as a warning, which the copy
+   is not). Body Small ink-muted, capped at 70ch. */
+.intro {
+  margin: 0 0 16px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+}
+
 .notifications {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  /* `paperWarm` in light + `nightSoft` in dark — one tonal step DARKER than
+     the modal bg (`paperCard`/`nightCard`), so the list reads as inset. */
+  background-color: var(--paperWarm);
+  overflow: hidden;
 }

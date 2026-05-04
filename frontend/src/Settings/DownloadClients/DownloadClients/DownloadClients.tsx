@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DownloadClientAppState } from 'App/State/SettingsAppState';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import { icons } from 'Helpers/Props';
@@ -54,40 +53,41 @@ function DownloadClients() {
   }, [dispatch]);
 
   return (
-    <FieldSet legend={translate('DownloadClients')}>
-      <PageSectionContent
-        errorMessage={translate('DownloadClientsLoadError')}
-        error={error}
-        isFetching={isFetching}
-        isPopulated={isPopulated}
-      >
-        <div className={styles.downloadClients}>
-          {items.map((item) => {
-            return <DownloadClient key={item.id} {...item} />;
-          })}
+    <PageSectionContent
+      errorMessage={translate('DownloadClientsLoadError')}
+      error={error}
+      isFetching={isFetching}
+      isPopulated={isPopulated}
+    >
+      <div className={styles.downloadClients}>
+        {items.map((item) => {
+          return <DownloadClient key={item.id} {...item} />;
+        })}
 
-          <Card
-            className={styles.addDownloadClient}
-            onPress={handleAddDownloadClientPress}
-          >
-            <div className={styles.center}>
-              <Icon name={icons.ADD} size={45} />
-            </div>
-          </Card>
-        </div>
+        <Card
+          className={styles.addDownloadClient}
+          onPress={handleAddDownloadClientPress}
+        >
+          <div className={styles.center}>
+            <Icon name={icons.ADD} size={20} />
+          </div>
+          <div className={styles.addLabel}>
+            {translate('AddDownloadClient')}
+          </div>
+        </Card>
+      </div>
 
-        <AddDownloadClientModal
-          isOpen={isAddDownloadClientModalOpen}
-          onDownloadClientSelect={handleDownloadClientSelect}
-          onModalClose={handleAddDownloadClientModalClose}
-        />
+      <AddDownloadClientModal
+        isOpen={isAddDownloadClientModalOpen}
+        onDownloadClientSelect={handleDownloadClientSelect}
+        onModalClose={handleAddDownloadClientModalClose}
+      />
 
-        <EditDownloadClientModal
-          isOpen={isEditDownloadClientModalOpen}
-          onModalClose={handleEditDownloadClientModalClose}
-        />
-      </PageSectionContent>
-    </FieldSet>
+      <EditDownloadClientModal
+        isOpen={isEditDownloadClientModalOpen}
+        onModalClose={handleEditDownloadClientModalClose}
+      />
+    </PageSectionContent>
   );
 }
 

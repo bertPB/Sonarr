@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ImportListAppState } from 'App/State/SettingsAppState';
 import Card from 'Components/Card';
-import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import { icons } from 'Helpers/Props';
@@ -64,43 +63,42 @@ function ImportLists() {
   }, [dispatch]);
 
   return (
-    <FieldSet legend={translate('ImportLists')}>
-      <PageSectionContent
-        errorMessage={translate('ImportListsLoadError')}
-        error={error}
-        isFetching={isFetching}
-        isPopulated={isPopulated}
-      >
-        <div className={styles.lists}>
-          {items.map((item) => {
-            return (
-              <ImportList
-                key={item.id}
-                {...item}
-                onCloneImportListPress={handleCloneImportListPress}
-              />
-            );
-          })}
+    <PageSectionContent
+      errorMessage={translate('ImportListsLoadError')}
+      error={error}
+      isFetching={isFetching}
+      isPopulated={isPopulated}
+    >
+      <div className={styles.lists}>
+        {items.map((item) => {
+          return (
+            <ImportList
+              key={item.id}
+              {...item}
+              onCloneImportListPress={handleCloneImportListPress}
+            />
+          );
+        })}
 
-          <Card className={styles.addList} onPress={handleAddImportListPress}>
-            <div className={styles.center}>
-              <Icon name={icons.ADD} size={45} />
-            </div>
-          </Card>
-        </div>
+        <Card className={styles.addList} onPress={handleAddImportListPress}>
+          <div className={styles.center}>
+            <Icon name={icons.ADD} size={20} />
+          </div>
+          <div className={styles.addLabel}>{translate('AddImportList')}</div>
+        </Card>
+      </div>
 
-        <AddImportListModal
-          isOpen={isAddImportListModalOpen}
-          onImportListSelect={handleImportListSelect}
-          onModalClose={handleAddImportListModalClose}
-        />
+      <AddImportListModal
+        isOpen={isAddImportListModalOpen}
+        onImportListSelect={handleImportListSelect}
+        onModalClose={handleAddImportListModalClose}
+      />
 
-        <EditImportListModal
-          isOpen={isEditImportListModalOpen}
-          onModalClose={handleEditImportListModalClose}
-        />
-      </PageSectionContent>
-    </FieldSet>
+      <EditImportListModal
+        isOpen={isEditImportListModalOpen}
+        onModalClose={handleEditImportListModalClose}
+      />
+    </PageSectionContent>
   );
 }
 

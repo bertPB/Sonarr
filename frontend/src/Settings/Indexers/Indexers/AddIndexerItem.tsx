@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
+import Icon from 'Components/Icon';
 import Button from 'Components/Link/Button';
 import Link from 'Components/Link/Link';
 import Menu from 'Components/Menu/Menu';
 import MenuContent from 'Components/Menu/MenuContent';
-import { sizes } from 'Helpers/Props';
+import { icons, sizes } from 'Helpers/Props';
 import { SelectedSchema } from 'Settings/useProviderSchema';
 import translate from 'Utilities/String/translate';
 import { IndexerModel } from '../useIndexers';
@@ -40,13 +41,20 @@ function AddIndexerItem({
 
         <div className={styles.actions}>
           {hasPresets && (
-            <span>
-              <Button size={sizes.SMALL} onPress={handleIndexerSelect}>
+            <div className={styles.cluster}>
+              <Button
+                className={styles.clusterButton}
+                size={sizes.SMALL}
+                onPress={handleIndexerSelect}
+              >
                 {translate('Custom')}
               </Button>
 
               <Menu className={styles.presetsMenu}>
-                <Button className={styles.presetsMenuButton} size={sizes.SMALL}>
+                <Button
+                  className={styles.clusterButtonWithCaret}
+                  size={sizes.SMALL}
+                >
                   {translate('Presets')}
                 </Button>
 
@@ -64,12 +72,17 @@ function AddIndexerItem({
                   })}
                 </MenuContent>
               </Menu>
-            </span>
+            </div>
           )}
 
-          <Button to={infoLink} size={sizes.SMALL}>
-            {translate('MoreInfo')}
-          </Button>
+          <Link
+            className={styles.infoLink}
+            to={infoLink}
+            title={translate('MoreInfo')}
+            aria-label={translate('MoreInfo')}
+          >
+            <Icon name={icons.INFO} size={14} />
+          </Link>
         </div>
       </div>
     </div>

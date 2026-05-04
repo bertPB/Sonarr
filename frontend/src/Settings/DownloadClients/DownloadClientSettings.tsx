@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import { icons } from 'Helpers/Props';
+import settingsStyles from 'Settings/Settings.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import { testAllDownloadClients } from 'Store/Actions/settingsActions';
 import {
@@ -88,19 +90,28 @@ function DownloadClientSettings() {
       />
 
       <PageContentBody>
-        <DownloadClients />
+        <div className={settingsStyles.section}>
+          <PageHeading
+            scope={`${translate('Configuration')} · ${translate(
+              'DownloadClients'
+            )}`}
+            title={translate('DownloadClientSettings')}
+          />
 
-        <DownloadClientOptions
-          setChildSave={handleSetChildSave}
-          onChildStateChange={handleChildStateChange}
-        />
+          <DownloadClients />
 
-        <RemotePathMappings />
+          <DownloadClientOptions
+            setChildSave={handleSetChildSave}
+            onChildStateChange={handleChildStateChange}
+          />
 
-        <ManageDownloadClientsModal
-          isOpen={isManageDownloadClientsModalOpen}
-          onModalClose={handleManageDownloadClientsModalClose}
-        />
+          <RemotePathMappings />
+
+          <ManageDownloadClientsModal
+            isOpen={isManageDownloadClientsModalOpen}
+            onModalClose={handleManageDownloadClientsModalClose}
+          />
+        </div>
       </PageContentBody>
     </PageContent>
   );

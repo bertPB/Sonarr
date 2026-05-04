@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
+import PageHeading from 'Components/Page/PageHeading';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import { icons } from 'Helpers/Props';
+import settingsStyles from 'Settings/Settings.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import { testAllImportLists } from 'Store/Actions/settingsActions';
 import {
@@ -86,19 +88,28 @@ function ImportListSettings() {
       />
 
       <PageContentBody>
-        <ImportLists />
+        <div className={settingsStyles.section}>
+          <PageHeading
+            scope={`${translate('Configuration')} · ${translate(
+              'ImportLists'
+            )}`}
+            title={translate('ImportListSettings')}
+          />
 
-        <ImportListOptions
-          setChildSave={handleSetChildSave}
-          onChildStateChange={handleChildStateChange}
-        />
+          <ImportLists />
 
-        <ImportListExclusions />
+          <ImportListOptions
+            setChildSave={handleSetChildSave}
+            onChildStateChange={handleChildStateChange}
+          />
 
-        <ManageImportListsModal
-          isOpen={isManageImportListsModalOpen}
-          onModalClose={handleManageImportListsModalClose}
-        />
+          <ImportListExclusions />
+
+          <ManageImportListsModal
+            isOpen={isManageImportListsModalOpen}
+            onModalClose={handleManageImportListsModalClose}
+          />
+        </div>
       </PageContentBody>
     </PageContent>
   );

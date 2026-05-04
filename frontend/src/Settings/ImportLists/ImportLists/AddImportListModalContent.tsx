@@ -1,15 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from 'App/State/AppState';
-import Alert from 'Components/Alert';
-import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { kinds } from 'Helpers/Props';
 import { fetchImportListSchema } from 'Store/Actions/settingsActions';
 import ImportList from 'typings/ImportList';
 import titleCase from 'Utilities/String/titleCase';
@@ -63,23 +60,22 @@ function AddImportListModalContent({
         {isSchemaFetching ? <LoadingIndicator /> : null}
 
         {!isSchemaFetching && !!schemaError ? (
-          <Alert kind={kinds.DANGER}>{translate('AddListError')}</Alert>
+          <p className={styles.error}>{translate('AddListError')}</p>
         ) : null}
 
         {isSchemaPopulated && !schemaError ? (
           <div>
-            <Alert kind={kinds.INFO}>
-              <div>{translate('SupportedListsSeries')}</div>
-              <div>{translate('SupportedListsMoreInfo')}</div>
-            </Alert>
+            <p className={styles.intro}>
+              {translate('SupportedListsSeries')}{' '}
+              {translate('SupportedListsMoreInfo')}
+            </p>
+
             {Object.keys(listGroups).map((key) => {
               return (
-                <FieldSet
-                  key={key}
-                  legend={translate('TypeOfList', {
-                    typeOfList: titleCase(key),
-                  })}
-                >
+                <section key={key} className={styles.section}>
+                  <h3 className={styles.sectionHeading}>
+                    {translate('TypeOfList', { typeOfList: titleCase(key) })}
+                  </h3>
                   <div className={styles.lists}>
                     {listGroups[key].map((list) => {
                       return (
@@ -92,7 +88,7 @@ function AddImportListModalContent({
                       );
                     })}
                   </div>
-                </FieldSet>
+                </section>
               );
             })}
           </div>

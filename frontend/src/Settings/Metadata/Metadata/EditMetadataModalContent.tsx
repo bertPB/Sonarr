@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -79,35 +78,43 @@ function EditMetadataModalContent({
       <ModalBody>
         <Form {...otherSettings}>
           {message ? (
-            <Alert className={styles.message} kind={message.value.type}>
-              {message.value.message}
-            </Alert>
+            <p className={styles.intro}>{message.value.message}</p>
           ) : null}
 
-          <FormGroup>
-            <FormLabel>{translate('Enable')}</FormLabel>
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>{translate('Status')}</h3>
 
-            <FormInputGroup
-              type={inputTypes.CHECK}
-              name="enable"
-              helpText={translate('EnableMetadataHelpText')}
-              {...enable}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+            <FormGroup>
+              <FormLabel>{translate('Enable')}</FormLabel>
 
-          {fields.map((field) => {
-            return (
-              <ProviderFieldFormGroup
-                key={field.name}
-                advancedSettings={advancedSettings}
-                provider="metadata"
-                {...field}
-                isDisabled={!enable.value}
-                onChange={handleFieldChange}
+              <FormInputGroup
+                type={inputTypes.CHECK}
+                name="enable"
+                helpText={translate('EnableMetadataHelpText')}
+                {...enable}
+                onChange={handleInputChange}
               />
-            );
-          })}
+            </FormGroup>
+          </section>
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>
+              {translate('MetadataSectionFields')}
+            </h3>
+
+            {fields.map((field) => {
+              return (
+                <ProviderFieldFormGroup
+                  key={field.name}
+                  advancedSettings={advancedSettings}
+                  provider="metadata"
+                  {...field}
+                  isDisabled={!enable.value}
+                  onChange={handleFieldChange}
+                />
+              );
+            })}
+          </section>
         </Form>
       </ModalBody>
 

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DownloadClientAppState } from 'App/State/SettingsAppState';
-import Alert from 'Components/Alert';
 import FieldSet from 'Components/FieldSet';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
@@ -121,9 +120,7 @@ function EditDownloadClientModalContent({
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && !!error ? (
-          <Alert kind={kinds.DANGER}>
-            {translate('AddDownloadClientError')}
-          </Alert>
+          <p className={styles.error}>{translate('AddDownloadClientError')}</p>
         ) : null}
 
         {!isFetching && !error ? (
@@ -132,9 +129,7 @@ function EditDownloadClientModalContent({
             validationWarnings={validationWarnings}
           >
             {!!message && (
-              <Alert className={styles.message} kind={message.value.type}>
-                {message.value.message}
-              </Alert>
+              <p className={styles.message}>{message.value.message}</p>
             )}
 
             <FormGroup>

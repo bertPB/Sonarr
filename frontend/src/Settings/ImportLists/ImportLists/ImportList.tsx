@@ -1,14 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Card from 'Components/Card';
-import Label from 'Components/Label';
 import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import TagList from 'Components/TagList';
 import { icons, kinds } from 'Helpers/Props';
 import { deleteImportList } from 'Store/Actions/settingsActions';
 import { useTagList } from 'Tags/useTags';
-import formatShortTimeSpan from 'Utilities/Date/formatShortTimeSpan';
 import translate from 'Utilities/String/translate';
 import EditImportListModal from './EditImportListModal';
 import styles from './ImportList.css';
@@ -18,7 +16,6 @@ interface ImportListProps {
   name: string;
   enableAutomaticAdd: boolean;
   tags: number[];
-  minRefreshInterval: string;
   onCloneImportListPress: (id: number) => void;
 }
 
@@ -27,7 +24,6 @@ function ImportList({
   name,
   enableAutomaticAdd,
   tags,
-  minRefreshInterval,
   onCloneImportListPress,
 }: ImportListProps) {
   const dispatch = useDispatch();
@@ -64,6 +60,8 @@ function ImportList({
     onCloneImportListPress(id);
   }, [id, onCloneImportListPress]);
 
+  const isActive = enableAutomaticAdd;
+
   return (
     <Card
       className={styles.list}
@@ -73,30 +71,23 @@ function ImportList({
       <div className={styles.nameContainer}>
         <div className={styles.name}>{name}</div>
 
-        <IconButton
-          className={styles.cloneButton}
-          title={translate('CloneImportList')}
-          aria-label={translate('CloneImportList')}
-          name={icons.CLONE}
-          onPress={handleCloneImportListPress}
-        />
+        <div className={styles.rightCluster}>
+          <IconButton
+            className={styles.cloneButton}
+            title={translate('CloneImportList')}
+            aria-label={translate('CloneImportList')}
+            name={icons.CLONE}
+            onPress={handleCloneImportListPress}
+          />
+        </div>
       </div>
 
-      <div className={styles.enabled}>
-        {enableAutomaticAdd ? (
-          <Label kind={kinds.SUCCESS}>{translate('AutomaticAdd')}</Label>
-        ) : null}
+      <div className={styles.statusLine}>
+        <span className={isActive ? styles.statusDot : styles.statusDotMuted} />
+        <span>{isActive ? translate('Enabled') : translate('Disabled')}</span>
       </div>
 
-      <TagList tags={tags} tagList={tagList} />
-
-      <div className={styles.enabled}>
-        <Label kind={kinds.DEFAULT} title="List Refresh Interval">
-          {`${translate('Refresh')}: ${formatShortTimeSpan(
-            minRefreshInterval
-          )}`}
-        </Label>
-      </div>
+      {tags.length > 0 ? <TagList tags={tags} tagList={tagList} /> : null}
 
       <EditImportListModal
         id={id}

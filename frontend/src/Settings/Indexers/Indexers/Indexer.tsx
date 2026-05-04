@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import Card from 'Components/Card';
-import Label from 'Components/Label';
 import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import TagList from 'Components/TagList';
@@ -63,6 +61,20 @@ function Indexer({
     onCloneIndexerPress(id);
   }, [id, onCloneIndexerPress]);
 
+  const capabilityTokens: string[] = [];
+  if (supportsRss && enableRss) capabilityTokens.push(translate('Rss'));
+  if (supportsSearch && enableAutomaticSearch)
+    capabilityTokens.push(translate('Search'));
+  if (supportsSearch && enableInteractiveSearch)
+    capabilityTokens.push(translate('Interactive'));
+  if (showPriority) {
+    capabilityTokens.push(`P${priority}`);
+  }
+
+  const isActive = capabilityTokens.length > (showPriority ? 1 : 0);
+  const tokens =
+    capabilityTokens.length === 0 ? [translate('Disabled')] : capabilityTokens;
+
   return (
     <Card
       className={styles.indexer}
@@ -72,44 +84,33 @@ function Indexer({
       <div className={styles.nameContainer}>
         <div className={styles.name}>{name}</div>
 
-        <IconButton
-          className={styles.cloneButton}
-          title={translate('CloneIndexer')}
-          aria-label={translate('CloneIndexer')}
-          name={icons.CLONE}
-          onPress={handleCloneIndexerPress}
-        />
+        <div className={styles.rightCluster}>
+          <span className={styles.protocolPill}>
+            <span className={styles.protocolDot} />
+            {protocol}
+          </span>
+
+          <IconButton
+            className={styles.cloneButton}
+            title={translate('CloneIndexer')}
+            aria-label={translate('CloneIndexer')}
+            name={icons.CLONE}
+            onPress={handleCloneIndexerPress}
+          />
+        </div>
       </div>
 
-      <div className={styles.enabled}>
-        <ProtocolLabel protocol={protocol} />
-
-        {supportsRss && enableRss ? (
-          <Label kind={kinds.SUCCESS}>{translate('Rss')}</Label>
-        ) : null}
-
-        {supportsSearch && enableAutomaticSearch ? (
-          <Label kind={kinds.SUCCESS}>{translate('AutomaticSearch')}</Label>
-        ) : null}
-
-        {supportsSearch && enableInteractiveSearch ? (
-          <Label kind={kinds.SUCCESS}>{translate('InteractiveSearch')}</Label>
-        ) : null}
-
-        {showPriority ? (
-          <Label kind={kinds.DEFAULT}>
-            {translate('Priority')}: {priority}
-          </Label>
-        ) : null}
-
-        {!enableRss && !enableAutomaticSearch && !enableInteractiveSearch ? (
-          <Label kind={kinds.DISABLED} outline={true}>
-            {translate('Disabled')}
-          </Label>
-        ) : null}
+      <div className={styles.statusLine}>
+        <span className={isActive ? styles.statusDot : styles.statusDotMuted} />
+        {tokens.map((token, idx) => (
+          <React.Fragment key={token}>
+            {idx > 0 ? <span className={styles.statusSeparator}>·</span> : null}
+            <span>{token}</span>
+          </React.Fragment>
+        ))}
       </div>
 
-      <TagList tags={tags} tagList={tagList} />
+      {tags.length > 0 ? <TagList tags={tags} tagList={tagList} /> : null}
 
       <EditIndexerModal
         id={id}

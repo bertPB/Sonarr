@@ -1,3 +1,10 @@
+.filteredMessage {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  margin-top: 10px;
+}
+
 .leftButtons,
 .rightButtons {
   display: flex;

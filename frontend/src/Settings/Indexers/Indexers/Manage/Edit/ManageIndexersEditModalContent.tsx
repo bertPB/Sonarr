@@ -140,68 +140,80 @@ function ManageIndexersEditModalContent(
       <ModalHeader>{translate('EditSelectedIndexers')}</ModalHeader>
 
       <ModalBody>
-        <FormGroup>
-          <FormLabel>{translate('EnableRss')}</FormLabel>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageIndexersEditModalContentSearchSection')}
+          </h3>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="enableRss"
-            value={enableRss}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('EnableRss')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('EnableAutomaticSearch')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="enableRss"
+              value={enableRss}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="enableAutomaticSearch"
-            value={enableAutomaticSearch}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('EnableAutomaticSearch')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('EnableInteractiveSearch')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="enableAutomaticSearch"
+              value={enableAutomaticSearch}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
 
-          <FormInputGroup
-            type={inputTypes.SELECT}
-            name="enableInteractiveSearch"
-            value={enableInteractiveSearch}
-            values={enableOptions}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+          <FormGroup>
+            <FormLabel>{translate('EnableInteractiveSearch')}</FormLabel>
 
-        <FormGroup>
-          <FormLabel>{translate('Priority')}</FormLabel>
+            <FormInputGroup
+              type={inputTypes.SELECT}
+              name="enableInteractiveSearch"
+              value={enableInteractiveSearch}
+              values={enableOptions}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
 
-          <FormInputGroup
-            type={inputTypes.NUMBER}
-            name="priority"
-            value={priority}
-            min={1}
-            max={50}
-            onChange={onInputChange}
-          />
-        </FormGroup>
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('ManageIndexersEditModalContentBehaviorSection')}
+          </h3>
 
-        <FormGroup>
-          <FormLabel>{translate('MaximumSingleEpisodeAge')}</FormLabel>
+          <FormGroup>
+            <FormLabel>{translate('Priority')}</FormLabel>
 
-          <FormInputGroup
-            type={inputTypes.NUMBER}
-            name="seasonSearchMaximumSingleEpisodeAge"
-            helpText={translate('MaximumSingleEpisodeAgeHelpText')}
-            value={seasonSearchMaximumSingleEpisodeAge}
-            min={0}
-            unit="days"
-            onChange={onInputChange}
-          />
-        </FormGroup>
+            <FormInputGroup
+              type={inputTypes.NUMBER}
+              name="priority"
+              value={priority}
+              min={1}
+              max={50}
+              onChange={onInputChange}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>{translate('MaximumSingleEpisodeAge')}</FormLabel>
+
+            <FormInputGroup
+              type={inputTypes.NUMBER}
+              name="seasonSearchMaximumSingleEpisodeAge"
+              helpText={translate('MaximumSingleEpisodeAgeHelpText')}
+              value={seasonSearchMaximumSingleEpisodeAge}
+              min={0}
+              unit="days"
+              onChange={onInputChange}
+            />
+          </FormGroup>
+        </section>
       </ModalBody>
 
       <ModalFooter className={styles.modalFooter}>

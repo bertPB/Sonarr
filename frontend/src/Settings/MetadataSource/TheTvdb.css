@@ -7,9 +7,12 @@
 }
 
 .title {
-  margin-bottom: 20px;
-  font-weight: 300;
-  font-size: 36px;
+  margin-bottom: 16px;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--ink);
 }
 
 .image {
