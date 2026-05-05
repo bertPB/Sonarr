@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -68,10 +67,12 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
       </ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('SelectLanguageIntro')}</p>
+
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && error ? (
-          <Alert kind={kinds.DANGER}>{translate('LanguagesLoadError')}</Alert>
+          <p className={styles.error}>{translate('LanguagesLoadError')}</p>
         ) : null}
 
         {isPopulated && !error ? (

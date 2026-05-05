@@ -1,10 +1,16 @@
 .container {
+  display: inline-flex;
+  align-items: center;
   margin: 2px;
-  padding: 0 2px;
-  border: 1px solid;
-  border-radius: 2px;
+  padding: 0 6px;
+  height: 18px;
+  border-radius: 4px;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
-  font-size: 12px;
   cursor: default;
 }
 
@@ -30,37 +36,31 @@
   margin-left: 100px;
 }
 
-.levelMixed {
-  border-color: var(--dangerColor);
+.levelMixed,
+.levelNotRequested {
+  background-color: rgba(var(--dangerColorRgb), 0.12);
   color: var(--dangerColor);
 }
 
 .levelUnknown {
-  border-color: var(--warningColor);
+  background-color: rgba(var(--warningColorRgb), 0.12);
   color: var(--warningColor);
 }
 
-.levelMapped {
-  border-color: var(--textColor);
-  color: var(--textColor);
-}
-
+.levelMapped,
 .levelNormal {
-  border-color: var(--textColor);
-  color: var(--textColor);
+  background-color: var(--paperWarm);
+  border: 1px solid var(--borderColor);
+  color: var(--inkSoft);
 }
 
 .levelNone {
-  border-color: var(--textColor);
-  color: var(--textColor);
-  opacity: 0.2;
+  background-color: var(--paperWarm);
+  border: 1px solid var(--borderColor);
+  color: var(--inkMuted);
+  opacity: 0.35;
 
   &:hover {
     opacity: 1;
   }
-}
-
-.levelNotRequested {
-  border-color: var(--dangerColor);
-  color: var(--dangerColor);
 }

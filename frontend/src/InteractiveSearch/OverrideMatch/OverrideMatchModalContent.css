@@ -4,10 +4,37 @@
   cursor: pointer;
 }
 
-.item {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 50px;
+.section {
+  margin-top: 24px;
+
+  &:first-of-type {
+    margin-top: 16px;
+  }
+}
+
+.sectionHeading {
+  margin: 0 0 12px;
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.fieldLabel {
+  font-family: $defaultFontFamily;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--inkSoft);
+  min-width: 120px;
 }
 
 .footer {
@@ -29,10 +56,6 @@
 }
 
 @media only screen and (max-width: $breakpointSmall) {
-  .item {
-    margin-left: 0;
-  }
-
   .footer {
     display: block;
   }

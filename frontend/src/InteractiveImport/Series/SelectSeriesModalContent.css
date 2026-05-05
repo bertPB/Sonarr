@@ -1,3 +1,13 @@
+.intro {
+  flex: 0 0 auto;
+  margin: 0 0 8px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
 .modalBody {
   composes: modalBody from '~Components/Modal/ModalBody.css';
 

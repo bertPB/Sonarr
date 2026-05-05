@@ -46,6 +46,8 @@ function SelectReleaseGroupModalContent(
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
+        <p className={styles.intro}>{translate('SelectReleaseGroupIntro')}</p>
+
         <Form>
           <FormGroup>
             <FormLabel>{translate('ReleaseGroup')}</FormLabel>

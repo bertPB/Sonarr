@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -17,6 +16,7 @@ import { useQualityProfileSchema } from 'Settings/Profiles/Quality/useQualityPro
 import { InputChanged } from 'typings/inputs';
 import getQualities from 'Utilities/Quality/getQualities';
 import translate from 'Utilities/String/translate';
+import styles from './SelectQualityModalContent.css';
 
 interface SelectQualityModalContentProps {
   qualityId: number;
@@ -91,10 +91,12 @@ function SelectQualityModalContent(props: SelectQualityModalContentProps) {
       <ModalHeader>{modalTitle} - Select Quality</ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('SelectQualityIntro')}</p>
+
         {isSchemaFetching ? <LoadingIndicator /> : null}
 
         {!isSchemaFetching && schemaError ? (
-          <Alert kind={kinds.DANGER}>{translate('QualitiesLoadError')}</Alert>
+          <p className={styles.error}>{translate('QualitiesLoadError')}</p>
         ) : null}
 
         {isSchemaFetched && !schemaError ? (

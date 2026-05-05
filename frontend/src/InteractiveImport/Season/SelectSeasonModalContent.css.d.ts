@@ -1,7 +1,6 @@
 declare const styles: {
-  readonly "error": string;
+  readonly "bordered": string;
   readonly "intro": string;
-  readonly "languageInput": string;
 };
 export = styles;
 

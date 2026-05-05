@@ -183,6 +183,8 @@ function SelectEpisodeModalContentInner(props: SelectEpisodeModalContentProps) {
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
+        <p className={styles.intro}>{translate('SelectEpisodeIntro')}</p>
+
         <TextInput
           className={styles.filterInput}
           placeholder={translate('FilterEpisodesPlaceholder')}

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import Alert from 'Components/Alert';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
 import FormLabel from 'Components/Form/FormLabel';
@@ -69,9 +68,9 @@ export default function AuthenticationRequiredModalContent() {
       <ModalHeader>{translate('AuthenticationRequired')}</ModalHeader>
 
       <ModalBody>
-        <Alert className={styles.authRequiredAlert} kind={kinds.WARNING}>
+        <p className={styles.intro}>
           {translate('AuthenticationRequiredWarning')}
-        </Alert>
+        </p>
 
         {isFetched && !error ? (
           <div>

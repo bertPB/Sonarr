@@ -15,7 +15,7 @@ const dirs = fs
 
 module.exports = {
   root: true,
-
+  ignorePatterns: ['src/Styles/*'],
   parser: '@babel/eslint-parser',
 
   env: {

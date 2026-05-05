@@ -1,5 +1,6 @@
-.authRequiredAlert {
-  composes: alert from '~Components/Alert.css';
-
-  margin-bottom: 20px;
+.intro {
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--textSecondary);
+  max-width: 70ch;
 }

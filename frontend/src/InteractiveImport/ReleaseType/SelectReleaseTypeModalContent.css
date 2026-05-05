@@ -6,11 +6,3 @@
   color: var(--inkMuted);
   max-width: 70ch;
 }
-
-.modalBody {
-  composes: modalBody from '~Components/Modal/ModalBody.css';
-
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-}

@@ -46,6 +46,8 @@ function SelectIndexerFlagsModalContent(
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
+        <p className={styles.intro}>{translate('SelectIndexerFlagsIntro')}</p>
+
         <Form>
           <FormGroup>
             <FormLabel>{translate('IndexerFlags')}</FormLabel>

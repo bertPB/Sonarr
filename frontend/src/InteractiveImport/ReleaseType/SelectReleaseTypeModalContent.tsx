@@ -11,6 +11,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import { inputTypes, kinds } from 'Helpers/Props';
 import ReleaseType from 'InteractiveImport/ReleaseType';
 import translate from 'Utilities/String/translate';
+import styles from './SelectReleaseTypeModalContent.css';
 
 const options = [
   {
@@ -70,6 +71,8 @@ function SelectReleaseTypeModalContent(
       </ModalHeader>
 
       <ModalBody>
+        <p className={styles.intro}>{translate('SelectReleaseTypeIntro')}</p>
+
         <Form>
           <FormGroup>
             <FormLabel>{translate('ReleaseType')}</FormLabel>

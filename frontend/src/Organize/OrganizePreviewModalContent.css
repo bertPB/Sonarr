@@ -1,6 +1,18 @@
+.error {
+  margin-bottom: 20px;
+  color: var(--dangerColor);
+  font-size: 13px;
+}
+
+.info {
+  margin-bottom: 16px;
+  color: var(--inkMuted);
+  font-size: 13px;
+}
+
 .path {
   margin-left: 5px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .episodeFormat {

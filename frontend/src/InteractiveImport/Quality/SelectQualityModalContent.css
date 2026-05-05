@@ -7,10 +7,11 @@
   max-width: 70ch;
 }
 
-.modalBody {
-  composes: modalBody from '~Components/Modal/ModalBody.css';
-
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
+.error {
+  margin: 0 0 8px;
+  font-family: $defaultFontFamily;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+  max-width: 70ch;
 }
