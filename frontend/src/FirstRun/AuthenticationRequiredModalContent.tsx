@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
+import Alert from 'Components/Alert';
 import FormGroup from 'Components/Form/FormGroup';
 import FormInputGroup from 'Components/Form/FormInputGroup';
 import FormLabel from 'Components/Form/FormLabel';
+import Link from 'Components/Link/Link';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
@@ -18,7 +20,6 @@ import { useManageGeneralSettings } from 'Settings/General/useGeneralSettings';
 import useSystemStatus from 'System/Status/useSystemStatus';
 import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
-import styles from './AuthenticationRequiredModalContent.css';
 
 function onModalClose() {
   // No-op
@@ -68,9 +69,12 @@ export default function AuthenticationRequiredModalContent() {
       <ModalHeader>{translate('AuthenticationRequired')}</ModalHeader>
 
       <ModalBody>
-        <p className={styles.intro}>
-          {translate('AuthenticationRequiredWarning')}
-        </p>
+        <Alert kind={kinds.WARNING}>
+          {translate('AuthenticationRequiredWarning')}{' '}
+          <Link to="https://wiki.servarr.com/sonarr/faq#forced-authentication">
+            {translate('MoreInfo')}
+          </Link>
+        </Alert>
 
         {isFetched && !error ? (
           <div>
@@ -87,7 +91,6 @@ export default function AuthenticationRequiredModalContent() {
                     ? translate('AuthenticationMethodHelpTextWarning')
                     : undefined
                 }
-                helpLink="https://wiki.servarr.com/sonarr/faq#forced-authentication"
                 onChange={onInputChange}
                 {...authenticationMethod}
               />
