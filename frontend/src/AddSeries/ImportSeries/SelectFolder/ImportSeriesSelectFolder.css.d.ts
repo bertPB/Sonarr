@@ -2,13 +2,12 @@
 // Please do not change this file!
 interface CssExports {
   'addErrorAlert': string;
-  'code': string;
-  'header': string;
   'importButtonIcon': string;
-  'recentFolders': string;
-  'startImport': string;
-  'tip': string;
-  'tips': string;
+  'rootFoldersSection': string;
+  'sectionHeading': string;
+  'tipsBlock': string;
+  'tipsIntro': string;
+  'tipsList': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

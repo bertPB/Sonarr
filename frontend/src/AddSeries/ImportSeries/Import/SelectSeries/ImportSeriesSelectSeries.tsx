@@ -2,6 +2,7 @@ import {
   autoUpdate,
   flip,
   FloatingPortal,
+  shift,
   useClick,
   useDismiss,
   useFloating,
@@ -118,9 +119,10 @@ function ImportSeriesSelectSeries({
         crossAxis: false,
         mainAxis: true,
       }),
+      shift({ padding: 12 }),
     ],
     open: isOpen,
-    placement: 'bottom',
+    placement: 'bottom-end',
     whileElementsMounted: autoUpdate,
     onOpenChange: setIsOpen,
   });
@@ -180,6 +182,13 @@ function ImportSeriesSelectSeries({
               />
 
               {translate('SearchFailedError')}
+            </div>
+          ) : null}
+
+          {!isLookingUpSeries && !isFetched && !error ? (
+            <div className={styles.placeholder}>
+              <Icon className={styles.placeholderIcon} name={icons.SEARCH} />
+              {'Search for series…'}
             </div>
           ) : null}
 

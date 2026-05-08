@@ -15,7 +15,7 @@ import PageContentFooter from 'Components/Page/PageContentFooter';
 import Popover from 'Components/Tooltip/Popover';
 import { icons, inputTypes, kinds, tooltipPositions } from 'Helpers/Props';
 import { SeriesMonitor, SeriesType } from 'Series/Series';
-import { InputChanged } from 'typings/inputs';
+import { CheckInputChanged, InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
 import {
   ImportSeriesItem,
@@ -54,7 +54,14 @@ function ImportSeriesFooter() {
     defaultSeasonFolder
   );
 
-  const { selectedCount, getSelectedIds } = useSelect<ImportSeriesItem>();
+  const {
+    selectedCount,
+    getSelectedIds,
+    allSelected,
+    allUnselected,
+    selectAll,
+    unselectAll,
+  } = useSelect<ImportSeriesItem>();
 
   const { importSeries, isImporting, importError } = useImportSeries();
 
@@ -108,6 +115,27 @@ function ImportSeriesFooter() {
     items,
     isLookingUpSeries,
   ]);
+
+  const selectAllValue = useMemo(() => {
+    if (allSelected) {
+      return true;
+    }
+    if (allUnselected) {
+      return false;
+    }
+    return null;
+  }, [allSelected, allUnselected]);
+
+  const handleSelectAllChange = useCallback(
+    ({ value }: CheckInputChanged) => {
+      if (value) {
+        selectAll();
+      } else {
+        unselectAll();
+      }
+    },
+    [selectAll, unselectAll]
+  );
 
   const handleInputChange = useCallback(
     ({ name, value }: InputChanged<string | number | boolean | number[]>) => {
@@ -232,7 +260,20 @@ function ImportSeriesFooter() {
         />
       </div>
 
-      <div>
+      <div className={styles.selectionGroup}>
+        <CheckInput
+          className={styles.selectAllInput}
+          name="selectAllRows"
+          value={selectAllValue}
+          onChange={handleSelectAllChange}
+        />
+
+        <span className={styles.selectionLabel}>
+          {`${selectedCount} of ${items.length} selected`}
+        </span>
+      </div>
+
+      <div className={styles.buttonGroup}>
         <div className={styles.label}>&nbsp;</div>
 
         <div className={styles.importButtonContainer}>
@@ -249,7 +290,7 @@ function ImportSeriesFooter() {
           {isLookingUpSeries ? (
             <Button
               className={styles.loadingButton}
-              kind={kinds.WARNING}
+              kind={kinds.DEFAULT}
               onPress={handleCancelLookupPress}
             >
               {translate('CancelProcessing')}
@@ -259,7 +300,7 @@ function ImportSeriesFooter() {
           {hasUnsearchedItems ? (
             <Button
               className={styles.loadingButton}
-              kind={kinds.SUCCESS}
+              kind={kinds.DEFAULT}
               onPress={handleLookupPress}
             >
               {translate('StartProcessing')}
@@ -270,7 +311,11 @@ function ImportSeriesFooter() {
             <LoadingIndicator className={styles.loading} size={24} />
           ) : null}
 
-          {isLookingUpSeries ? translate('ProcessingFolders') : null}
+          {isLookingUpSeries ? (
+            <span className={styles.processingLabel}>
+              {translate('ProcessingFolders')}
+            </span>
+          ) : null}
 
           {importError ? (
             <Popover

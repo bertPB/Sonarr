@@ -12,7 +12,7 @@ const bodyPaddingSmallScreen = parseInt(
 );
 
 interface VirtualTableProps<T> {
-  Header: React.JSX.Element;
+  Header?: React.JSX.Element;
   itemCount: number;
   itemData: T;
   isSmallScreen: boolean;
@@ -97,7 +97,7 @@ function VirtualTable<T>({
   return (
     <div ref={measureRef}>
       <Scroller className={styles.tableScroller} scrollDirection="horizontal">
-        {Header}
+        {Header ?? null}
         <FixedSizeList<T>
           ref={listRef}
           style={{

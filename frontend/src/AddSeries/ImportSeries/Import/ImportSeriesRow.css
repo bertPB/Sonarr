@@ -1,45 +1,170 @@
+/* Sonarr v5 — Import Series row card.
+ * Each row is a card with a meta strip on top and a body below.
+ * Card height = 150px; ROW_HEIGHT in the table includes 8px gap below. */
+
+.rowLayout {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  background-color: var(--paperCard);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    border-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rowLayout:hover {
+  border-color: var(--inkFaint);
+  box-shadow: 0 1px 4px rgba(20, 17, 12, 0.05);
+}
+
+/* —— Meta strip (top, 38px) —— */
+
+.metaStrip {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  gap: 12px;
+  background-color: var(--paperWarm);
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+
 .selectInput {
   composes: input from '~Components/Form/CheckInput.css';
 }
 
 .folder {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
-
-  flex: 1 0 200px;
-  line-height: 36px;
+  flex: 1;
+  min-width: 0;
+  font-family: $monoSpaceFontFamily;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--inkSoft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.monitor {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
-
-  flex: 0 1 200px;
-  min-width: 185px;
+.seasonFolderGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.qualityProfile {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
-
-  flex: 0 1 250px;
-  min-width: 170px;
+.seasonFolderLabel {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkFaint);
+  white-space: nowrap;
 }
 
-.seriesType {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
+/* —— Body (below meta strip) —— */
 
-  flex: 0 1 200px;
-  min-width: 120px;
+.body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  flex: 1;
+  min-width: 0;
 }
 
-.seasonFolder {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
-
-  flex: 0 1 150px;
-  min-width: 120px;
+.poster {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 84px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--paperWarm);
+  flex-shrink: 0;
+  position: relative;
 }
 
-.series {
-  composes: cell from '~Components/Table/Cells/VirtualTableRowCell.css';
+/* SeriesPoster renders an <img> at its source resolution; constrain it to
+   the wrapper so 250px artwork crops to a 56×84 thumbnail. */
+.poster :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  flex: 0 1 400px;
-  min-width: 300px;
+.posterPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed var(--hairlineStrong);
+  border-radius: 6px;
+  color: var(--inkFaint);
+  font-size: 22px;
+}
+
+.seriesInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titleRow {
+  min-width: 0;
+}
+
+/* —— Chip strip —— */
+
+.chipStrip {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* `chipReset` and `chipResetOverride` are passed as `className` to
+ * `EnhancedSelectInput`. They override the default v3 input chrome so the
+ * inner ImportSeriesChip provides all visual treatment. */
+
+.chipReset {
+  display: inline-flex;
+  align-items: stretch;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  font-family: $defaultFontFamily;
+  transition: none;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    border: 0;
+    background-color: transparent;
+    box-shadow: 0 0 0 4px var(--inputFocusBoxShadowColor);
+  }
+
+  /* `EnhancedSelectInput` renders the SelectedValueComponent (our chip)
+   * followed by a `dropdownArrowContainer` <div>. The chip provides its
+   * own caret, so hide the redundant trailing arrow. The selector targets
+   * the second direct-child <div> of the outer Link. */
+  & > div + div {
+    display: none;
+  }
+}
+
+.chipResetOverride {
+  composes: chipReset;
 }

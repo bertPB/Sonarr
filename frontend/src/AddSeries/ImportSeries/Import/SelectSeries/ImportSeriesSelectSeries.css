@@ -3,66 +3,90 @@
 
   display: flex;
   align-items: center;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 6px 12px;
   width: 100%;
-  height: 35px;
+  height: 38px;
   border: 1px solid var(--inputBorderColor);
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: var(--inputBackgroundColor);
-  box-shadow: inset 0 1px 1px var(--inputBoxShadowColor);
+  transition: border-color 120ms ease-out, background-color 120ms ease-out;
+
+  &:hover {
+    background-color: var(--inputHoverBackgroundColor);
+    border-color: var(--ember);
+  }
 }
 
 .loading {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .warningIcon {
-  margin-right: 8px;
+  flex-shrink: 0;
+  margin-right: 6px;
 }
 
-.existing {
-  margin-left: 5px;
+.placeholder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--inkMuted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.placeholderIcon {
+  flex-shrink: 0;
+  color: var(--inkFaint);
 }
 
 .dropdownArrowContainer {
-  flex: 1 0 auto;
-  margin-left: 5px;
-  text-align: right;
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--inkFaint);
 }
 
 .contentContainer {
   z-index: $popperZIndex;
   margin-top: 4px;
-  /* 400px container width with 8px padding on each side */
   width: 384px;
 }
 
 .content {
-  padding: 4px;
-  border: 1px solid var(--inputBorderColor);
-  border-radius: 4px;
-  background-color: var(--inputBackgroundColor);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background-color: var(--paperCard);
+  box-shadow:
+    0 12px 32px -12px var(--popoverShadowColor),
+    0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .searchContainer {
   display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .searchIconContainer {
-  width: 58px;
-  border: 1px solid var(--inputBorderColor);
-  border-right: none;
-  border-radius: 4px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: var(--searchIconContainerBackgroundColor);
-  text-align: center;
-  line-height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex-shrink: 0;
+  background-color: var(--inputBackgroundColor);
+  border-right: 1px solid var(--hairline);
+  color: var(--inkMuted);
 }
 
 .searchInput {
   composes: input from '~Components/Form/TextInput.css';
 
+  flex: 1;
+  border: none;
   border-radius: 0;
 }
 
@@ -72,6 +96,6 @@
   @add-mixin scrollbarThumb;
 
   overflow-x: hidden;
-  overflow-y: scroll;
-  max-height: 165px;
+  overflow-y: auto;
+  max-height: 200px;
 }

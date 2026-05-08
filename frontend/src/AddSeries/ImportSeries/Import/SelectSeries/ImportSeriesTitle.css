@@ -2,19 +2,26 @@
   display: flex;
   align-items: center;
   flex: 0 1 auto;
+  min-width: 0;
   overflow: hidden;
 }
 
 .title {
   @add-mixin truncate;
+
+  color: var(--ink);
 }
 
 .year {
-  margin-right: 5px;
-  margin-left: 5px;
-  color: var(--disabledColor);
+  flex-shrink: 0;
+  margin-right: 4px;
+  margin-left: 4px;
+  font-size: $smallFontSize;
+  color: var(--inkMuted);
 }
 
 .existing {
-  margin-left: 5px;
+  flex-shrink: 0;
+  margin-left: 4px;
+  color: var(--inkMuted);
 }

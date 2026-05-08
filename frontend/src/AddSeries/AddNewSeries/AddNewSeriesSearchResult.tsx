@@ -3,10 +3,9 @@ import AddSeries from 'AddSeries/AddSeries';
 import { useAppDimension } from 'App/appStore';
 import HeartRating from 'Components/HeartRating';
 import Icon from 'Components/Icon';
-import Label from 'Components/Label';
 import Link from 'Components/Link/Link';
 import MetadataAttribution from 'Components/MetadataAttribution';
-import { icons, kinds, sizes } from 'Helpers/Props';
+import { icons } from 'Helpers/Props';
 import { Statistics } from 'Series/Series';
 import SeriesGenres from 'Series/SeriesGenres';
 import SeriesPoster from 'Series/SeriesPoster';
@@ -64,7 +63,9 @@ function AddNewSeriesSearchResult({ series }: AddNewSeriesSearchResultProps) {
   }
 
   return (
-    <div className={styles.searchResult}>
+    <div
+      className={`${styles.searchResult}${isExcluded ? ` ${styles.searchResultExcluded}` : ''}`}
+    >
       <Link
         className={styles.underlay}
         aria-label={
@@ -125,59 +126,89 @@ function AddNewSeriesSearchResult({ series }: AddNewSeriesSearchResultProps) {
                 <Icon
                   className={styles.tvdbLinkIcon}
                   name={icons.EXTERNAL_LINK}
-                  size={28}
+                  size={16}
                   aria-hidden={true}
                 />
               </Link>
             </div>
           </div>
 
-          <div>
-            <Label size={sizes.LARGE}>
-              <HeartRating
-                rating={ratings.value}
-                votes={ratings.votes}
-                iconSize={13}
-              />
-            </Label>
+          <div className={styles.chips}>
+            {ratings?.votes > 0 ? (
+              <span className={styles.chip}>
+                <HeartRating
+                  rating={ratings.value}
+                  votes={ratings.votes}
+                  iconSize={11}
+                />
+              </span>
+            ) : null}
+
+            {status === 'continuing' ? (
+              <span className={styles.chip}>
+                <span
+                  className={`${styles.chipDot} ${styles.chipDotAiring}`}
+                />
+                {translate('Continuing')}
+              </span>
+            ) : status === 'upcoming' ? (
+              <span className={styles.chip}>
+                <span
+                  className={`${styles.chipDot} ${styles.chipDotUpcoming}`}
+                />
+                {translate('Upcoming')}
+              </span>
+            ) : status === 'ended' ? (
+              <span className={styles.chip}>
+                <span
+                  className={`${styles.chipDot} ${styles.chipDotEnded}`}
+                />
+                {translate('Ended')}
+              </span>
+            ) : status === 'deleted' ? (
+              <span className={styles.chip}>
+                <span
+                  className={`${styles.chipDot} ${styles.chipDotFinished}`}
+                />
+                {translate('Deleted')}
+              </span>
+            ) : (
+              <span className={styles.chip}>
+                <span
+                  className={`${styles.chipDot} ${styles.chipDotFinished}`}
+                />
+                {translate('Ended')}
+              </span>
+            )}
+
+            {network ? (
+              <span className={styles.chip}>
+                <span className={styles.network}>{network}</span>
+              </span>
+            ) : null}
 
             {originalLanguage?.name ? (
-              <Label size={sizes.LARGE}>
-                <Icon name={icons.LANGUAGE} size={13} />
-
+              <span className={styles.chip}>
                 <span className={styles.originalLanguageName}>
                   {originalLanguage.name}
                 </span>
-              </Label>
-            ) : null}
-
-            {network ? (
-              <Label size={sizes.LARGE}>
-                <Icon name={icons.NETWORK} size={13} />
-
-                <span className={styles.network}>{network}</span>
-              </Label>
+              </span>
             ) : null}
 
             {genres.length > 0 ? (
-              <Label size={sizes.LARGE}>
-                <Icon name={icons.GENRE} size={13} />
+              <span className={styles.chip}>
                 <SeriesGenres className={styles.genres} genres={genres} />
-              </Label>
+              </span>
             ) : null}
 
-            {seasonCount ? <Label size={sizes.LARGE}>{seasons}</Label> : null}
-
-            {status === 'ended' ? (
-              <Label kind={kinds.DANGER} size={sizes.LARGE}>
-                {translate('Ended')}
-              </Label>
+            {seasonCount ? (
+              <span className={styles.chip}>{seasons}</span>
             ) : null}
 
-            {status === 'upcoming' ? (
-              <Label kind={kinds.INFO} size={sizes.LARGE}>
-                {translate('Upcoming')}
-              </Label>
+            {isExcluded ? (
+              <span className={`${styles.chip} ${styles.chipExcluded}`}>
+                {translate('SeriesInImportListExclusions')}
+              </span>
             ) : null}
           </div>
 

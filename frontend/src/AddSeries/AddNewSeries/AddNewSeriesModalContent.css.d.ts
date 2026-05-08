@@ -4,6 +4,7 @@ interface CssExports {
   'addButton': string;
   'container': string;
   'info': string;
+  'intro': string;
   'labelIcon': string;
   'modalFooter': string;
   'overview': string;
@@ -12,6 +13,8 @@ interface CssExports {
   'searchInputContainer': string;
   'searchLabel': string;
   'searchLabelContainer': string;
+  'section': string;
+  'sectionHeading': string;
   'year': string;
 }
 export const cssExports: CssExports;

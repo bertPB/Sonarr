@@ -1,27 +1,63 @@
-.link {
-  composes: link from '~Components/Link/Link.css';
-}
-
-.pathContainer {
+.row {
   display: flex;
   align-items: center;
+  gap: 12px;
+  background: var(--paperCard);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 11px 14px;
 }
 
-.label {
-  composes: label from '~Components/Label.css';
-
-  margin-left: 10px;
+.unavailable {
+  opacity: 0.75;
 }
 
-.freeSpace,
-.unmappedFolders {
-  composes: cell from '~Components/Table/Cells/TableRowCell.css';
-
-  width: 150px;
+.icon {
+  flex-shrink: 0;
+  color: var(--inkMuted);
 }
 
-.actions {
-  composes: cell from '~Components/Table/Cells/TableRowCell.css';
+.iconUnavailable {
+  flex-shrink: 0;
+  color: var(--statusMissing);
+}
 
-  width: 45px;
+.path {
+  composes: link from '~Components/Link/Link.css';
+
+  flex: 1;
+  font-family: ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--emberDeep);
+}
+
+.pathUnavailable {
+  flex: 1;
+  font-family: ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--statusMissing);
+}
+
+.stats {
+  font-size: 12.5px;
+  color: var(--inkMuted);
+  white-space: nowrap;
+}
+
+.unavailableLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--statusMissing);
+}
+
+.emptyLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--statusUpcoming);
 }

@@ -2,6 +2,14 @@
 // Please do not change this file!
 interface CssExports {
   'alreadyExistsIcon': string;
+  'chip': string;
+  'chipDot': string;
+  'chipDotAiring': string;
+  'chipDotEnded': string;
+  'chipDotFinished': string;
+  'chipDotUpcoming': string;
+  'chipExcluded': string;
+  'chips': string;
   'content': string;
   'excludedIcon': string;
   'genres': string;
@@ -12,6 +20,7 @@ interface CssExports {
   'overview': string;
   'poster': string;
   'searchResult': string;
+  'searchResultExcluded': string;
   'title': string;
   'titleContainer': string;
   'titleRow': string;

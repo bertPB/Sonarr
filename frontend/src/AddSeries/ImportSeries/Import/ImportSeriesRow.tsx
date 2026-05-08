@@ -1,18 +1,24 @@
-import React, { useCallback, useEffect } from 'react';
+import classNames from 'classnames';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { useAddSeriesOptions } from 'AddSeries/addSeriesOptionsStore';
 import { useSelect } from 'App/Select/SelectContext';
-import FormInputGroup from 'Components/Form/FormInputGroup';
-import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
+import CheckInput from 'Components/Form/CheckInput';
+import MonitorEpisodesSelectInput from 'Components/Form/Select/MonitorEpisodesSelectInput';
+import QualityProfileSelectInput from 'Components/Form/Select/QualityProfileSelectInput';
+import SeriesTypeSelectInput from 'Components/Form/Select/SeriesTypeSelectInput';
 import VirtualTableSelectCell from 'Components/Table/Cells/VirtualTableSelectCell';
-import { inputTypes } from 'Helpers/Props';
+import SeriesPoster from 'Series/SeriesPoster';
 import useExistingSeries from 'Series/useExistingSeries';
-import { InputChanged } from 'typings/inputs';
+import { CheckInputChanged, InputChanged } from 'typings/inputs';
 import { SelectStateInputProps } from 'typings/props';
+import translate from 'Utilities/String/translate';
 import {
   ImportSeriesItem,
   UnamppedFolderItem,
   updateImportSeriesItem,
   useImportSeriesItem,
 } from './importSeriesStore';
+import ImportSeriesChip from './ImportSeriesChip';
 import ImportSeriesSelectSeries from './SelectSeries/ImportSeriesSelectSeries';
 import styles from './ImportSeriesRow.css';
 
@@ -34,6 +40,12 @@ function ImportSeriesRow({ unmappedFolder }: ImportSeriesRowProps) {
     selectedSeries,
   } = item ?? {};
 
+  const {
+    monitor: defaultMonitor,
+    qualityProfileId: defaultQualityProfileId,
+    seriesType: defaultSeriesType,
+  } = useAddSeriesOptions();
+
   const isExistingSeries = useExistingSeries(selectedSeries?.tvdbId);
 
   const { getIsSelected, toggleSelected, toggleDisabled } =
@@ -41,6 +53,13 @@ function ImportSeriesRow({ unmappedFolder }: ImportSeriesRowProps) {
 
   const handleInputChange = useCallback(
     ({ name, value }: InputChanged) => {
+      updateImportSeriesItem({ id, [name]: value });
+    },
+    [id]
+  );
+
+  const handleSeasonFolderChange = useCallback(
+    ({ name, value }: CheckInputChanged) => {
       updateImportSeriesItem({ id, [name]: value });
     },
     [id]
@@ -57,6 +76,29 @@ function ImportSeriesRow({ unmappedFolder }: ImportSeriesRowProps) {
     [toggleSelected]
   );
 
+  const isMonitorOverride = monitor !== undefined && monitor !== defaultMonitor;
+  const isQualityProfileOverride =
+    qualityProfileId !== undefined && qualityProfileId !== defaultQualityProfileId;
+  const isSeriesTypeOverride =
+    seriesType !== undefined && seriesType !== defaultSeriesType;
+
+  const monitorChipOptions = useMemo(
+    () => ({ label: translate('Monitor'), showDot: true, isOverride: isMonitorOverride }),
+    [isMonitorOverride]
+  );
+  const qualityChipOptions = useMemo(
+    () => ({ label: translate('QualityProfile'), isOverride: isQualityProfileOverride }),
+    [isQualityProfileOverride]
+  );
+  const seriesTypeChipOptions = useMemo(
+    () => ({
+      label: translate('SeriesType'),
+      isOverride: isSeriesTypeOverride,
+      includeHint: false,
+    }),
+    [isSeriesTypeOverride]
+  );
+
   useEffect(() => {
     toggleDisabled(id, !selectedSeries || isExistingSeries);
   }, [id, selectedSeries, isExistingSeries, toggleDisabled]);
@@ -66,59 +108,96 @@ function ImportSeriesRow({ unmappedFolder }: ImportSeriesRowProps) {
   }, [id, selectedSeries, toggleSelected]);
 
   return (
-    <>
-      <VirtualTableSelectCell<string>
-        inputClassName={styles.selectInput}
-        id={id}
-        isSelected={getIsSelected(id)}
-        isDisabled={!selectedSeries || isExistingSeries}
-        onSelectedChange={handleSelectedChange}
-      />
-
-      <VirtualTableRowCell className={styles.folder}>
-        {relativePath}
-      </VirtualTableRowCell>
-
-      <VirtualTableRowCell className={styles.monitor}>
-        <FormInputGroup
-          type={inputTypes.MONITOR_EPISODES_SELECT}
-          name="monitor"
-          value={monitor}
-          onChange={handleInputChange}
+    <div className={styles.rowLayout}>
+      <div className={styles.metaStrip}>
+        <VirtualTableSelectCell<string>
+          inputClassName={styles.selectInput}
+          id={id}
+          isSelected={getIsSelected(id)}
+          isDisabled={!selectedSeries || isExistingSeries}
+          onSelectedChange={handleSelectedChange}
         />
-      </VirtualTableRowCell>
 
-      <VirtualTableRowCell className={styles.qualityProfile}>
-        <FormInputGroup
-          type={inputTypes.QUALITY_PROFILE_SELECT}
-          name="qualityProfileId"
-          value={qualityProfileId}
-          onChange={handleInputChange}
-        />
-      </VirtualTableRowCell>
+        <div className={styles.folder}>{relativePath}</div>
 
-      <VirtualTableRowCell className={styles.seriesType}>
-        <FormInputGroup
-          type={inputTypes.SERIES_TYPE_SELECT}
-          name="seriesType"
-          value={seriesType}
-          onChange={handleInputChange}
-        />
-      </VirtualTableRowCell>
+        <div className={styles.seasonFolderGroup}>
+          <span className={styles.seasonFolderLabel}>
+            {translate('SeasonFolder')}
+          </span>
 
-      <VirtualTableRowCell className={styles.seasonFolder}>
-        <FormInputGroup
-          type={inputTypes.CHECK}
-          name="seasonFolder"
-          value={seasonFolder}
-          onChange={handleInputChange}
-        />
-      </VirtualTableRowCell>
+          <CheckInput
+            name="seasonFolder"
+            value={seasonFolder}
+            onChange={handleSeasonFolderChange}
+          />
+        </div>
+      </div>
 
-      <VirtualTableRowCell className={styles.series}>
-        <ImportSeriesSelectSeries id={id} onInputChange={handleInputChange} />
-      </VirtualTableRowCell>
-    </>
+      <div className={styles.body}>
+        <div className={styles.poster}>
+          {selectedSeries ? (
+            <SeriesPoster
+              title={selectedSeries.title}
+              images={selectedSeries.images}
+              size={250}
+              lazy={false}
+              overflow={true}
+            />
+          ) : (
+            <div className={styles.posterPlaceholder}>?</div>
+          )}
+        </div>
+
+        <div className={styles.seriesInfo}>
+          <div className={styles.titleRow}>
+            <ImportSeriesSelectSeries
+              id={id}
+              onInputChange={handleInputChange}
+            />
+          </div>
+
+          {selectedSeries ? (
+            <div className={styles.chipStrip}>
+              <MonitorEpisodesSelectInput
+                className={classNames(
+                  styles.chipReset,
+                  isMonitorOverride && styles.chipResetOverride
+                )}
+                name="monitor"
+                value={monitor}
+                selectedValueComponent={ImportSeriesChip}
+                selectedValueOptions={monitorChipOptions}
+                onChange={handleInputChange}
+              />
+
+              <QualityProfileSelectInput
+                className={classNames(
+                  styles.chipReset,
+                  isQualityProfileOverride && styles.chipResetOverride
+                )}
+                name="qualityProfileId"
+                value={qualityProfileId}
+                selectedValueComponent={ImportSeriesChip}
+                selectedValueOptions={qualityChipOptions}
+                onChange={handleInputChange}
+              />
+
+              <SeriesTypeSelectInput
+                className={classNames(
+                  styles.chipReset,
+                  isSeriesTypeOverride && styles.chipResetOverride
+                )}
+                name="seriesType"
+                value={seriesType}
+                selectedValueComponent={ImportSeriesChip}
+                selectedValueOptions={seriesTypeChipOptions}
+                onChange={handleInputChange}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
   );
 }
 

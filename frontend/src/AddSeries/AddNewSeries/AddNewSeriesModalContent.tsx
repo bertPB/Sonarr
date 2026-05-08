@@ -142,114 +142,130 @@ function AddNewSeriesModalContent({
           )}
 
           <div className={styles.info}>
-            {overview ? (
-              <div className={styles.overview}>{overview}</div>
-            ) : null}
+            {overview ? <p className={styles.intro}>{overview}</p> : null}
 
             <Form
               validationErrors={validationErrors}
               validationWarnings={validationWarnings}
             >
-              <FormGroup>
-                <FormLabel>{translate('RootFolder')}</FormLabel>
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Library')}
+                </h3>
 
-                <FormInputGroup
-                  type={inputTypes.ROOT_FOLDER_SELECT}
-                  name="rootFolderPath"
-                  valueOptions={{
-                    seriesFolder: folder,
-                    isWindows,
-                  }}
-                  selectedValueOptions={{
-                    seriesFolder: folder,
-                    isWindows,
-                  }}
-                  helpText={translate('AddNewSeriesRootFolderHelpText', {
-                    folder,
-                  })}
-                  onChange={handleInputChange}
-                  {...rootFolderPath}
-                />
-              </FormGroup>
+                <FormGroup>
+                  <FormLabel>{translate('RootFolder')}</FormLabel>
 
-              <FormGroup>
-                <FormLabel>
-                  {translate('Monitor')}
-
-                  <Popover
-                    anchor={
-                      <Icon className={styles.labelIcon} name={icons.INFO} />
-                    }
-                    title={translate('MonitoringOptions')}
-                    body={<SeriesMonitoringOptionsPopoverContent />}
-                    position={tooltipPositions.RIGHT}
+                  <FormInputGroup
+                    type={inputTypes.ROOT_FOLDER_SELECT}
+                    name="rootFolderPath"
+                    valueOptions={{
+                      seriesFolder: folder,
+                      isWindows,
+                    }}
+                    selectedValueOptions={{
+                      seriesFolder: folder,
+                      isWindows,
+                    }}
+                    helpText={translate('AddNewSeriesRootFolderHelpText', {
+                      folder,
+                    })}
+                    onChange={handleInputChange}
+                    {...rootFolderPath}
                   />
-                </FormLabel>
+                </FormGroup>
 
-                <FormInputGroup
-                  type={inputTypes.MONITOR_EPISODES_SELECT}
-                  name="monitor"
-                  onChange={handleInputChange}
-                  {...monitor}
-                />
-              </FormGroup>
+                <FormGroup>
+                  <FormLabel>{translate('Tags')}</FormLabel>
 
-              <FormGroup>
-                <FormLabel>{translate('QualityProfile')}</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.QUALITY_PROFILE_SELECT}
-                  name="qualityProfileId"
-                  onChange={handleQualityProfileIdChange}
-                  {...qualityProfileId}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <FormLabel>
-                  {translate('SeriesType')}
-
-                  <Popover
-                    anchor={
-                      <Icon className={styles.labelIcon} name={icons.INFO} />
-                    }
-                    title={translate('SeriesTypes')}
-                    body={<SeriesTypePopoverContent />}
-                    position={tooltipPositions.RIGHT}
+                  <FormInputGroup
+                    type={inputTypes.TAG}
+                    name="tags"
+                    onChange={handleInputChange}
+                    {...tags}
                   />
-                </FormLabel>
+                </FormGroup>
+              </section>
 
-                <FormInputGroup
-                  type={inputTypes.SERIES_TYPE_SELECT}
-                  name="seriesType"
-                  onChange={handleInputChange}
-                  {...seriesTypeSetting}
-                  value={seriesType}
-                  helpText={translate('SeriesTypesHelpText')}
-                />
-              </FormGroup>
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Monitoring')}
+                </h3>
 
-              <FormGroup>
-                <FormLabel>{translate('SeasonFolder')}</FormLabel>
+                <FormGroup>
+                  <FormLabel>
+                    {translate('Monitor')}
 
-                <FormInputGroup
-                  type={inputTypes.CHECK}
-                  name="seasonFolder"
-                  onChange={handleInputChange}
-                  {...seasonFolder}
-                />
-              </FormGroup>
+                    <Popover
+                      anchor={
+                        <Icon className={styles.labelIcon} name={icons.INFO} />
+                      }
+                      title={translate('MonitoringOptions')}
+                      body={<SeriesMonitoringOptionsPopoverContent />}
+                      position={tooltipPositions.RIGHT}
+                    />
+                  </FormLabel>
 
-              <FormGroup>
-                <FormLabel>{translate('Tags')}</FormLabel>
+                  <FormInputGroup
+                    type={inputTypes.MONITOR_EPISODES_SELECT}
+                    name="monitor"
+                    onChange={handleInputChange}
+                    {...monitor}
+                  />
+                </FormGroup>
 
-                <FormInputGroup
-                  type={inputTypes.TAG}
-                  name="tags"
-                  onChange={handleInputChange}
-                  {...tags}
-                />
-              </FormGroup>
+                <FormGroup>
+                  <FormLabel>{translate('SeasonFolder')}</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.CHECK}
+                    name="seasonFolder"
+                    onChange={handleInputChange}
+                    {...seasonFolder}
+                  />
+                </FormGroup>
+              </section>
+
+              <section className={styles.section}>
+                <h3 className={styles.sectionHeading}>
+                  {translate('Quality')}
+                </h3>
+
+                <FormGroup>
+                  <FormLabel>{translate('QualityProfile')}</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.QUALITY_PROFILE_SELECT}
+                    name="qualityProfileId"
+                    onChange={handleQualityProfileIdChange}
+                    {...qualityProfileId}
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormLabel>
+                    {translate('SeriesType')}
+
+                    <Popover
+                      anchor={
+                        <Icon className={styles.labelIcon} name={icons.INFO} />
+                      }
+                      title={translate('SeriesTypes')}
+                      body={<SeriesTypePopoverContent />}
+                      position={tooltipPositions.RIGHT}
+                    />
+                  </FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.SERIES_TYPE_SELECT}
+                    name="seriesType"
+                    onChange={handleInputChange}
+                    {...seriesTypeSetting}
+                    value={seriesType}
+                    helpText={translate('SeriesTypesHelpText')}
+                  />
+                </FormGroup>
+              </section>
             </Form>
           </div>
         </div>

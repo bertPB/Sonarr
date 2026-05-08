@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import Label from 'Components/Label';
+import Icon from 'Components/Icon';
 import IconButton from 'Components/Link/IconButton';
 import Link from 'Components/Link/Link';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
-import TableRowCell from 'Components/Table/Cells/TableRowCell';
-import TableRow from 'Components/Table/TableRow';
 import { icons, kinds } from 'Helpers/Props';
 import formatBytes from 'Utilities/Number/formatBytes';
 import translate from 'Utilities/String/translate';
@@ -19,7 +17,7 @@ function RootFolderRow(props: RootFolderRowProps) {
     path,
     accessible,
     isEmpty,
-    freeSpace = 0,
+    freeSpace,
     unmappedFolders = [],
   } = props;
 
@@ -29,65 +27,62 @@ function RootFolderRow(props: RootFolderRowProps) {
 
   const onDeletePress = useCallback(() => {
     setIsDeleteModalOpen(true);
-  }, [setIsDeleteModalOpen]);
+  }, []);
 
   const onDeleteModalClose = useCallback(() => {
     setIsDeleteModalOpen(false);
-  }, [setIsDeleteModalOpen]);
+  }, []);
 
   const onConfirmDelete = useCallback(() => {
     deleteRootFolder();
     setIsDeleteModalOpen(false);
   }, [deleteRootFolder]);
 
+  const statsString =
+    freeSpace != null && !isNaN(freeSpace)
+      ? `${unmappedFolders.length} unmapped · ${formatBytes(freeSpace)} free`
+      : `${unmappedFolders.length} unmapped`;
+
   return (
-    <TableRow>
-      <TableRowCell>
-        <div className={styles.pathContainer}>
-          {isUnavailable ? (
-            path
-          ) : (
-            <Link className={styles.link} to={`/add/import/${id}`}>
-              {path}
-            </Link>
-          )}
+    <div className={`${styles.row}${isUnavailable ? ` ${styles.unavailable}` : ''}`}>
+      <Icon
+        className={isUnavailable ? styles.iconUnavailable : styles.icon}
+        name={icons.ROOT_FOLDER}
+      />
 
-          {isUnavailable ? (
-            <Label className={styles.label} kind={kinds.DANGER}>
-              {translate('Unavailable')}
-            </Label>
-          ) : null}
+      {isUnavailable ? (
+        <span className={styles.pathUnavailable}>{path}</span>
+      ) : (
+        <Link className={styles.path} to={`/add/import/${id}`}>
+          {path}
+        </Link>
+      )}
 
-          {accessible && isEmpty ? (
-            <Label
-              className={styles.label}
-              kind={kinds.WARNING}
+      {isUnavailable ? (
+        <span className={styles.unavailableLabel}>
+          {translate('Unavailable')}
+        </span>
+      ) : (
+        <>
+          <span className={styles.stats}>{statsString}</span>
+
+          {isEmpty ? (
+            <span
+              className={styles.emptyLabel}
               title={translate('EmptyRootFolderTooltip')}
             >
               {translate('Empty')}
-            </Label>
+            </span>
           ) : null}
-        </div>
-      </TableRowCell>
+        </>
+      )}
 
-      <TableRowCell className={styles.freeSpace}>
-        {isUnavailable || isNaN(Number(freeSpace))
-          ? '-'
-          : formatBytes(freeSpace)}
-      </TableRowCell>
-
-      <TableRowCell className={styles.unmappedFolders}>
-        {isUnavailable ? '-' : unmappedFolders.length}
-      </TableRowCell>
-
-      <TableRowCell className={styles.actions}>
-        <IconButton
-          title={translate('RemoveRootFolder')}
-          aria-label={translate('RemoveRootFolder')}
-          name={icons.REMOVE}
-          onPress={onDeletePress}
-        />
-      </TableRowCell>
+      <IconButton
+        title={translate('RemoveRootFolder')}
+        aria-label={translate('RemoveRootFolder')}
+        name={icons.REMOVE}
+        onPress={onDeletePress}
+      />
 
       <ConfirmModal
         isOpen={isDeleteModalOpen}
@@ -98,7 +93,7 @@ function RootFolderRow(props: RootFolderRowProps) {
         onConfirm={onConfirmDelete}
         onCancel={onDeleteModalClose}
       />
-    </TableRow>
+    </div>
   );
 }
 
