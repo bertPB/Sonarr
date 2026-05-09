@@ -11,7 +11,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import { fetchCustomFormatSpecificationSchema } from 'Store/Actions/settingsActions';
 import translate from 'Utilities/String/translate';
 import AddSpecificationItem from './AddSpecificationItem';
-import styles from './AddSpecificationModalContent.css';
+import styles from './AddSpecificationModalContent.module.css';
 
 export interface AddSpecificationModalContentProps {
   onSpecificationSelect: () => void;

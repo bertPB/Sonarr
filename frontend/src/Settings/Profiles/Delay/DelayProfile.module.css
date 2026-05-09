@@ -1,0 +1,75 @@
+.delayProfile {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-top: 1px solid var(--borderColor);
+}
+
+.isDefault {
+  background-color: color-mix(in oklch, var(--ember) 4%, var(--paperCard));
+}
+
+.isDragging {
+  opacity: 0.25;
+}
+
+.colDrag    { flex: 0 0 32px; }
+.colScope   { flex: 1 1 auto; min-width: 80px; padding-right: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.colProto   { flex: 0 0 180px; font-family: var(--monoSpaceFontFamily); font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+.colUsenet  { flex: 0 0 120px; font-family: var(--monoSpaceFontFamily); font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+.colTorrent { flex: 0 0 120px; font-family: var(--monoSpaceFontFamily); font-size: 11px; letter-spacing: 0.04em; color: var(--inkMuted); }
+
+.colActions {
+  flex: 0 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.actions {
+  display: inline-flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.delayProfile:hover .actions {
+  opacity: 1;
+}
+
+.actionButton {
+  composes: button from 'Components/Link/IconButton.module.css';
+
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 44px;
+  cursor: grab;
+  color: var(--inkFaint);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.delayProfile:hover .dragHandle {
+  opacity: 1;
+}
+
+.placeholder {
+  height: 44px;
+  border-top: 2px solid var(--ember);
+}
+
+.anyText {
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--inkFaint);
+}

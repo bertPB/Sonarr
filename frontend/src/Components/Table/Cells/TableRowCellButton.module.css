@@ -1,0 +1,8 @@
+.cell {
+  composes: cell from './TableRowCell.module.css';
+  composes: link from 'Components/Link/Link.module.css';
+
+  &:hover {
+    text-decoration: none;
+  }
+}

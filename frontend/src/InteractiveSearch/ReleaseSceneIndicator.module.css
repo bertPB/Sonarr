@@ -1,0 +1,66 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  margin: 2px;
+  padding: 0 6px;
+  height: 18px;
+  border-radius: 4px;
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.messages {
+  margin-top: 15px;
+}
+
+.descriptionList {
+  composes: descriptionList from 'Components/DescriptionList/DescriptionList.module.css';
+
+  margin-right: 10px;
+}
+
+.title {
+  composes: title from 'Components/DescriptionList/DescriptionListItemTitle.module.css';
+
+  width: 80px;
+}
+
+.description {
+  composes: description from 'Components/DescriptionList/DescriptionListItemDescription.module.css';
+
+  margin-left: 100px;
+}
+
+.levelMixed,
+.levelNotRequested {
+  background-color: rgba(var(--dangerColorRgb), 0.12);
+  color: var(--dangerColor);
+}
+
+.levelUnknown {
+  background-color: rgba(var(--warningColorRgb), 0.12);
+  color: var(--warningColor);
+}
+
+.levelMapped,
+.levelNormal {
+  background-color: var(--paperWarm);
+  border: 1px solid var(--borderColor);
+  color: var(--inkSoft);
+}
+
+.levelNone {
+  background-color: var(--paperWarm);
+  border: 1px solid var(--borderColor);
+  color: var(--inkMuted);
+  opacity: 0.35;
+
+  &:hover {
+    opacity: 1;
+  }
+}

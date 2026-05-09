@@ -27,7 +27,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
-import styles from './Blocklist.css';
+import styles from './Blocklist.module.css';
 import BlocklistFilterModal from './BlocklistFilterModal';
 import {
   setBlocklistOption,

@@ -13,7 +13,7 @@ import {
   ReleaseProfileModel,
   useDeleteReleaseProfile,
 } from './useReleaseProfiles';
-import styles from './ReleaseProfileItem.css';
+import styles from './ReleaseProfileItem.module.css';
 
 const CHIP_CAP_THRESHOLD = 6;
 

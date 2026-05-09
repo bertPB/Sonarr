@@ -1,0 +1,16 @@
+.qualityProfileItemDragSource {
+  margin: var(--qualityProfileItemDragSourcePadding) 0;
+}
+
+.qualityProfileItemPlaceholder {
+  width: 100%;
+  border-top: 2px solid var(--ember);
+}
+
+.qualityProfileItemPlaceholderBefore {
+  margin-bottom: 8px;
+}
+
+.qualityProfileItemPlaceholderAfter {
+  margin-top: 8px;
+}

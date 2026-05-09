@@ -1,0 +1,43 @@
+.fieldSet {
+  margin: 0 0 16px;
+  padding: 28px 28px 24px;
+  min-width: 0;
+  background-color: var(--paperCard);
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+}
+
+.fieldSet:last-child {
+  margin-bottom: 0;
+}
+
+.legend {
+  display: block;
+  margin: 0 0 4px;
+  padding: 0;
+  width: 100%;
+  border: 0;
+  font-family: var(--defaultFontFamily);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+
+  &.small {
+    color: var(--inkMuted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+.caption {
+  margin: 0 0 20px;
+  font-family: var(--defaultFontFamily);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--inkMuted);
+  max-width: 65ch;
+}

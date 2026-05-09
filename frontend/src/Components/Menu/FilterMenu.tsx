@@ -5,7 +5,7 @@ import translate from 'Utilities/String/translate';
 import FilterMenuContent from './FilterMenuContent';
 import Menu from './Menu';
 import ToolbarMenuButton from './ToolbarMenuButton';
-import styles from './FilterMenu.css';
+import styles from './FilterMenu.module.css';
 
 interface FilterMenuProps {
   className?: string;
@@ -45,7 +45,7 @@ function FilterMenu({
   }, []);
 
   return (
-    <div>
+    <>
       <Menu className={className} {...otherProps}>
         <ButtonComponent
           iconName={icons.FILTER}
@@ -75,7 +75,7 @@ function FilterMenu({
           onModalClose={handleFiltersModalClose}
         />
       ) : null}
-    </div>
+    </>
   );
 }
 

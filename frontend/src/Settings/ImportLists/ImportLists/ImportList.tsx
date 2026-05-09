@@ -9,7 +9,7 @@ import { deleteImportList } from 'Store/Actions/settingsActions';
 import { useTagList } from 'Tags/useTags';
 import translate from 'Utilities/String/translate';
 import EditImportListModal from './EditImportListModal';
-import styles from './ImportList.css';
+import styles from './ImportList.module.css';
 
 interface ImportListProps {
   id: number;

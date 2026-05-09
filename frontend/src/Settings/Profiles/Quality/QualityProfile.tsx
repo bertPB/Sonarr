@@ -11,7 +11,7 @@ import {
   QualityProfileItems,
   useDeleteQualityProfile,
 } from './useQualityProfiles';
-import styles from './QualityProfile.css';
+import styles from './QualityProfile.module.css';
 
 // How many allowed chips before the cluster gets capped (≈ 2 rows at 290px)
 const CHIP_CAP_THRESHOLD = 6;

@@ -1,0 +1,21 @@
+.dayOfWeek {
+  flex: 1 0 14.28%;
+  padding: 10px 0;
+  background-color: var(--calendarBackgroundColor);
+  border-bottom: 1px solid var(--calendarBorderColor);
+  text-align: center;
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+.isSingleDay {
+  width: 100%;
+}
+
+.isToday {
+  color: var(--ember);
+}

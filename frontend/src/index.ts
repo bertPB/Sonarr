@@ -1,5 +1,6 @@
 import './polyfills';
 import 'Styles/globals.css';
+import 'Styles/Themes/themes.css';
 import './index.css';
 
 const initializeUrl = `${
@@ -9,10 +10,6 @@ const response = await fetch(initializeUrl);
 
 window.Sonarr = await response.json();
 
-/* eslint-disable no-undef, @typescript-eslint/ban-ts-comment */
-// @ts-ignore 2304
-__webpack_public_path__ = `${window.Sonarr.urlBase}/`;
-/* eslint-enable no-undef, @typescript-eslint/ban-ts-comment */
 
 const error = console.error;
 

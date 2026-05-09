@@ -5,7 +5,7 @@ import useApiQuery from 'Helpers/Hooks/useApiQuery';
 import SeriesImage from 'Series/SeriesImage';
 import useSeries from 'Series/useSeries';
 import translate from 'Utilities/String/translate';
-import styles from './GrabbedList.css';
+import styles from './GrabbedList.module.css';
 
 const GRABBED_QUERY_PARAMS = {
   eventType: 'grabbed',

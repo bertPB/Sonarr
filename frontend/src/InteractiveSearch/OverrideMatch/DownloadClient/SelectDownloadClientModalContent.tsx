@@ -11,7 +11,7 @@ import DownloadProtocol from 'DownloadClient/DownloadProtocol';
 import createEnabledDownloadClientsSelector from 'Store/Selectors/createEnabledDownloadClientsSelector';
 import translate from 'Utilities/String/translate';
 import SelectDownloadClientRow from './SelectDownloadClientRow';
-import styles from './SelectDownloadClientModalContent.css';
+import styles from './SelectDownloadClientModalContent.module.css';
 
 interface SelectDownloadClientModalContentProps {
   protocol: DownloadProtocol;

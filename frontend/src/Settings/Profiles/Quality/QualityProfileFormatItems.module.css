@@ -1,0 +1,44 @@
+.formats {
+  margin-top: 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperWarm);
+  overflow: hidden;
+  user-select: none;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 36px;
+  background-color: var(--paperWarm);
+  border-bottom: 1px solid var(--borderColor);
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+.headerTitle {
+  display: flex;
+  flex-grow: 1;
+}
+
+.headerScore {
+  display: flex;
+  flex-grow: 0;
+  padding-left: 16px;
+  width: 100px;
+}
+
+.addCustomFormatMessage {
+  max-width: var(--formGroupExtraSmallWidth);
+  margin-top: 10px;
+  font-family: var(--defaultFontFamily);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+}

@@ -23,7 +23,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
-import styles from './History.css';
+import styles from './History.module.css';
 import HistoryFilterModal from './HistoryFilterModal';
 import {
   setHistoryOption,

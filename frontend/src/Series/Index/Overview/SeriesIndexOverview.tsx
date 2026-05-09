@@ -18,7 +18,7 @@ import dimensions from 'Styles/Variables/dimensions';
 import translate from 'Utilities/String/translate';
 import useSeriesIndexItem from '../useSeriesIndexItem';
 import SeriesIndexOverviewInfo from './SeriesIndexOverviewInfo';
-import styles from './SeriesIndexOverview.css';
+import styles from './SeriesIndexOverview.module.css';
 
 const columnPadding = parseInt(dimensions.seriesIndexColumnPadding);
 const columnPaddingSmallScreen = parseInt(

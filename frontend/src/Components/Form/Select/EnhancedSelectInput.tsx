@@ -32,7 +32,7 @@ import * as keyCodes from 'Utilities/Constants/keyCodes';
 import TextInput from '../TextInput';
 import HintedSelectInputOption from './HintedSelectInputOption';
 import HintedSelectInputSelectedValue from './HintedSelectInputSelectedValue';
-import styles from './EnhancedSelectInput.css';
+import styles from './EnhancedSelectInput.module.css';
 
 function isArrowKey(keyCode: number) {
   return keyCode === keyCodes.UP_ARROW || keyCode === keyCodes.DOWN_ARROW;

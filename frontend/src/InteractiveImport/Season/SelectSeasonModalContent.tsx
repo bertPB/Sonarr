@@ -8,7 +8,7 @@ import { Season } from 'Series/Series';
 import { useSingleSeries } from 'Series/useSeries';
 import translate from 'Utilities/String/translate';
 import SelectSeasonRow from './SelectSeasonRow';
-import styles from './SelectSeasonModalContent.css';
+import styles from './SelectSeasonModalContent.module.css';
 
 interface SelectSeasonModalContentProps {
   seriesId?: number;

@@ -30,7 +30,7 @@ import Field from 'typings/Field';
 import { InputChanged } from 'typings/inputs';
 import { ValidationError } from 'typings/pending';
 import translate from 'Utilities/String/translate';
-import styles from './ImportCustomFormatModalContent.css';
+import styles from './ImportCustomFormatModalContent.module.css';
 
 interface ImportCustomFormatModalContentProps {
   onModalClose: () => void;

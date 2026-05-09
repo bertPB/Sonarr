@@ -28,7 +28,7 @@ import { createProviderSettingsSelectorHook } from 'Store/Selectors/createProvid
 import DownloadClient from 'typings/DownloadClient';
 import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
-import styles from './EditDownloadClientModalContent.css';
+import styles from './EditDownloadClientModalContent.module.css';
 
 export interface EditDownloadClientModalContentProps {
   id?: number;

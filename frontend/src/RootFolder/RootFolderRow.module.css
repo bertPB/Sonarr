@@ -1,0 +1,67 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--paperCard);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 11px 14px;
+}
+
+.unavailable {
+  opacity: 0.75;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--inkMuted);
+}
+
+.iconUnavailable {
+  flex-shrink: 0;
+  color: var(--statusMissing);
+}
+
+.path {
+  composes: link from 'Components/Link/Link.module.css';
+
+  flex: 1;
+  font-family: ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--emberDeep);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.pathUnavailable {
+  flex: 1;
+  font-family: ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--statusMissing);
+}
+
+.stats {
+  font-size: 12.5px;
+  color: var(--inkMuted);
+  white-space: nowrap;
+}
+
+.unavailableLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--statusMissing);
+}
+
+.emptyLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--statusUpcoming);
+}

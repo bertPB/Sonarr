@@ -1,0 +1,36 @@
+.error {
+  margin-bottom: 20px;
+  color: var(--dangerColor);
+  font-size: 13px;
+}
+
+.info {
+  margin-bottom: 16px;
+  color: var(--inkMuted);
+  font-size: 13px;
+}
+
+.path {
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.episodeFormat {
+  margin-left: 5px;
+  font-family: var(--monoSpaceFontFamily);
+}
+
+.previews {
+  margin-top: 10px;
+}
+
+.selectAllInputContainer {
+  margin-right: auto;
+  line-height: 30px;
+}
+
+.selectAllInput {
+  composes: input from 'Components/Form/CheckInput.module.css';
+
+  margin: 0;
+}

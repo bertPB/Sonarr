@@ -17,7 +17,7 @@ import Series from 'Series/Series';
 import { useMultipleSeries } from 'Series/useSeries';
 import { Tag, useTagList } from 'Tags/useTags';
 import translate from 'Utilities/String/translate';
-import styles from './TagsModalContent.css';
+import styles from './TagsModalContent.module.css';
 
 export interface TagsModalContentProps {
   onApplyTagsPress: (tags: number[], applyTags: string) => void;

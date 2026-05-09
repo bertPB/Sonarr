@@ -11,7 +11,7 @@ import { fetchDownloadClientSchema } from 'Store/Actions/settingsActions';
 import DownloadClient from 'typings/DownloadClient';
 import translate from 'Utilities/String/translate';
 import AddDownloadClientItem from './AddDownloadClientItem';
-import styles from './AddDownloadClientModalContent.css';
+import styles from './AddDownloadClientModalContent.module.css';
 
 export interface AddDownloadClientModalContentProps {
   onDownloadClientSelect: () => void;

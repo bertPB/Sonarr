@@ -8,7 +8,7 @@ import { scrollDirections } from 'Helpers/Props';
 import InteractiveSearch from 'InteractiveSearch/InteractiveSearch';
 import formatSeason from 'Season/formatSeason';
 import translate from 'Utilities/String/translate';
-import styles from './SeasonInteractiveSearchModalContent.css';
+import styles from './SeasonInteractiveSearchModalContent.module.css';
 
 export interface SeasonInteractiveSearchModalContentProps {
   episodeCount: number;

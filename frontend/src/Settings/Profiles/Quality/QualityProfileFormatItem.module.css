@@ -1,0 +1,48 @@
+.qualityProfileFormatItemContainer {
+  display: flex;
+  width: 100%;
+}
+
+.qualityProfileFormatItem {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-top: 1px solid var(--borderColor);
+  background: transparent;
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.qualityProfileFormatItem:hover {
+  background-color: color-mix(in oklch, var(--paperCard) 60%, transparent);
+}
+
+.formatNameContainer {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-bottom: 0;
+  padding-left: 16px;
+  width: 100%;
+  font-weight: normal;
+  line-height: var(--qualityProfileItemHeight);
+  cursor: text;
+}
+
+.formatName {
+  display: flex;
+  flex-grow: 1;
+}
+
+.scoreContainer {
+  display: flex;
+  flex-grow: 0;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.scoreInput {
+  composes: input from 'Components/Form/Input.module.css';
+
+  width: 100px;
+  height: 30px;
+}

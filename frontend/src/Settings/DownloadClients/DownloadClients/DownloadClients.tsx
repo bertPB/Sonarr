@@ -13,7 +13,7 @@ import translate from 'Utilities/String/translate';
 import AddDownloadClientModal from './AddDownloadClientModal';
 import DownloadClient from './DownloadClient';
 import EditDownloadClientModal from './EditDownloadClientModal';
-import styles from './DownloadClients.css';
+import styles from './DownloadClients.module.css';
 
 function DownloadClients() {
   const dispatch = useDispatch();

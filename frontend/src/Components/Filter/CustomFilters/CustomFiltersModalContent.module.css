@@ -1,0 +1,21 @@
+.intro {
+  margin: 0 0 8px;
+  font-family: var(--defaultFontFamily);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
+.bordered {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperWarm);
+  overflow: hidden;
+}
+
+.addButtonContainer {
+  margin-top: 12px;
+}

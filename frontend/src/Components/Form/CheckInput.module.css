@@ -1,0 +1,127 @@
+@layer base {
+
+.container {
+  position: relative;
+  display: flex;
+  flex: 1 1 65%;
+  user-select: none;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  min-height: 38px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+
+  &:global(.isDisabled) {
+    cursor: not-allowed;
+  }
+}
+
+.input {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--inputBorderColor);
+  border-radius: 4px;
+  background-color: var(--inputBackgroundColor);
+  color: var(--paper);
+  text-align: center;
+  line-height: 1;
+  font-size: 11px;
+  transition:
+    background-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.checkbox:focus + .input,
+.checkbox:focus-visible + .input {
+  outline: 0;
+  border-color: var(--ember);
+  box-shadow: 0 0 0 4px var(--inputFocusBoxShadowColor);
+}
+
+.input:not(.isNotChecked) {
+  border-color: var(--ember);
+  background-color: var(--ember);
+}
+
+.danger {
+  border-color: var(--dangerColor);
+  background-color: var(--dangerColor);
+
+  &.isDisabled {
+    opacity: 0.7;
+  }
+}
+
+.primary {
+  border-color: var(--primaryColor);
+  background-color: var(--primaryColor);
+
+  &.isDisabled {
+    opacity: 0.7;
+  }
+}
+
+.success {
+  border-color: var(--successColor);
+  background-color: var(--successColor);
+
+  &.isDisabled {
+    opacity: 0.7;
+  }
+}
+
+.warning {
+  border-color: var(--warningColor);
+  background-color: var(--warningColor);
+
+  &.isDisabled {
+    opacity: 0.7;
+  }
+}
+
+.isNotChecked {
+  background-color: var(--inputBackgroundColor);
+  border-color: var(--inputBorderColor);
+  color: transparent;
+
+  &.isDisabled {
+    border-color: var(--disabledCheckInputColor);
+    background-color: var(--disabledCheckInputColor);
+    opacity: 0.7;
+  }
+}
+
+.isIndeterminate {
+  border-color: var(--inkMuted);
+  background-color: var(--inkMuted);
+}
+
+.helpText {
+  composes: helpText from 'Components/Form/FormInputHelpText.module.css';
+
+  margin-top: 0;
+  margin-left: 4px;
+  color: var(--ink);
+}
+
+.isDisabled {
+  cursor: not-allowed;
+}
+}

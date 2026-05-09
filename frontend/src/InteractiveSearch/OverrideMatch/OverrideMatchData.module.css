@@ -1,0 +1,23 @@
+.link {
+  composes: link from 'Components/Link/Link.module.css';
+
+  width: 100%;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.placeholder {
+  display: inline-block;
+  margin: -2px 0;
+  width: 100%;
+  border: 1px dashed var(--inputBorderColor);
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: var(--inkMuted);
+}
+
+.optional {
+  border-color: var(--borderColor);
+}

@@ -8,7 +8,7 @@ import { useTagList } from 'Tags/useTags';
 import translate from 'Utilities/String/translate';
 import { IndexerModel, useDeleteIndexer } from '../useIndexers';
 import EditIndexerModal from './EditIndexerModal';
-import styles from './Indexer.css';
+import styles from './Indexer.module.css';
 
 interface IndexerProps extends IndexerModel {
   showPriority: boolean;

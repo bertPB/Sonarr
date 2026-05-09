@@ -1,0 +1,44 @@
+.autoTaggings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.addAutoTagging {
+  composes: autoTagging from './AutoTagging.module.css';
+
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px dashed var(--inputBorderColor);
+  color: var(--inkMuted);
+  text-align: center;
+  transition:
+    border-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 200ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--paperWarm);
+    border-color: var(--ember);
+    color: var(--ember);
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addLabel {
+  font-family: var(--defaultFontFamily);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: inherit;
+}

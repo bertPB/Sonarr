@@ -12,7 +12,7 @@
 
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import styles from './EpisodeStrip.css';
+import styles from './EpisodeStrip.module.css';
 
 export type EpisodeStripDotState =
   | 'owned'

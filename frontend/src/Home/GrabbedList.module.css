@@ -1,0 +1,142 @@
+.section {
+  margin-bottom: 56px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.serif {
+  font-family: var(--editorialFontFamily);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.sectionMeta {
+  font-size: 0.8125rem;
+  color: var(--inkMuted);
+}
+
+.sectionMeta b {
+  color: var(--ink);
+  font-weight: 550;
+}
+
+.viewAll {
+  color: var(--emberDeep);
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.cover {
+  width: 52px;
+  height: 78px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  background: var(--paperWarm);
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coverPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--defaultFontFamily);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--inkFaint);
+}
+
+.content {
+  min-width: 0;
+}
+
+.show {
+  font-size: 0.9375rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ep {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--inkMuted);
+  margin: 0 0 3px;
+  flex-wrap: wrap;
+}
+
+.epCode {
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 0.75rem;
+  color: var(--inkSoft);
+  padding: 1px 6px;
+  background: var(--paperWarm);
+  border-radius: 4px;
+}
+
+.release {
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 0.71875rem;
+  color: var(--inkFaint);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-size: 0.75rem;
+  color: var(--inkMuted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}

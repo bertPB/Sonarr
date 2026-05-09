@@ -8,7 +8,7 @@ import QualityProfileItem from './QualityProfileItem';
 import QualityProfileItemGroup from './QualityProfileItemGroup';
 import { SizeChanged } from './QualityProfileItemSize';
 import { QualityProfileQualityItem } from './useQualityProfiles';
-import styles from './QualityProfileItemDragSource.css';
+import styles from './QualityProfileItemDragSource.module.css';
 
 export interface DragMoveState {
   dragQualityIndex: string | null;

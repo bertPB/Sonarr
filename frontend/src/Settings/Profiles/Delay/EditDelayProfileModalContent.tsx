@@ -24,7 +24,7 @@ import selectSettings from 'Store/Selectors/selectSettings';
 import DelayProfile from 'typings/DelayProfile';
 import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
-import styles from './EditDelayProfileModalContent.css';
+import styles from './EditDelayProfileModalContent.module.css';
 
 const newDelayProfile: DelayProfile & { [key: string]: unknown } = {
   id: 0,

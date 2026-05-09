@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { ReactNode, useMemo } from 'react';
 import { EnhancedSelectInputValue } from 'Components/Form/Select/EnhancedSelectInput';
-import styles from './ImportSeriesChip.css';
+import styles from './ImportSeriesChip.module.css';
 
 interface ImportSeriesChipProps<T extends EnhancedSelectInputValue<V>, V> {
   values: T[];

@@ -1,0 +1,21 @@
+.intro {
+  margin: 0 0 8px;
+  font-family: var(--defaultFontFamily);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
+.renameIcon {
+  margin-left: 5px;
+}
+
+.message {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.result {
+  padding-top: 4px;
+}

@@ -14,7 +14,7 @@ import QualityProfileItemDragSource, {
 } from './QualityProfileItemDragSource';
 import { SizeChanged } from './QualityProfileItemSize';
 import { QualityProfileQualityItem } from './useQualityProfiles';
-import styles from './QualityProfileItemGroup.css';
+import styles from './QualityProfileItemGroup.module.css';
 
 interface QualityProfileItemGroupProps {
   dragRef: ConnectDragSource;

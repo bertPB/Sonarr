@@ -1,0 +1,23 @@
+.deleteButton {
+  composes: button from 'Components/Link/Button.module.css';
+
+  margin-right: auto;
+}
+
+.labelIcon {
+  margin-left: 8px;
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dangerColor);
+}
+
+.message {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}

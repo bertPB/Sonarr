@@ -46,7 +46,7 @@ import {
 } from './cutoffUnmetOptionsStore';
 import CutoffUnmetRow from './CutoffUnmetRow';
 import useCutoffUnmet, { FILTERS } from './useCutoffUnmet';
-import styles from './CutoffUnmet.css';
+import styles from './CutoffUnmet.module.css';
 
 function getMonitoredValue(
   filters: Filter[],

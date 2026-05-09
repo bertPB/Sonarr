@@ -12,7 +12,7 @@ import DelayProfileModel from 'typings/DelayProfile';
 import translate from 'Utilities/String/translate';
 import DelayProfile from './DelayProfile';
 import EditDelayProfileModal from './EditDelayProfileModal';
-import styles from './DelayProfiles.css';
+import styles from './DelayProfiles.module.css';
 
 function createDisplayProfilesSelector() {
   return createSelector(

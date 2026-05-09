@@ -8,7 +8,7 @@ import QualityProfileItemDragSource, {
   QualityProfileItemDragSourceActionProps,
 } from './QualityProfileItemDragSource';
 import { QualityProfileItems as Items } from './useQualityProfiles';
-import styles from './QualityProfileItems.css';
+import styles from './QualityProfileItems.module.css';
 
 export type EditQualityProfileMode = 'default' | 'editGroups' | 'editSizes';
 

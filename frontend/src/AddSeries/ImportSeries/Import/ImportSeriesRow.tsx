@@ -20,7 +20,7 @@ import {
 } from './importSeriesStore';
 import ImportSeriesChip from './ImportSeriesChip';
 import ImportSeriesSelectSeries from './SelectSeries/ImportSeriesSelectSeries';
-import styles from './ImportSeriesRow.css';
+import styles from './ImportSeriesRow.module.css';
 
 interface ImportSeriesRowProps {
   unmappedFolder: UnamppedFolderItem;

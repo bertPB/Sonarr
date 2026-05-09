@@ -5,7 +5,7 @@ import Link from 'Components/Link/Link';
 import { kinds, sizes } from 'Helpers/Props';
 import Series from 'Series/Series';
 import translate from 'Utilities/String/translate';
-import styles from './SeriesDetailsLinks.css';
+import styles from './SeriesDetailsLinks.module.css';
 
 type SeriesDetailsLinksProps = Pick<
   Series,

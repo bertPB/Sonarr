@@ -13,7 +13,7 @@ import { kinds } from 'Helpers/Props';
 import { fetchCustomFormatSpecifications } from 'Store/Actions/settingsActions';
 import Field from 'typings/Field';
 import translate from 'Utilities/String/translate';
-import styles from './ExportCustomFormatModalContent.css';
+import styles from './ExportCustomFormatModalContent.module.css';
 
 const omittedProperties = ['id', 'implementationName', 'infoLink'];
 

@@ -9,7 +9,7 @@ import { deleteDownloadClient } from 'Store/Actions/settingsActions';
 import { useTagList } from 'Tags/useTags';
 import translate from 'Utilities/String/translate';
 import EditDownloadClientModal from './EditDownloadClientModal';
-import styles from './DownloadClient.css';
+import styles from './DownloadClient.module.css';
 
 interface DownloadClientProps {
   id: number;

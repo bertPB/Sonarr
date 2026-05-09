@@ -43,9 +43,3 @@ if (!('contains' in String.prototype)) {
   };
 }
 
-// For Firefox ESR 115 support
-if (!Object.groupBy) {
-  import('core-js/actual/object/group-by');
-}
-
-import 'core-js/actual/iterator';

@@ -30,7 +30,7 @@ import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
 import RootFolderModal from './RootFolder/RootFolderModal';
 import { RootFolderUpdated } from './RootFolder/RootFolderModalContent';
-import styles from './EditSeriesModalContent.css';
+import styles from './EditSeriesModalContent.module.css';
 
 export interface EditSeriesModalContentProps {
   seriesId: number;

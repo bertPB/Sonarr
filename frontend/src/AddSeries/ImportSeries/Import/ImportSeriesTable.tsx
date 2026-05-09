@@ -8,7 +8,7 @@ import {
   UnamppedFolderItem,
   useEnsureImportSeriesItems,
 } from './importSeriesStore';
-import styles from './ImportSeriesTable.css';
+import styles from './ImportSeriesTable.module.css';
 
 const ROW_HEIGHT = 158;
 

@@ -8,7 +8,7 @@ import { sizes } from 'Helpers/Props';
 import { selectCustomFormatSpecificationSchema } from 'Store/Actions/settingsActions';
 import translate from 'Utilities/String/translate';
 import AddSpecificationPresetMenuItem from './AddSpecificationPresetMenuItem';
-import styles from './AddSpecificationItem.css';
+import styles from './AddSpecificationItem.module.css';
 
 interface AddSpecificationItemProps {
   implementation: string;

@@ -15,7 +15,7 @@ import CustomFormat from 'typings/CustomFormat';
 import { SelectStateInputProps } from 'typings/props';
 import translate from 'Utilities/String/translate';
 import EditCustomFormatModal from '../EditCustomFormatModal';
-import styles from './ManageCustomFormatsModalRow.css';
+import styles from './ManageCustomFormatsModalRow.module.css';
 
 interface ManageCustomFormatsModalRowProps {
   id: number;

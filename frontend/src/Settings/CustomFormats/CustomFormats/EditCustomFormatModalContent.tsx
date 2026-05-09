@@ -28,7 +28,7 @@ import ImportCustomFormatModal from './ImportCustomFormatModal';
 import AddSpecificationModal from './Specifications/AddSpecificationModal';
 import EditSpecificationModal from './Specifications/EditSpecificationModal';
 import Specification from './Specifications/Specification';
-import styles from './EditCustomFormatModalContent.css';
+import styles from './EditCustomFormatModalContent.module.css';
 
 export interface EditCustomFormatModalContentProps {
   id?: number;

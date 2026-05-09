@@ -31,7 +31,7 @@ import {
 } from '../importSeriesStore';
 import ImportSeriesSearchResult from './ImportSeriesSearchResult';
 import ImportSeriesTitle from './ImportSeriesTitle';
-import styles from './ImportSeriesSelectSeries.css';
+import styles from './ImportSeriesSelectSeries.module.css';
 
 interface ImportSeriesSelectSeriesProps {
   id: string;

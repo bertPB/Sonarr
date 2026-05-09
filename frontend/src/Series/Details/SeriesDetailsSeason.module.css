@@ -1,0 +1,222 @@
+.season {
+  margin-bottom: 16px;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--cardBackgroundColor);
+  overflow: hidden;
+  transition: box-shadow 200ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    box-shadow:
+      0 6px 20px -8px rgba(0, 0, 0, 0.18),
+      0 2px 4px -2px rgba(0, 0, 0, 0.08);
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: var(--defaultFontFamily);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+
+.seasonInfo {
+  margin-right: 8px;
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--inkSoft);
+}
+
+.seasonNumber {
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.seasonStats {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 16px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.seasonStats > * {
+  display: inline-flex;
+  align-items: center;
+}
+
+.seasonStatsLabel {
+  composes: label from 'Components/Label.module.css';
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 4px 10px;
+  background-color: var(--paperWarm);
+  border: none;
+  border-radius: 999px;
+  color: var(--inkSoft);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.episodeCountTooltip {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sizeOnDisk {
+  color: var(--inkMuted);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: var(--monoSpaceFontFamily);
+}
+
+.expandButton {
+  composes: link from 'Components/Link/Link.module.css';
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  align-self: stretch;
+  margin: 0 16px;
+  color: var(--inkMuted);
+  transition: color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    color: var(--ink);
+    text-decoration: none;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex: 0 1 350px;
+  gap: 6px;
+}
+
+.left,
+.actions {
+  padding: 14px 16px;
+}
+
+.actionsMenu {
+  composes: menu from 'Components/Menu/Menu.module.css';
+
+  flex: 0 0 45px;
+}
+
+.actionsMenuContent {
+  composes: menuContent from 'Components/Menu/MenuContent.module.css';
+
+  white-space: nowrap;
+  font-size: var(--defaultFontSize);
+}
+
+.actionMenuIcon {
+  margin-right: 8px;
+  color: var(--inkMuted);
+}
+
+.actionButton {
+  composes: button from 'Components/Link/IconButton.module.css';
+
+  width: 30px;
+  color: var(--inkSoft);
+  transition: color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    
+    color: var(--ink);
+  }
+}
+
+.episodes {
+  padding-top: 12px;
+  border-top: 1px solid var(--borderColor);
+}
+
+.collapseButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  width: 100%;
+  border-top: 1px solid var(--borderColor);
+  background-color: var(--paperWarm);
+  color: var(--inkMuted);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1), color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    background-color: var(--menuItemHoverBackgroundColor);
+    color: var(--ink);
+  }
+}
+
+.collapseButtonIcon {
+  margin-bottom: -4px;
+}
+
+.expandButtonIcon {
+  composes: actionButton;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1), color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  .expandButton:hover & {
+    background-color: var(--menuItemHoverBackgroundColor);
+    color: var(--ink);
+  }
+}
+
+.noEpisodes {
+  margin: 0 0 12px;
+  padding: 24px;
+  text-align: center;
+  color: var(--inkMuted);
+  font-family: var(--editorialFontFamily);
+  font-style: italic;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 768px) {
+  .season {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .expandButtonIcon {
+    position: static;
+    transform: none;
+    margin: 0;
+  }
+
+  .sizeOnDisk {
+    display: none;
+  }
+}

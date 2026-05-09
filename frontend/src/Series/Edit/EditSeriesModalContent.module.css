@@ -1,0 +1,18 @@
+.intro {
+  margin: 0 0 8px;
+  font-family: var(--defaultFontFamily);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 70ch;
+}
+
+.deleteButton {
+  composes: button from 'Components/Link/Button.module.css';
+
+  margin-right: auto;
+}
+
+.labelIcon {
+  margin-left: 8px;
+}

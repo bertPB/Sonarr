@@ -26,7 +26,7 @@ import createEnabledDownloadClientsSelector from 'Store/Selectors/createEnabledD
 import translate from 'Utilities/String/translate';
 import SelectDownloadClientModal from './DownloadClient/SelectDownloadClientModal';
 import OverrideMatchData from './OverrideMatchData';
-import styles from './OverrideMatchModalContent.css';
+import styles from './OverrideMatchModalContent.module.css';
 
 type SelectType =
   | 'select'

@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import useCalendar from 'Calendar/useCalendar';
 import AgendaEvent from './AgendaEvent';
-import styles from './Agenda.css';
+import styles from './Agenda.module.css';
 
 function Agenda() {
   const { data } = useCalendar();

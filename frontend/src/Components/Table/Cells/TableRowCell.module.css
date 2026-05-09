@@ -1,0 +1,16 @@
+@layer base {
+.cell {
+  padding: 12px 10px;
+  border-top: 1px solid var(--borderColor);
+  font-family: var(--defaultFontFamily);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+@media only screen and (max-width: 992px) {
+  .cell {
+    white-space: nowrap;
+  }
+}
+}

@@ -91,9 +91,6 @@ function SeriesImage({
     const nextImage = findImage(images, coverType);
 
     if (nextImage && (!image.current || nextImage.url !== image.current.url)) {
-      // Don't reset isLoaded, as we want to immediately try to
-      // show the new image, whether an image was shown previously
-      // or the placeholder was shown.
       image.current = nextImage;
 
       setUrl(getUrl(nextImage, coverType, pixelRatio * size));

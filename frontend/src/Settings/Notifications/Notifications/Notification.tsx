@@ -7,7 +7,7 @@ import { useTagList } from 'Tags/useTags';
 import translate from 'Utilities/String/translate';
 import { NotificationModel, useDeleteConnection } from '../useConnections';
 import EditNotificationModal from './EditNotificationModal';
-import styles from './Notification.css';
+import styles from './Notification.module.css';
 
 function Notification({
   id,

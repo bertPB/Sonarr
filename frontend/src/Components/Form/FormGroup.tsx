@@ -4,7 +4,7 @@ import { Size } from 'Helpers/Props/sizes';
 import FormInputGroup from './FormInputGroup';
 import FormInputHelpText from './FormInputHelpText';
 import FormLabel from './FormLabel';
-import styles from './FormGroup.css';
+import styles from './FormGroup.module.css';
 
 interface FormGroupProps extends ComponentPropsWithoutRef<'div'> {
   className?: string;

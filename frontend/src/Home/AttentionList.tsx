@@ -7,7 +7,7 @@ import useApiQuery from 'Helpers/Hooks/useApiQuery';
 import SeriesImage from 'Series/SeriesImage';
 import useSeries from 'Series/useSeries';
 import translate from 'Utilities/String/translate';
-import styles from './AttentionList.css';
+import styles from './AttentionList.module.css';
 
 const placeholderPoster =
   'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';

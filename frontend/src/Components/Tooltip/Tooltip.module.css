@@ -1,0 +1,52 @@
+.tooltipContainer {
+  z-index: var(--popperZIndex);
+}
+
+.tooltip {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--borderColor);
+
+  &.default {
+    background-color: var(--paperCard);
+    box-shadow:
+      0 12px 32px -12px rgba(0, 0, 0, 0.32),
+      0 2px 8px -2px rgba(0, 0, 0, 0.12);
+    color: var(--ink);
+  }
+
+  &.inverse {
+    background-color: var(--ink);
+    border-color: var(--ink);
+    box-shadow:
+      0 12px 32px -12px rgba(0, 0, 0, 0.45),
+      0 2px 8px -2px rgba(0, 0, 0, 0.18);
+    color: var(--paper);
+  }
+}
+
+.body {
+  padding: 8px 12px;
+  font-family: var(--defaultFontFamily);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media only screen and (min-width: 480px) {
+  .tooltip {
+    max-width: calc(768px * 0.8);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tooltip {
+    max-width: calc(992px * 0.8);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .tooltip {
+    max-width: calc(1200px * 0.8);
+  }
+}

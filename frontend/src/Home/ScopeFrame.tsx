@@ -6,7 +6,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import styles from './ScopeFrame.css';
+import styles from './ScopeFrame.module.css';
 
 interface ScopeFrameProps {
   caption: string;

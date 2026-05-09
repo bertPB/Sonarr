@@ -1,0 +1,102 @@
+.header {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: var(--headerHeight);
+  padding: 0 20px 0 0;
+  background-color: var(--pageHeaderBackgroundColor);
+  color: var(--ink);
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex: 0 0 var(--sidebarWidth);
+  padding-left: 20px;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 0;
+  color: var(--ink);
+  font-family: var(--defaultFontFamily);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--ink);
+  }
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.brandName {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.sidebarToggleContainer {
+  display: none;
+  justify-content: center;
+  flex: 0 0 45px;
+  margin-right: 8px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.donate {
+  composes: link from 'Components/Link/Link.module.css';
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--inkMuted);
+  text-align: center;
+  border-radius: 6px;
+  transition:
+    color 160ms cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  &:hover {
+    color: var(--statusMissing);
+    background-color: var(--menuItemHoverBackgroundColor);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .logoContainer {
+    flex: 0 0 auto;
+    padding-left: 16px;
+  }
+
+  .brandName {
+    display: none;
+  }
+
+  .sidebarToggleContainer {
+    display: flex;
+  }
+
+  .donate {
+    display: none;
+  }
+}

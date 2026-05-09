@@ -1,0 +1,16 @@
+@layer base {
+.cell {
+  @add-mixin truncate;
+  composes: cell from 'Components/Table/Cells/TableRowCell.module.css';
+
+  flex-grow: 0;
+  flex-shrink: 1;
+  white-space: nowrap;
+}
+
+@media only screen and (max-width: 992px) {
+  .cell {
+    white-space: nowrap;
+  }
+}
+}

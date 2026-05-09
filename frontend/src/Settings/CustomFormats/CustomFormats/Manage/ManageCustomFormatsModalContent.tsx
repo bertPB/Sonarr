@@ -26,7 +26,7 @@ import getErrorMessage from 'Utilities/Object/getErrorMessage';
 import translate from 'Utilities/String/translate';
 import ManageCustomFormatsEditModal from './Edit/ManageCustomFormatsEditModal';
 import ManageCustomFormatsModalRow from './ManageCustomFormatsModalRow';
-import styles from './ManageCustomFormatsModalContent.css';
+import styles from './ManageCustomFormatsModalContent.module.css';
 
 const COLUMNS: Column[] = [
   {

@@ -9,7 +9,7 @@ import CustomFormatSpecification from 'typings/CustomFormatSpecification';
 import translate from 'Utilities/String/translate';
 import EditCustomFormatModal from './EditCustomFormatModal';
 import ExportCustomFormatModal from './ExportCustomFormatModal';
-import styles from './CustomFormat.css';
+import styles from './CustomFormat.module.css';
 
 interface CustomFormatProps {
   id: number;

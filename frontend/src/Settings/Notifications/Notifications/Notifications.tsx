@@ -9,7 +9,7 @@ import { useConnections, useSortedConnections } from '../useConnections';
 import AddNotificationModal from './AddNotificationModal';
 import EditNotificationModal from './EditNotificationModal';
 import Notification from './Notification';
-import styles from './Notifications.css';
+import styles from './Notifications.module.css';
 
 function Notifications() {
   const { error, isFetching, isFetched } = useConnections();

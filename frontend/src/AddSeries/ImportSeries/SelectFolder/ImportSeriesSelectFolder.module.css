@@ -1,0 +1,78 @@
+.tipsBlock {
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+
+.tipsIntro {
+  margin-bottom: 14px;
+  font-size: var(--defaultFontSize);
+  line-height: 1.6;
+  color: var(--inkSoft);
+}
+
+.tipsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.tipsList li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--inkMuted);
+  max-width: 60ch;
+}
+
+.tipsList li::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  font-weight: 700;
+  color: var(--inkFaint);
+}
+
+.tipsList code {
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 11.5px;
+  background: var(--paperWarm);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--inkSoft);
+}
+
+.rootFoldersSection {
+  margin-bottom: 20px;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+}
+
+.importButtonIcon {
+  margin-right: 8px;
+}
+
+.addErrorAlert {
+  composes: alert from 'Components/Alert.module.css';
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+}

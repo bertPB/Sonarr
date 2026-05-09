@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import Icon, { IconName, IconProps } from 'Components/Icon';
-import styles from './LegendIconItem.css';
+import styles from './LegendIconItem.module.css';
 
 interface LegendIconItemProps extends Pick<IconProps, 'kind'> {
   name: string;

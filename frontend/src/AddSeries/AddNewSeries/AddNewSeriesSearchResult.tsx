@@ -12,7 +12,7 @@ import SeriesPoster from 'Series/SeriesPoster';
 import useExistingSeries from 'Series/useExistingSeries';
 import translate from 'Utilities/String/translate';
 import AddNewSeriesModal from './AddNewSeriesModal';
-import styles from './AddNewSeriesSearchResult.css';
+import styles from './AddNewSeriesSearchResult.module.css';
 
 interface AddNewSeriesSearchResultProps {
   series: AddSeries;

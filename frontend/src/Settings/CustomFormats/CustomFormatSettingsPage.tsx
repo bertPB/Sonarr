@@ -6,7 +6,7 @@ import PageContentBody from 'Components/Page/PageContentBody';
 import PageHeading from 'Components/Page/PageHeading';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import ParseToolbarButton from 'Parse/ParseToolbarButton';
-import settingsStyles from 'Settings/Settings.css';
+import settingsStyles from 'Settings/Settings.module.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import translate from 'Utilities/String/translate';
 import CustomFormats from './CustomFormats/CustomFormats';

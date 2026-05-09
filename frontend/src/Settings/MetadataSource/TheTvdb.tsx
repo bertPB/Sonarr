@@ -2,7 +2,7 @@ import React from 'react';
 import InlineMarkdown from 'Components/Markdown/InlineMarkdown';
 import useTheme from 'Helpers/Hooks/useTheme';
 import translate from 'Utilities/String/translate';
-import styles from './TheTvdb.css';
+import styles from './TheTvdb.module.css';
 
 function TheTvdb() {
   const theme = useTheme();

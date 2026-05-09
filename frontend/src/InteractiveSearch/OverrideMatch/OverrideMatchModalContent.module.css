@@ -1,0 +1,72 @@
+.label {
+  composes: label from 'Components/Label.module.css';
+
+  cursor: pointer;
+}
+
+.section {
+  margin-top: 24px;
+
+  &:first-of-type {
+    margin-top: 16px;
+  }
+}
+
+.sectionHeading {
+  margin: 0 0 12px;
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inkMuted);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.fieldLabel {
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--inkSoft);
+  min-width: 120px;
+}
+
+.footer {
+  composes: modalFooter from 'Components/Modal/ModalFooter.module.css';
+
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.error {
+  margin-right: 20px;
+  color: var(--dangerColor);
+  word-break: break-word;
+}
+
+.buttons {
+  display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+  .footer {
+    display: block;
+  }
+
+  .error {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+}

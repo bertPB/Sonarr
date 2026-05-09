@@ -16,7 +16,7 @@ import { useQualityProfileSchema } from 'Settings/Profiles/Quality/useQualityPro
 import { InputChanged } from 'typings/inputs';
 import getQualities from 'Utilities/Quality/getQualities';
 import translate from 'Utilities/String/translate';
-import styles from './SelectQualityModalContent.css';
+import styles from './SelectQualityModalContent.module.css';
 
 interface SelectQualityModalContentProps {
   qualityId: number;

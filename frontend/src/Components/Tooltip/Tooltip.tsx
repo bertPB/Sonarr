@@ -16,11 +16,10 @@ import {
 } from '@floating-ui/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
-import { useThemeColor } from 'Helpers/Hooks/useTheme';
 import { kinds } from 'Helpers/Props';
 import { Kind } from 'Helpers/Props/kinds';
 import { isMobile } from 'Utilities/browser';
-import styles from './Tooltip.css';
+import styles from './Tooltip.module.css';
 
 export interface TooltipProps {
   className?: string;
@@ -42,11 +41,13 @@ function Tooltip(props: TooltipProps) {
     canFlip = true,
   } = props;
 
-  const arrowColor = useThemeColor(
+  const arrowColorVar =
     kind === 'inverse'
-      ? 'popoverArrowBorderInverseColor'
-      : 'popoverArrowBorderColor'
-  );
+      ? '--popoverArrowBorderInverseColor'
+      : '--popoverArrowBorderColor';
+  const arrowColor = getComputedStyle(document.documentElement)
+    .getPropertyValue(arrowColorVar)
+    .trim();
   const [isOpen, setIsOpen] = useState(false);
 
   const arrowRef = useRef(null);

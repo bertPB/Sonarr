@@ -1,0 +1,54 @@
+.delayList {
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperCard);
+  overflow: hidden;
+  user-select: none;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 36px;
+  background-color: var(--paperWarm);
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.colDrag    { flex: 0 0 32px; }
+.colScope   { flex: 1 1 auto; min-width: 80px; padding-right: 8px; }
+.colProto   { flex: 0 0 180px; }
+.colUsenet  { flex: 0 0 120px; }
+.colTorrent { flex: 0 0 120px; }
+.colActions { flex: 0 0 56px; }
+
+.headerCell {
+  font-family: var(--defaultFontFamily);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--inkMuted);
+}
+
+.ghostRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 0;
+  border-top: 1px dashed var(--borderColor);
+  cursor: pointer;
+  color: var(--inkMuted);
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: none;
+  width: 100%;
+}
+
+.ghostRow:hover {
+  color: var(--ember);
+  background-color: var(--paperWarm);
+}

@@ -9,7 +9,7 @@ import { useSortedIndexers } from '../useIndexers';
 import AddIndexerModal from './AddIndexerModal';
 import EditIndexerModal from './EditIndexerModal';
 import Indexer from './Indexer';
-import styles from './Indexers.css';
+import styles from './Indexers.module.css';
 
 function Indexers() {
   const { isFetching, isFetched, data, error } = useSortedIndexers();

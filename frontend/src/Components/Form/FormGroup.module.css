@@ -1,0 +1,49 @@
+.group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(280px, 35%, 360px);
+  column-gap: 32px;
+  align-items: start;
+  padding: 24px 0;
+}
+
+.group + .group {
+  border-top: 1px solid var(--borderColor);
+}
+
+.group:first-child {
+  padding-top: 0;
+}
+
+.group:last-child {
+  padding-bottom: 0;
+}
+
+.textStack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+
+.controlSlot {
+  min-width: 0;
+}
+
+.extraSmall {
+  & .controlSlot {
+    max-width: 160px;
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  .group {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .extraSmall .controlSlot {
+    max-width: 100%;
+  }
+}

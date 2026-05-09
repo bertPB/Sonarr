@@ -1,0 +1,75 @@
+:root {
+  
+  --pageContentBodyPadding: 32px;
+  --pageContentBodyPaddingSmallScreen: 16px;
+
+  
+  --headerHeight: 56px;
+
+  
+  --sidebarWidth: 240px;
+
+  
+  --toolbarHeight: 52px;
+  --toolbarSeparatorMargin: 12px;
+
+  
+  --breakpointExtraSmall: 480px;
+  --breakpointSmall: 768px;
+  --breakpointMedium: 992px;
+  --breakpointLarge: 1200px;
+  --breakpointExtraLarge: 1450px;
+
+  
+  --formGroupExtraSmallWidth: 550px;
+  --formGroupSmallWidth: 650px;
+  --formGroupMediumWidth: 800px;
+  --formGroupLargeWidth: 1200px;
+  --formLabelSmallWidth: 150px;
+  --formLabelLargeWidth: 250px;
+  --formLabelRightMarginWidth: 20px;
+
+  
+  --dragHandleWidth: 40px;
+  --qualityProfileItemHeight: 30px;
+  --qualityProfileItemDragSourcePadding: 4px;
+
+  
+  --progressBarSmallHeight: 5px;
+  --progressBarMediumHeight: 15px;
+  --progressBarLargeHeight: 20px;
+
+  
+  --jumpBarItemHeight: 25px;
+
+  
+  --modalBodyPadding: 30px;
+
+  
+  --seriesIndexColumnPadding: 16px;
+  --seriesIndexColumnPaddingSmallScreen: 8px;
+  --seriesIndexOverviewInfoRowHeight: 21px;
+
+  
+  --defaultFontFamily: "Inter", ui-sans-serif, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --editorialFontFamily: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --monoSpaceFontFamily: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  
+  --extraSmallFontSize: 11px;
+  --smallFontSize: 13px;
+  --defaultFontSize: 15px;
+  --intermediateFontSize: 16px;
+  --largeFontSize: 18px;
+  --lineHeight: 1.55;
+
+  
+  --defaultSpeed: 0.2s;
+  --slowSpeed: 0.6s;
+  --fastSpeed: 0.1s;
+
+  
+  --pageJumpBarZIndex: 10;
+  --modalZIndex: 1000;
+  --popperZIndex: 2000;
+}

@@ -8,7 +8,7 @@ import { icons } from 'Helpers/Props';
 import { InputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
 import QualityProfileItemSize, { SizeChanged } from './QualityProfileItemSize';
-import styles from './QualityProfileItem.css';
+import styles from './QualityProfileItem.module.css';
 
 interface QualityProfileItemProps {
   dragRef: ConnectDragSource;

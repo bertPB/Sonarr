@@ -3,7 +3,7 @@ import PageSectionContent from 'Components/Page/PageSectionContent';
 import translate from 'Utilities/String/translate';
 import { useSortedMetadata } from '../useMetadata';
 import Metadata from './Metadata';
-import styles from './Metadatas.css';
+import styles from './Metadatas.module.css';
 
 function Metadatas() {
   const { data: items, isFetching, isFetched, error } = useSortedMetadata();

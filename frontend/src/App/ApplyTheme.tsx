@@ -1,20 +1,23 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import useTheme from 'Helpers/Hooks/useTheme';
-import themes from 'Styles/Themes';
 
 function ApplyTheme() {
   const theme = useTheme();
 
-  const updateCSSVariables = useCallback(() => {
-    Object.entries(themes[theme]).forEach(([key, value]) => {
-      document.documentElement.style.setProperty(`--${key}`, value);
-    });
-  }, [theme]);
-
-  // On Component Mount and Component Update
   useEffect(() => {
-    updateCSSVariables();
-  }, [updateCSSVariables, theme]);
+    // Clear any inline custom properties left by the old JS theme system —
+    // inline styles override stylesheet rules so they must be removed first.
+    const { style } = document.documentElement;
+    Array.from(style)
+      .filter((p) => p.startsWith('--'))
+      .forEach((p) => style.removeProperty(p));
+
+    if (theme === 'dark') {
+      document.documentElement.dataset.theme = 'dark';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+  }, [theme]);
 
   return null;
 }

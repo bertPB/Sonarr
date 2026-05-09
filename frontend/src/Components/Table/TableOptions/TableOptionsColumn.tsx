@@ -7,7 +7,7 @@ import DragType from 'Helpers/DragType';
 import { icons } from 'Helpers/Props';
 import { CheckInputChanged } from 'typings/inputs';
 import Column from '../Column';
-import styles from './TableOptionsColumn.css';
+import styles from './TableOptionsColumn.module.css';
 
 interface DragItem {
   name: string;

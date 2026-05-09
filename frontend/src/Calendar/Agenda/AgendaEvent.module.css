@@ -1,0 +1,179 @@
+.event {
+  position: relative;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--borderColor);
+  transition: background-color 160ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.underlay {
+  @add-mixin cover;
+
+  &:hover {
+    background-color: var(--paperWarm);
+  }
+}
+
+.overlay {
+  @add-mixin linkOverlay;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  font-family: var(--defaultFontFamily);
+  font-size: var(--defaultFontSize);
+  color: var(--ink);
+
+  &:global(.colorImpaired) {
+    border-left-width: 5px;
+  }
+}
+
+.eventWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1 0 1px;
+  overflow-x: hidden;
+  gap: 10px;
+}
+
+.eventWrapper::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background-color: var(--inkMuted);
+}
+
+.date {
+  flex: 0 0 230px;
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--inkSoft);
+}
+
+.time {
+  flex: 0 0 110px;
+  margin-right: 16px;
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--inkMuted);
+  border: none !important;
+}
+
+.seriesTitle,
+.episodeTitle {
+  @add-mixin truncate;
+
+  flex: 0 1 300px;
+  margin-right: 16px;
+}
+
+.seriesTitle {
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.episodeTitle {
+  flex: 1 1 1px;
+  font-style: italic;
+  color: var(--inkSoft);
+}
+
+.seasonEpisodeNumber {
+  flex: 0 0 90px;
+  font-family: var(--monoSpaceFontFamily);
+  font-size: 12px;
+  color: var(--inkMuted);
+}
+
+.episodeSeparator {
+  display: none;
+}
+
+.absoluteEpisodeNumber {
+  margin-left: 3px;
+}
+
+.statusIcon {
+  margin-left: 6px;
+  cursor: default;
+  pointer-events: all;
+  color: var(--inkMuted);
+}
+
+
+.eventWrapper.downloaded::before {
+  background-color: var(--successColor);
+}
+
+.eventWrapper.downloading::before {
+  background-color: var(--purple);
+}
+
+.eventWrapper.unmonitored::before {
+  background-color: var(--inkMuted);
+  opacity: 0.5;
+}
+.eventWrapper.unmonitored .seriesTitle {
+  color: var(--inkSoft);
+}
+
+.eventWrapper.onAir::before {
+  background-color: var(--ember);
+  animation: agendaNowPulse 2s ease-out infinite;
+}
+
+@keyframes agendaNowPulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--ember) 55%, transparent); }
+  70% { box-shadow: 0 0 0 6px color-mix(in oklch, var(--ember) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--ember) 0%, transparent); }
+}
+
+.eventWrapper.missing::before {
+  background-color: var(--dangerColor);
+}
+
+.eventWrapper.premiere::before {
+  background-color: var(--ember);
+}
+
+.eventWrapper.unaired::before {
+  background-color: var(--primaryColor);
+}
+
+@media only screen and (max-width: 768px) {
+  .overlay {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .eventWrapper {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .date {
+    margin-left: 10px;
+  }
+
+  .date,
+  .time,
+  .seriesTitle {
+    flex: 0 0 100%;
+  }
+
+  .seasonEpisodeNumber {
+    flex: 0 0 auto;
+  }
+
+  .episodeSeparator {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}

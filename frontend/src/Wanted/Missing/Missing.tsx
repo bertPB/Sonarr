@@ -42,7 +42,7 @@ import {
 } from './missingOptionsStore';
 import MissingRow from './MissingRow';
 import useMissing, { FILTERS, useFilters } from './useMissing';
-import styles from './Missing.css';
+import styles from './Missing.module.css';
 
 function getMonitoredValue(
   filters: Filter[],

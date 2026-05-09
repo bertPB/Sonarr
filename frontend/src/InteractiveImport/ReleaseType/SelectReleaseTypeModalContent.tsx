@@ -11,7 +11,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import { inputTypes, kinds } from 'Helpers/Props';
 import ReleaseType from 'InteractiveImport/ReleaseType';
 import translate from 'Utilities/String/translate';
-import styles from './SelectReleaseTypeModalContent.css';
+import styles from './SelectReleaseTypeModalContent.module.css';
 
 const options = [
   {

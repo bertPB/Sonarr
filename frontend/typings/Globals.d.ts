@@ -1,5 +1,3 @@
-declare module '*.module.css';
-
 interface Window {
   Sonarr: {
     apiKey: string;

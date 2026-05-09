@@ -36,7 +36,7 @@ import {
   unregisterPagePopulator,
 } from 'Utilities/pagePopulator';
 import translate from 'Utilities/String/translate';
-import styles from './Queue.css';
+import styles from './Queue.module.css';
 import QueueFilterModal from './QueueFilterModal';
 import {
   setQueueOption,

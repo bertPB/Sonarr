@@ -2,11 +2,11 @@ import React from 'react';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageHeading from 'Components/Page/PageHeading';
-import settingsStyles from 'Settings/Settings.css';
+import settingsStyles from 'Settings/Settings.module.css';
 import SettingsToolbar from 'Settings/SettingsToolbar';
 import translate from 'Utilities/String/translate';
 import AutoTaggings from './AutoTagging/AutoTaggings';
-import styles from './TagSettings.css';
+import styles from './TagSettings.module.css';
 import Tags from './Tags';
 
 function TagSettings() {

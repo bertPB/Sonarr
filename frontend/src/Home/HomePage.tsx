@@ -1,22 +1,3 @@
-/*
- * Sonarr v5 — Home page.
- *
- * The default landing route. Editorial daily-glance feed of:
- *   1. Tonight & Today    — marquee + rail of episodes airing in the next 24h
- *   2. Just grabbed       — recent successful queue completions (stub for now)
- *   3. Needs attention    — failed grabs / aged missing (stub for now)
- *   4. Added this week    — series added to the library in the last 7 days
- *
- * NOT a metric-tile dashboard. NOT a hero-number kpi board. Editorial restraint.
- *
- * Data wiring status:
- *   - Tonight             : LIVE (calendar API today→tomorrow + includeSeries)
- *   - Series stats        : LIVE (useSeries)
- *   - Added this week     : LIVE (useSeries filtered by added date)
- *   - Just grabbed        : LIVE (history API — GrabbedList)
- *   - Needs attention     : LIVE (wanted/missing + queue API — AttentionList)
- */
-
 import moment from 'moment';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import DocumentTitle from 'react-document-title';
@@ -36,7 +17,7 @@ import EpisodeStrip from './EpisodeStrip';
 import GrabbedList from './GrabbedList';
 import AttentionList from './AttentionList';
 import ScopeFrame from './ScopeFrame';
-import styles from './HomePage.css';
+import styles from './HomePage.module.css';
 
 interface CalendarItemWithSeries extends CalendarItem {
   series?: Series;
@@ -127,8 +108,6 @@ function HomePage() {
   const isFirstRun = !seriesPending && allSeries.length === 0;
   const todayLabel = moment().format('dddd, D MMMM');
 
-  // Welcome subtitle — terse summary of the day, written like an editor wrote it.
-  // Strings hard-coded for now; localization keys land when backend reloads.
   const subtitle = useMemo(() => {
     if (isFirstRun) {
       return 'Add your first series to begin your library.';
@@ -553,7 +532,7 @@ function PosterRail({ items }: { items: RailItem[] }) {
     <div className={styles.rail} role="list">
       {items.map((it) => (
         <article key={it.key} className={styles.posterCard} role="listitem">
-          <a className={styles.posterCover} href={`#${it.to}`}>
+          <a className={styles.posterCover} href={`${it.to}`}>
             {it.images && it.images.length > 0 ? (
               <SeriesImage
                 images={it.images as never}
