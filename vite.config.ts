@@ -1,4 +1,5 @@
 import path from 'path';
+import { cpSync } from 'fs';
 import react from '@vitejs/plugin-react';
 import { defineConfig, Plugin } from 'vite';
 import postcssMixins from 'postcss-mixins';
@@ -9,6 +10,26 @@ const src = path.resolve(__dirname, 'frontend/src');
 
 const backendPort = process.env.SONARR_PORT ?? '8989';
 const backendTarget = `http://localhost:${backendPort}`;
+
+function copyStaticContent(): Plugin {
+  return {
+    name: 'copy-static-content',
+    apply: 'build',
+    closeBundle() {
+      const out = path.join(__dirname, '_output/UI');
+
+      cpSync(
+        path.join(src, 'Content'),
+        path.join(out, 'Content'),
+        { recursive: true }
+      );
+
+      for (const file of ['login.html', 'oauth.html']) {
+        cpSync(path.join(src, file), path.join(out, file));
+      }
+    },
+  };
+}
 
 function sonarrDevPlaceholders(): Plugin {
   return {
@@ -24,7 +45,12 @@ function sonarrDevPlaceholders(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [sonarrDevPlaceholders(), patchCssModules({ exportMode: 'default' }), react()],
+  plugins: [
+    sonarrDevPlaceholders(),
+    patchCssModules({ exportMode: 'default' }),
+    react(),
+    copyStaticContent(),
+  ],
 
   base: '/',
 

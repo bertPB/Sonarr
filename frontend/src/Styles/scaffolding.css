@@ -26,6 +26,11 @@ body {
   line-height: 1.55;
 }
 
+a{
+  background: unset;
+  background-color: unset;
+}
+
 /* Override normalize */
 
 button,
