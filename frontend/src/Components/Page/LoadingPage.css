@@ -1,14 +1,26 @@
 .page {
   composes: page from '~./Page.css';
 
+  align-items: center;
+
+  justify-content: center;
   background-color: var(--pageBackground);
+  animation: fadeIn 0.4s ease-out;
+  gap: 24px;
 }
 
 .logoFull {
-  margin-top: 50px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   opacity: 0.65;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
