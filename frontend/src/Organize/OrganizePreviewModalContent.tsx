@@ -5,7 +5,6 @@ import { useExecuteCommand } from 'Commands/useCommands';
 import CheckInput from 'Components/Form/CheckInput';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
-import InlineMarkdown from 'Components/Markdown/InlineMarkdown';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
@@ -58,8 +57,14 @@ function OrganizePreviewModalContentInner({
 
   const series = useSingleSeries(seriesId)!;
 
-  const { allSelected, allUnselected, getSelectedIds, selectAll, unselectAll } =
-    useSelect<OrganizePreviewModel>();
+  const {
+    allSelected,
+    allUnselected,
+    selectedCount,
+    getSelectedIds,
+    selectAll,
+    unselectAll,
+  } = useSelect<OrganizePreviewModel>();
 
   const isFetching = isPreviewFetching || isNamingFetching;
   const isPopulated = isPreviewFetched && isNamingFetched;
@@ -121,23 +126,13 @@ function OrganizePreviewModalContentInner({
 
         {!isFetching && isPopulated && items.length ? (
           <div>
-            <div className={styles.info}>
-              <div>
-                <InlineMarkdown
-                  data={translate('OrganizeRelativePaths', {
-                    path: series.path,
-                  })}
-                  blockClassName={styles.path}
-                />
-              </div>
+            <dl className={styles.meta}>
+              <dt className={styles.metaLabel}>{translate('Location')}</dt>
+              <dd className={styles.metaValue}>{series.path}</dd>
 
-              <div>
-                <InlineMarkdown
-                  data={translate('OrganizeNamingPattern', { episodeFormat })}
-                  blockClassName={styles.episodeFormat}
-                />
-              </div>
-            </div>
+              <dt className={styles.metaLabel}>{translate('NamingPattern')}</dt>
+              <dd className={styles.metaValue}>{episodeFormat}</dd>
+            </dl>
 
             <div className={styles.previews}>
               {items.map((item) => {
@@ -157,14 +152,22 @@ function OrganizePreviewModalContentInner({
 
       <ModalFooter>
         {isPopulated && items.length ? (
-          <CheckInput
-            className={styles.selectAllInput}
-            containerClassName={styles.selectAllInputContainer}
-            name="selectAll"
-            ariaLabel={translate('SelectAll')}
-            value={selectAllValue}
-            onChange={handleSelectAllChange}
-          />
+          <div className={styles.selectionGroup}>
+            <CheckInput
+              className={styles.selectAllInput}
+              name="selectAll"
+              ariaLabel={translate('SelectAll')}
+              value={selectAllValue}
+              onChange={handleSelectAllChange}
+            />
+
+            <span className={styles.selectionLabel}>
+              {translate('CountOfTotalSelected', {
+                selectedCount,
+                totalCount: items.length,
+              })}
+            </span>
+          </div>
         ) : null}
 
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>

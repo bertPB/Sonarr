@@ -45,8 +45,6 @@ function SelectReleaseGroupModalContent(
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
-        <p className={styles.intro}>{translate('SelectReleaseGroupIntro')}</p>
-
         <Form>
           <FormRow>
             <FormLabel>{translate('ReleaseGroup')}</FormLabel>
@@ -64,7 +62,7 @@ function SelectReleaseGroupModalContent(
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
-        <Button kind={kinds.SUCCESS} onPress={onReleaseGroupSelectWrapper}>
+        <Button kind={kinds.PRIMARY} onPress={onReleaseGroupSelectWrapper}>
           {translate('SetReleaseGroup')}
         </Button>
       </ModalFooter>

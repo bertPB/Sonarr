@@ -183,8 +183,6 @@ function SelectEpisodeModalContentInner(props: SelectEpisodeModalContentProps) {
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
-        <p className={styles.intro}>{translate('SelectEpisodeIntro')}</p>
-
         <TextInput
           className={styles.filterInput}
           placeholder={translate('FilterEpisodesPlaceholder')}
@@ -243,7 +241,7 @@ function SelectEpisodeModalContentInner(props: SelectEpisodeModalContentProps) {
           <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
           <Button
-            kind={kinds.SUCCESS}
+            kind={kinds.PRIMARY}
             isDisabled={!selectionIsValid}
             onPress={onEpisodesSelectWrapper}
           >

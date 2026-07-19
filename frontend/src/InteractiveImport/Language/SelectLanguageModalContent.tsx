@@ -66,8 +66,6 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
         {translate('SelectLanguageModalTitle', { modalTitle })}
       </ModalHeader>
       <ModalBody>
-        <p className={styles.intro}>{translate('SelectLanguageIntro')}</p>
-
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && error ? (
@@ -99,7 +97,7 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
-        <Button kind={kinds.SUCCESS} onPress={onLanguagesSelectWrapper}>
+        <Button kind={kinds.PRIMARY} onPress={onLanguagesSelectWrapper}>
           {translate('SelectLanguages')}
         </Button>
       </ModalFooter>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import SelectIndexerFlagsModalContent from './SelectIndexerFlagsModalContent';
 
 interface SelectIndexerFlagsModalProps {
@@ -20,7 +21,7 @@ function SelectIndexerFlagsModal(props: SelectIndexerFlagsModalProps) {
   } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectIndexerFlagsModalContent
         indexerFlags={indexerFlags}
         modalTitle={modalTitle}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import Series from 'Series/Series';
 import SelectSeriesModalContent from './SelectSeriesModalContent';
 
@@ -14,7 +15,7 @@ function SelectSeriesModal(props: SelectSeriesModalProps) {
   const { isOpen, modalTitle, onSeriesSelect, onModalClose } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectSeriesModalContent
         modalTitle={modalTitle}
         onSeriesSelect={onSeriesSelect}

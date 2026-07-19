@@ -11,7 +11,6 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import { inputTypes, kinds } from 'Helpers/Props';
 import ReleaseType from 'InteractiveImport/ReleaseType';
 import translate from 'Utilities/String/translate';
-import styles from './SelectReleaseTypeModalContent.css';
 
 const options = [
   {
@@ -70,8 +69,6 @@ function SelectReleaseTypeModalContent(
         {modalTitle} - {translate('SelectReleaseType')}
       </ModalHeader>
       <ModalBody>
-        <p className={styles.intro}>{translate('SelectReleaseTypeIntro')}</p>
-
         <Form>
           <FormRow>
             <FormLabel>{translate('ReleaseType')}</FormLabel>
@@ -89,7 +86,7 @@ function SelectReleaseTypeModalContent(
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
-        <Button kind={kinds.SUCCESS} onPress={handleReleaseTypeSelect}>
+        <Button kind={kinds.PRIMARY} onPress={handleReleaseTypeSelect}>
           {translate('SelectReleaseType')}
         </Button>
       </ModalFooter>

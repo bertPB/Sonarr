@@ -45,8 +45,6 @@ function SelectIndexerFlagsModalContent(
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
-        <p className={styles.intro}>{translate('SelectIndexerFlagsIntro')}</p>
-
         <Form>
           <FormRow>
             <FormLabel>{translate('IndexerFlags')}</FormLabel>
@@ -64,7 +62,7 @@ function SelectIndexerFlagsModalContent(
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
-        <Button kind={kinds.SUCCESS} onPress={onIndexerFlagsSelectWrapper}>
+        <Button kind={kinds.PRIMARY} onPress={onIndexerFlagsSelectWrapper}>
           {translate('SetIndexerFlags')}
         </Button>
       </ModalFooter>

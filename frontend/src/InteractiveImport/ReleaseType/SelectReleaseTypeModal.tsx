@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import ReleaseType from 'InteractiveImport/ReleaseType';
 import SelectReleaseTypeModalContent from './SelectReleaseTypeModalContent';
 
@@ -16,7 +17,7 @@ function SelectReleaseTypeModal(props: SelectQualityModalProps) {
     props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectReleaseTypeModalContent
         releaseType={releaseType}
         modalTitle={modalTitle}

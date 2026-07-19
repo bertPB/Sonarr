@@ -31,8 +31,6 @@ function SelectSeasonModalContent(props: SelectSeasonModalContentProps) {
       </ModalHeader>
 
       <ModalBody>
-        <p className={styles.intro}>{translate('SelectSeasonIntro')}</p>
-
         <div className={styles.bordered}>
           {seasons.map((item) => {
             return (

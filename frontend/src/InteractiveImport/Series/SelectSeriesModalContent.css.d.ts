@@ -2,7 +2,6 @@
 // Please do not change this file!
 interface CssExports {
   'filterInput': string;
-  'intro': string;
   'modalBody': string;
   'scroller': string;
 }

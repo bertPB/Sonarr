@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import SelectReleaseGroupModalContent from './SelectReleaseGroupModalContent';
 
 interface SelectReleaseGroupModalProps {
@@ -20,7 +21,7 @@ function SelectReleaseGroupModal(props: SelectReleaseGroupModalProps) {
   } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectReleaseGroupModalContent
         releaseGroup={releaseGroup}
         modalTitle={modalTitle}

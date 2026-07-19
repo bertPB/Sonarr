@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import { QualityModel } from 'Quality/Quality';
 import SelectQualityModalContent from './SelectQualityModalContent';
 
@@ -25,7 +26,7 @@ function SelectQualityModal(props: SelectQualityModalProps) {
   } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectQualityModalContent
         qualityId={qualityId}
         proper={proper}

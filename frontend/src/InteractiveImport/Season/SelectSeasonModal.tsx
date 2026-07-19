@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import SelectSeasonModalContent from './SelectSeasonModalContent';
 
 interface SelectSeasonModalProps {
@@ -14,7 +15,7 @@ function SelectSeasonModal(props: SelectSeasonModalProps) {
   const { isOpen, modalTitle, seriesId, onSeasonSelect, onModalClose } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectSeasonModalContent
         modalTitle={modalTitle}
         seriesId={seriesId}

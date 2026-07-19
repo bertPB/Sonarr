@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import classNames from 'classnames';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useSelect } from 'App/Select/SelectContext';
 import CheckInput from 'Components/Form/CheckInput';
-import Icon from 'Components/Icon';
-import { icons, kinds } from 'Helpers/Props';
 import { CheckInputChanged } from 'typings/inputs';
 import translate from 'Utilities/String/translate';
 import { OrganizePreviewModel } from './useOrganizePreview';
@@ -14,6 +13,32 @@ interface OrganizePreviewRowProps {
   newPath: string;
 }
 
+function diffSegments(existing: string, next: string) {
+  const max = Math.min(existing.length, next.length);
+
+  let start = 0;
+
+  while (start < max && existing[start] === next[start]) {
+    start++;
+  }
+
+  let end = 0;
+
+  while (
+    end < max - start &&
+    existing[existing.length - 1 - end] === next[next.length - 1 - end]
+  ) {
+    end++;
+  }
+
+  return {
+    prefix: next.slice(0, start),
+    oldSegment: existing.slice(start, existing.length - end),
+    newSegment: next.slice(start, next.length - end),
+    suffix: end === 0 ? '' : next.slice(next.length - end),
+  };
+}
+
 function OrganizePreviewRow({
   id,
   existingPath,
@@ -21,6 +46,11 @@ function OrganizePreviewRow({
 }: OrganizePreviewRowProps) {
   const { toggleSelected, useIsSelected } = useSelect<OrganizePreviewModel>();
   const isSelected = useIsSelected(id);
+
+  const { prefix, oldSegment, newSegment, suffix } = useMemo(
+    () => diffSegments(existingPath, newPath),
+    [existingPath, newPath]
+  );
 
   const handleSelectedChange = useCallback(
     ({ value, shiftKey }: CheckInputChanged) => {
@@ -51,17 +81,29 @@ function OrganizePreviewRow({
         onChange={handleSelectedChange}
       />
 
-      <div>
-        <div>
-          <Icon name={icons.SUBTRACT} kind={kinds.DANGER} />
+      <div className={styles.lines}>
+        <div className={classNames(styles.line, styles.removed)}>
+          <span className={styles.gutter}>−</span>
 
-          <span className={styles.path}>{existingPath}</span>
+          <span>
+            {prefix}
+            {oldSegment ? (
+              <span className={styles.removedSegment}>{oldSegment}</span>
+            ) : null}
+            {suffix}
+          </span>
         </div>
 
-        <div>
-          <Icon name={icons.ADD} kind={kinds.SUCCESS} />
+        <div className={classNames(styles.line, styles.added)}>
+          <span className={styles.gutter}>+</span>
 
-          <span className={styles.path}>{newPath}</span>
+          <span>
+            {prefix}
+            {newSegment ? (
+              <span className={styles.addedSegment}>{newSegment}</span>
+            ) : null}
+            {suffix}
+          </span>
         </div>
       </div>
     </div>

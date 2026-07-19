@@ -983,10 +983,10 @@ function InteractiveImportModalContentInner(
             </span>
           ) : null}
 
-          <Button onPress={onModalClose}>Cancel</Button>
+          <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
           <Button
-            kind={kinds.SUCCESS}
+            kind={kinds.PRIMARY}
             isDisabled={!selectedIds.length || !!invalidRowsSelected.length}
             onPress={handleImportSelectedPress}
           >

@@ -185,8 +185,6 @@ function SelectSeriesModalContent(props: SelectSeriesModalContentProps) {
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
       >
-        <p className={styles.intro}>{translate('SelectSeriesIntro')}</p>
-
         <TextInput
           className={styles.filterInput}
           placeholder={translate('FilterSeriesPlaceholder')}

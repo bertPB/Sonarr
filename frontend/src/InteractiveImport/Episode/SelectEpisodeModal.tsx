@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'Components/Modal/Modal';
+import { sizes } from 'Helpers/Props';
 import SelectEpisodeModalContent, {
   SelectedEpisode,
 } from './SelectEpisodeModalContent';
@@ -30,7 +31,7 @@ function SelectEpisodeModal(props: SelectEpisodeModalProps) {
   } = props;
 
   return (
-    <Modal isOpen={isOpen} onModalClose={onModalClose}>
+    <Modal isOpen={isOpen} size={sizes.MEDIUM} onModalClose={onModalClose}>
       <SelectEpisodeModalContent
         selectedIds={selectedIds}
         seriesId={seriesId}
