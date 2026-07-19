@@ -3,8 +3,13 @@
 }
 
 .foldersTitle {
-  border-bottom: 1px solid var(--borderColor);
-  font-size: 21px;
+  margin: 0 0 12px;
+  color: var(--inkMuted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 11px;
+  font-family: var(--defaultFontFamily);
 }
 
 .buttonsContainer {

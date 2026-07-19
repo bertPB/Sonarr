@@ -5,6 +5,7 @@ interface CssExports {
   'details': string;
   'filterInput': string;
   'footer': string;
+  'intro': string;
   'modalBody': string;
   'scroller': string;
 }

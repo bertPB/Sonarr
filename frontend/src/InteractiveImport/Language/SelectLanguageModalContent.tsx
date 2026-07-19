@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
-import FormGroup from 'Components/Form/FormGroup';
-import FormInputGroup from 'Components/Form/FormInputGroup';
+import FormInput from 'Components/Form/FormInput';
 import FormLabel from 'Components/Form/FormLabel';
+import FormRow from 'Components/Form/FormRow';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
@@ -66,37 +65,37 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
       <ModalHeader>
         {translate('SelectLanguageModalTitle', { modalTitle })}
       </ModalHeader>
-
       <ModalBody>
+        <p className={styles.intro}>{translate('SelectLanguageIntro')}</p>
+
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && error ? (
-          <Alert kind={kinds.DANGER}>{translate('LanguagesLoadError')}</Alert>
+          <p className={styles.error}>{translate('LanguagesLoadError')}</p>
         ) : null}
 
         {isPopulated && !error ? (
           <Form>
             {items.map((language) => {
               return (
-                <FormGroup
+                <FormRow
                   key={language.id}
                   size={sizes.EXTRA_SMALL}
                   className={styles.languageInput}
                 >
                   <FormLabel>{language.name}</FormLabel>
-                  <FormInputGroup
+                  <FormInput
                     type={inputTypes.CHECK}
                     name={language.id.toString()}
                     value={languageIds.includes(language.id)}
                     onChange={onLanguageChange}
                   />
-                </FormGroup>
+                </FormRow>
               );
             })}
           </Form>
         ) : null}
       </ModalBody>
-
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 

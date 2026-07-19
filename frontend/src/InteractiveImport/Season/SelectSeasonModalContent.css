@@ -7,10 +7,9 @@
   line-height: 1.55;
 }
 
-.modalBody {
-  composes: modalBody from '~Components/Modal/ModalBody.css';
-
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
+.bordered {
+  overflow: hidden;
+  border: 1px solid var(--borderColor);
+  border-radius: 12px;
+  background-color: var(--paperWarm);
 }

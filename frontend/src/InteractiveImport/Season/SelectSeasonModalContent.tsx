@@ -8,6 +8,7 @@ import { Season } from 'Series/Series';
 import { useSingleSeries } from 'Series/useSeries';
 import translate from 'Utilities/String/translate';
 import SelectSeasonRow from './SelectSeasonRow';
+import styles from './SelectSeasonModalContent.css';
 
 interface SelectSeasonModalContentProps {
   seriesId?: number;
@@ -30,15 +31,19 @@ function SelectSeasonModalContent(props: SelectSeasonModalContentProps) {
       </ModalHeader>
 
       <ModalBody>
-        {seasons.map((item) => {
-          return (
-            <SelectSeasonRow
-              key={item.seasonNumber}
-              seasonNumber={item.seasonNumber}
-              onSeasonSelect={onSeasonSelect}
-            />
-          );
-        })}
+        <p className={styles.intro}>{translate('SelectSeasonIntro')}</p>
+
+        <div className={styles.bordered}>
+          {seasons.map((item) => {
+            return (
+              <SelectSeasonRow
+                key={item.seasonNumber}
+                seasonNumber={item.seasonNumber}
+                onSeasonSelect={onSeasonSelect}
+              />
+            );
+          })}
+        </div>
       </ModalBody>
 
       <ModalFooter>

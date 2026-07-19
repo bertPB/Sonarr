@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import Form from 'Components/Form/Form';
-import FormGroup from 'Components/Form/FormGroup';
-import FormInputGroup from 'Components/Form/FormInputGroup';
+import FormInput from 'Components/Form/FormInput';
 import FormLabel from 'Components/Form/FormLabel';
+import FormRow from 'Components/Form/FormRow';
 import Button from 'Components/Link/Button';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
@@ -11,6 +11,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import { inputTypes, kinds } from 'Helpers/Props';
 import ReleaseType from 'InteractiveImport/ReleaseType';
 import translate from 'Utilities/String/translate';
+import styles from './SelectReleaseTypeModalContent.css';
 
 const options = [
   {
@@ -68,23 +69,23 @@ function SelectReleaseTypeModalContent(
       <ModalHeader>
         {modalTitle} - {translate('SelectReleaseType')}
       </ModalHeader>
-
       <ModalBody>
+        <p className={styles.intro}>{translate('SelectReleaseTypeIntro')}</p>
+
         <Form>
-          <FormGroup>
+          <FormRow>
             <FormLabel>{translate('ReleaseType')}</FormLabel>
 
-            <FormInputGroup
+            <FormInput
               type={inputTypes.SELECT}
               name="releaseType"
               value={releaseType}
               values={options}
               onChange={handleReleaseTypeChange}
             />
-          </FormGroup>
+          </FormRow>
         </Form>
       </ModalBody>
-
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 
