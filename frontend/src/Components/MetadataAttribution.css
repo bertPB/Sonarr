@@ -8,11 +8,12 @@
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
-  color: var(--mediumGray);
-  font-size: $defaultFontSize;
+  color: var(--inkFaint);
+  letter-spacing: 0.01em;
+  font-size: 11px;
 
   &:hover {
-    color: var(--darkGray);
+    color: var(--inkMuted);
     text-decoration: none;
   }
 }

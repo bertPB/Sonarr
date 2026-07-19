@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react';
-import Alert from 'Components/Alert';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import PageMenuButton from 'Components/Menu/PageMenuButton';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import { useCustomFiltersList } from 'Filters/useCustomFilters';
-import { align, kinds } from 'Helpers/Props';
+import { align } from 'Helpers/Props';
 import { SortDirection } from 'Helpers/Props/sortDirections';
 import getErrorMessage from 'Utilities/Object/getErrorMessage';
 import translate from 'Utilities/String/translate';
@@ -91,13 +90,13 @@ function InteractiveSearch({ type, searchPayload }: InteractiveSearchProps) {
       ) : null}
 
       {!isFetching && isFetched && !totalItems ? (
-        <Alert kind={kinds.INFO}>{translate('NoResultsFound')}</Alert>
+        <p className={styles.filteredMessage}>{translate('NoResultsFound')}</p>
       ) : null}
 
       {!!totalItems && !isFetching && !data.length ? (
-        <Alert kind={kinds.WARNING}>
+        <p className={styles.filteredMessage}>
           {translate('AllResultsAreHiddenByTheAppliedFilter')}
-        </Alert>
+        </p>
       ) : null}
 
       {!isFetching && !!data.length ? (

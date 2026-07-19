@@ -3,9 +3,12 @@
 interface CssExports {
   'buttons': string;
   'error': string;
+  'field': string;
+  'fieldLabel': string;
   'footer': string;
-  'item': string;
   'label': string;
+  'section': string;
+  'sectionHeading': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

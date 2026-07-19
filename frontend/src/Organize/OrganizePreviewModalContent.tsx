@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { SelectProvider, useSelect } from 'App/Select/SelectContext';
 import CommandNames from 'Commands/CommandNames';
 import { useExecuteCommand } from 'Commands/useCommands';
-import Alert from 'Components/Alert';
 import CheckInput from 'Components/Form/CheckInput';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -107,7 +106,7 @@ function OrganizePreviewModalContentInner({
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && error ? (
-          <Alert kind={kinds.DANGER}>{translate('OrganizeLoadError')}</Alert>
+          <p className={styles.error}>{translate('OrganizeLoadError')}</p>
         ) : null}
 
         {!isFetching && isPopulated && !items.length ? (
@@ -122,7 +121,7 @@ function OrganizePreviewModalContentInner({
 
         {!isFetching && isPopulated && items.length ? (
           <div>
-            <Alert>
+            <div className={styles.info}>
               <div>
                 <InlineMarkdown
                   data={translate('OrganizeRelativePaths', {
@@ -138,7 +137,7 @@ function OrganizePreviewModalContentInner({
                   blockClassName={styles.episodeFormat}
                 />
               </div>
-            </Alert>
+            </div>
 
             <div className={styles.previews}>
               {items.map((item) => {

@@ -6,4 +6,7 @@
 
 .filteredMessage {
   margin-top: 10px;
+  color: var(--inkMuted);
+  font-size: 13px;
+  line-height: 1.55;
 }

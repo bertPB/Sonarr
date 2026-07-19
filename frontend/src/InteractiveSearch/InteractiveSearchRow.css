@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: space-between;
   word-break: break-all;
+  font-size: 13px;
+  font-family: var(--monoSpaceFontFamily);
 }
 
 .sceneMapping {
@@ -40,7 +42,7 @@
   composes: cell from '~Components/Table/Cells/TableRowCell.css';
 
   width: 55px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: default;
 }
 

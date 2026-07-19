@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import DescriptionList from 'Components/DescriptionList/DescriptionList';
-import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
 import Button from 'Components/Link/Button';
 import SpinnerErrorButton from 'Components/Link/SpinnerErrorButton';
 import ModalBody from 'Components/Modal/ModalBody';
@@ -228,88 +226,94 @@ function OverrideMatchModalContent(props: OverrideMatchModalContentProps) {
       </ModalHeader>
 
       <ModalBody>
-        <DescriptionList>
-          <DescriptionListItem
-            className={styles.item}
-            title={translate('Series')}
-            data={
-              <OverrideMatchData
-                value={series?.title}
-                onPress={onSelectSeriesPress}
-              />
-            }
-          />
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('Series')} &amp; {translate('Episode')}
+          </h3>
 
-          <DescriptionListItem
-            className={styles.item}
-            title={translate('SeasonNumber')}
-            data={
-              <OverrideMatchData
-                value={seasonNumber}
-                isDisabled={!series}
-                onPress={onSelectSeasonPress}
-              />
-            }
-          />
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>{translate('Series')}</span>
 
-          <DescriptionListItem
-            className={styles.item}
-            title={translate('Episodes')}
-            data={
-              <OverrideMatchData
-                value={episodeInfo}
-                isDisabled={!series || isNaN(Number(seasonNumber))}
-                onPress={onSelectEpisodePress}
-              />
-            }
-          />
+            <OverrideMatchData
+              value={series?.title}
+              onPress={onSelectSeriesPress}
+            />
+          </div>
 
-          <DescriptionListItem
-            className={styles.item}
-            title={translate('Quality')}
-            data={
-              <OverrideMatchData
-                value={
-                  <EpisodeQuality className={styles.label} quality={quality} />
-                }
-                onPress={onSelectQualityPress}
-              />
-            }
-          />
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>
+              {translate('SeasonNumber')}
+            </span>
 
-          <DescriptionListItem
-            className={styles.item}
-            title={translate('Languages')}
-            data={
-              <OverrideMatchData
-                value={
-                  <EpisodeLanguages
-                    className={styles.label}
-                    languages={languages}
-                  />
-                }
-                onPress={onSelectLanguagesPress}
-              />
-            }
-          />
+            <OverrideMatchData
+              value={seasonNumber}
+              isDisabled={!series}
+              onPress={onSelectSeasonPress}
+            />
+          </div>
 
-          {downloadClients.length > 1 ? (
-            <DescriptionListItem
-              className={styles.item}
-              title={translate('DownloadClient')}
-              data={
-                <OverrideMatchData
-                  value={
-                    downloadClients.find(
-                      (downloadClient) => downloadClient.id === downloadClientId
-                    )?.name ?? translate('Default')
-                  }
-                  onPress={onSelectDownloadClientPress}
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>{translate('Episodes')}</span>
+
+            <OverrideMatchData
+              value={episodeInfo}
+              isDisabled={!series || isNaN(Number(seasonNumber))}
+              onPress={onSelectEpisodePress}
+            />
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <h3 className={styles.sectionHeading}>
+            {translate('Quality')} &amp; {translate('Languages')}
+          </h3>
+
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>{translate('Quality')}</span>
+
+            <OverrideMatchData
+              value={
+                <EpisodeQuality className={styles.label} quality={quality} />
+              }
+              onPress={onSelectQualityPress}
+            />
+          </div>
+
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>{translate('Languages')}</span>
+
+            <OverrideMatchData
+              value={
+                <EpisodeLanguages
+                  className={styles.label}
+                  languages={languages}
                 />
               }
+              onPress={onSelectLanguagesPress}
             />
-          ) : null}
-        </DescriptionList>
+          </div>
+        </section>
+
+        {downloadClients.length > 1 ? (
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>{translate('Download')}</h3>
+
+            <div className={styles.field}>
+              <span className={styles.fieldLabel}>
+                {translate('DownloadClient')}
+              </span>
+
+              <OverrideMatchData
+                value={
+                  downloadClients.find(
+                    (downloadClient) => downloadClient.id === downloadClientId
+                  )?.name ?? translate('Default')
+                }
+                onPress={onSelectDownloadClientPress}
+              />
+            </div>
+          </section>
+        ) : null}
       </ModalBody>
 
       <ModalFooter className={styles.footer}>

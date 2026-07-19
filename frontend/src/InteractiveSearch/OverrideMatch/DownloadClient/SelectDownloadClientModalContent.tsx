@@ -1,5 +1,4 @@
 import React from 'react';
-import Alert from 'Components/Alert';
 import Form from 'Components/Form/Form';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -8,10 +7,10 @@ import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import DownloadProtocol from 'DownloadClient/DownloadProtocol';
-import { kinds } from 'Helpers/Props';
 import { useEnabledDownloadClients } from 'Settings/DownloadClients/DownloadClients/useDownloadClients';
 import translate from 'Utilities/String/translate';
 import SelectDownloadClientRow from './SelectDownloadClientRow';
+import styles from './SelectDownloadClientModalContent.css';
 
 interface SelectDownloadClientModalContentProps {
   protocol: DownloadProtocol;
@@ -38,9 +37,9 @@ function SelectDownloadClientModalContent(
         {isFetching ? <LoadingIndicator /> : null}
 
         {!isFetching && error ? (
-          <Alert kind={kinds.DANGER}>
+          <p className={styles.error}>
             {translate('DownloadClientsLoadError')}
-          </Alert>
+          </p>
         ) : null}
 
         {isFetched && !error ? (
