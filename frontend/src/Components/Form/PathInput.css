@@ -11,6 +11,8 @@
 .hasFileBrowser {
   composes: pathInput;
   composes: hasButton from '~Components/Form/Input.css';
+
+  border: none;
 }
 
 .fileBrowserGroup {
