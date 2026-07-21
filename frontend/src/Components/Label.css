@@ -3,7 +3,7 @@
   align-items: center;
   margin: 2px;
   padding: 4px 10px;
-  border: none;
+  border: 1px solid var(--borderColor);
   border-radius: 999px;
   background-color: var(--paperWarm);
   color: var(--inkSoft);
@@ -82,6 +82,7 @@
 }
 
 .inverse {
+  border-color: var(--ink);
   background-color: var(--ink);
   color: var(--paper);
 }
@@ -157,7 +158,6 @@
 /** Outline — text-only variant, used for non-state chips like genre. **/
 
 .outline {
-  border: 1px solid var(--borderColor);
   background-color: transparent;
   color: var(--inkSoft);
 
