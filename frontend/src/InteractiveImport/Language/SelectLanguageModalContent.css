@@ -7,7 +7,22 @@
   line-height: 1.55;
 }
 
-.languageInput {
+.languageRow {
   display: flex;
-  margin-bottom: 0;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--hairline);
+  gap: 10px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.languageCheckContainer {
+  flex: 0 0 auto;
+}
+
+.languageName {
+  font-size: 13px;
 }

@@ -2,7 +2,9 @@
 // Please do not change this file!
 interface CssExports {
   'error': string;
-  'languageInput': string;
+  'languageCheckContainer': string;
+  'languageName': string;
+  'languageRow': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

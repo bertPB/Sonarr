@@ -1,15 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import Form from 'Components/Form/Form';
-import FormInput from 'Components/Form/FormInput';
-import FormLabel from 'Components/Form/FormLabel';
-import FormRow from 'Components/Form/FormRow';
+import CheckInput from 'Components/Form/CheckInput';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import ModalHeader from 'Components/Modal/ModalHeader';
-import { inputTypes, kinds, sizes } from 'Helpers/Props';
+import { kinds } from 'Helpers/Props';
 import Language from 'Language/Language';
 import { useFilteredLanguages } from 'Language/useLanguages';
 import translate from 'Utilities/String/translate';
@@ -73,25 +70,23 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
         ) : null}
 
         {isPopulated && !error ? (
-          <Form>
+          <div>
             {items.map((language) => {
               return (
-                <FormRow
-                  key={language.id}
-                  size={sizes.EXTRA_SMALL}
-                  className={styles.languageInput}
-                >
-                  <FormLabel>{language.name}</FormLabel>
-                  <FormInput
-                    type={inputTypes.CHECK}
+                <div key={language.id} className={styles.languageRow}>
+                  <CheckInput
+                    containerClassName={styles.languageCheckContainer}
                     name={language.id.toString()}
+                    ariaLabel={language.name}
                     value={languageIds.includes(language.id)}
                     onChange={onLanguageChange}
                   />
-                </FormRow>
+
+                  <span className={styles.languageName}>{language.name}</span>
+                </div>
               );
             })}
-          </Form>
+          </div>
         ) : null}
       </ModalBody>
       <ModalFooter>
