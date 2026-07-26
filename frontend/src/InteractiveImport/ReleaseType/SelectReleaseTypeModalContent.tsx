@@ -66,8 +66,9 @@ function SelectReleaseTypeModalContent(
   return (
     <ModalContent onModalClose={onModalClose}>
       <ModalHeader>
-        {modalTitle} - {translate('SelectReleaseType')}
+        {translate('SelectReleaseTypeModalTitle', { modalTitle })}
       </ModalHeader>
+
       <ModalBody>
         <Form>
           <FormRow>
@@ -83,6 +84,7 @@ function SelectReleaseTypeModalContent(
           </FormRow>
         </Form>
       </ModalBody>
+
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 

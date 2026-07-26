@@ -2,7 +2,6 @@
   composes: page from '~./Page.css';
 
   align-items: center;
-
   justify-content: center;
   background-color: var(--pageBackground);
   animation: fadeIn 0.4s ease-out;

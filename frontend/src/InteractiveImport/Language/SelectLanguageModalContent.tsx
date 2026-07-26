@@ -62,6 +62,7 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
       <ModalHeader>
         {translate('SelectLanguageModalTitle', { modalTitle })}
       </ModalHeader>
+
       <ModalBody>
         {isFetching ? <LoadingIndicator /> : null}
 
@@ -89,6 +90,7 @@ function SelectLanguageModalContent(props: SelectLanguageModalContentProps) {
           </div>
         ) : null}
       </ModalBody>
+
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 

@@ -83,9 +83,7 @@ function SeriesTypeSelectInput(props: SeriesTypeSelectInputProps) {
       {...props}
       values={values}
       optionComponent={SeriesTypeSelectInputOption}
-      selectedValueComponent={
-        props.selectedValueComponent ?? SeriesTypeSelectInputSelectedValue
-      }
+      selectedValueComponent={SeriesTypeSelectInputSelectedValue}
     />
   );
 }

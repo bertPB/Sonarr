@@ -2,7 +2,6 @@
 // Please do not change this file!
 interface CssExports {
   'bulkSelect': string;
-  'deleteButton': string;
   'errorMessage': string;
   'filterContainer': string;
   'filterText': string;

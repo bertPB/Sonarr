@@ -41,6 +41,7 @@ function SelectIndexerFlagsModalContent(
       <ModalHeader>
         {translate('SetIndexerFlagsModalTitle', { modalTitle })}
       </ModalHeader>
+
       <ModalBody
         className={styles.modalBody}
         scrollDirection={scrollDirections.NONE}
@@ -59,6 +60,7 @@ function SelectIndexerFlagsModalContent(
           </FormRow>
         </Form>
       </ModalBody>
+
       <ModalFooter>
         <Button onPress={onModalClose}>{translate('Cancel')}</Button>
 

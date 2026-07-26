@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from 'Components/Form/Form';
 import Button from 'Components/Link/Button';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalBody from 'Components/Modal/ModalBody';
@@ -43,7 +42,7 @@ function SelectDownloadClientModalContent(
         ) : null}
 
         {isFetched && !error ? (
-          <Form>
+          <div className={styles.downloadClients}>
             {data.map((downloadClient) => {
               const { id, name, priority } = downloadClient;
 
@@ -57,7 +56,7 @@ function SelectDownloadClientModalContent(
                 />
               );
             })}
-          </Form>
+          </div>
         ) : null}
       </ModalBody>
 

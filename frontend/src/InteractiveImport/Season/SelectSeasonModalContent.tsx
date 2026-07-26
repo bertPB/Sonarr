@@ -31,7 +31,7 @@ function SelectSeasonModalContent(props: SelectSeasonModalContentProps) {
       </ModalHeader>
 
       <ModalBody>
-        <div className={styles.bordered}>
+        <div className={styles.seasons}>
           {seasons.map((item) => {
             return (
               <SelectSeasonRow

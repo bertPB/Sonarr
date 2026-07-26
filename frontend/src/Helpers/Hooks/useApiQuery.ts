@@ -10,7 +10,10 @@ import getQueryString, { QueryParams } from 'Utilities/Fetch/getQueryString';
 export interface QueryOptions<T> extends FetchJsonOptions<unknown> {
   queryParams?: QueryParams;
   queryOptions?:
-    | Omit<UndefinedInitialDataOptions<T, ApiError>, 'queryKey' | 'queryFn'>
+    | Omit<
+        UndefinedInitialDataOptions<Readonly<T>, ApiError>,
+        'queryKey' | 'queryFn'
+      >
     | undefined;
 }
 
@@ -37,8 +40,8 @@ const useApiQuery = <T>(options: QueryOptions<T>) => {
     ...useQuery({
       ...options.queryOptions,
       queryKey,
-      queryFn: ({ signal }) =>
-        fetchJson<T, unknown>({ ...requestOptions, signal }),
+      queryFn: async ({ signal }) =>
+        fetchJson<Readonly<T>, unknown>({ ...requestOptions, signal }),
     }),
   };
 };

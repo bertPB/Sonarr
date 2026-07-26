@@ -10,7 +10,7 @@
   border-radius: 8px;
 
   &:hover {
-    background-color: color-mix(in oklab, var(--accent) 6%, var(--paperCard));
+    background-color: color-mix(in oklab, var(--accent) 4%, var(--paperCard));
   }
 
   &:last-of-type {

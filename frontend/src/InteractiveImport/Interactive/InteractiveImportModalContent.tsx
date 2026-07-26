@@ -944,7 +944,6 @@ function InteractiveImportModalContentInner(
         <div className={styles.leftButtons}>
           {showDelete ? (
             <SpinnerButton
-              className={styles.deleteButton}
               kind={kinds.DANGER}
               isSpinning={isDeleting}
               isDisabled={
